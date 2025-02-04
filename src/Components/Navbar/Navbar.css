@@ -1,10 +1,11 @@
 .nav {
+    /* margin-top: 50px; */
     height: 70px;
     width: 100vw;
     background-color: #ffff;
     display: flex;
     box-shadow: 0px 0px 3px 0px;
-    position: fixed;
+    position: sticky;
     /* justify-content: center; */
     align-items: center;
 }
@@ -32,7 +33,7 @@
 .navItem {
     cursor: pointer;
     width: auto;
-    font-size: 20px;
+    font-size: 16px;
     display: flex;
     /* justify-content: center; */
     align-items: center;

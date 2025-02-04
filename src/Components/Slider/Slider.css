@@ -1,0 +1,38 @@
+.sliderComponent {
+    margin-top: 20px;
+    width: 100vw;
+    height: 450px;
+    /* background-color: aqua; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.BannerImag {
+    height: 100%;
+    width: 95vw;
+    position: absolute;
+    object-fit: cover;
+    border-radius: 20px;
+    opacity: 0;
+    transition: opacity 0.5s ease-in;
+    /* background: linear-gradient(90deg, rgba(60, 50, 50, 1) 4%, rgba(3, 3, 3, 1) 23%, rgba(3, 3, 3, 1) 35%, rgba(17, 4, 4, 1) 100%); */
+}
+
+.pointer {
+    display: flex;
+    margin-top: 10px;
+    width: 100vw;
+    justify-content: center;
+    align-items: center;
+    gap: 25px;
+}
+
+.point {
+    height: 5px;
+    width: 10px;
+    background-color: black;
+    border-radius: 10px;
+    transition: opacity 0.5s ease-in, width 0.8s ease-in-out;
+}

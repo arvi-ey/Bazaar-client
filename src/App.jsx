@@ -1,17 +1,24 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
 import Navbar from './Components/Navbar/Navbar'
-import { store } from '../Redux/Store'
+import Slider from './Components/Slider/Slider'
+import { useDispatch } from 'react-redux'
+import { GetBanners } from '../Redux/Slice/bannerSlicer'
 
 function App() {
-  const [count, setCount] = useState(0)
+
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    dispatch(GetBanners())
+  }, [dispatch])
 
   return (
     <>
       <Navbar />
-
+      <Slider />
     </>
   )
 }
