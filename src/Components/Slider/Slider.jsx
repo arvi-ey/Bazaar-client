@@ -37,6 +37,7 @@ const Slider = () => {
     return (
         <>
             <div className="sliderComponent">
+                <div className="layer"></div>
                 {
                     ImageAray && ImageAray.map((data, index) => <img key={index} src={data.image} alt='Banner' className='BannerImag' style={{ opacity: index == currentIndex ? 1 : 0 }} />)
                 }
