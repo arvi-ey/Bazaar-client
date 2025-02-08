@@ -1,13 +1,31 @@
 import React from 'react'
 import "./Navbar.css"
 import Logo from "../../assets/Bazaarlogo.svg"
-// import DemoUser from "../../assets/demo_user.jpg"
-import DemoUser from "../../assets/user.svg"
+import DemoUser from "../../assets/user.jpg"
 import Search from "../../assets/search.svg"
-import Cart from "../../assets/cart.svg"
+import { NavLink } from 'react-router-dom';
+import UserProfile from '../../Common/Avatar'
+import Cart from "../../Common/Cart"
 
 const Navbar = () => {
-    const navItemArray = ["Home", "Products", "Accounts", "Help"]
+    const navItemArray = [
+        {
+            name: "Home",
+            path: "/"
+        },
+        {
+            name: "Products",
+            path: "/products"
+        },
+        {
+            name: "About",
+            path: "/about"
+        },
+        {
+            name: "Help",
+            path: "/help"
+        }
+    ]
     return (
         <div className="nav">
             <div className="logo">
@@ -16,12 +34,12 @@ const Navbar = () => {
             <div className="navItems">
                 {navItemArray.map((data, index) => {
                     return (
-                        <div className="navItem" key={index}>
+                        <NavLink key={index} to={data.path} className={({ isActive }) => (isActive ? 'activeNav' : 'navItem')}>
                             <p>
-                                {data}
+                                {data.name}
                             </p>
                             <div className='navLayer' />
-                        </div>
+                        </NavLink>
                     )
                 })}
             </div>
@@ -36,10 +54,15 @@ const Navbar = () => {
 
             </div>
             <div className='CartBox'>
-                <img src={Cart} alt='cart' className='cart' />
+                <Cart
+                    count={0}
+                />
             </div>
             <div className="AccountBox" >
-                <img src={DemoUser} alt='user' className='userImage' />
+                <UserProfile
+                    image={DemoUser}
+                    name={""}
+                />
             </div>
         </div>
     )

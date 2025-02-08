@@ -1,0 +1,12 @@
+.viewAllProductsButton {
+    background-color: #9ee721;
+    padding: 10px;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: transform 0.1s ease;
+}
+
+.viewAllProductsButton:hover {
+    transform: scale(1.1);
+}

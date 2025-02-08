@@ -42,15 +42,25 @@
     transition: color 0.2s ease-in;
 }
 
-.navItem:hover {
-    color: #64960d;
+.activeNav {
+    cursor: pointer;
+    width: auto;
+    font-size: 16px;
+    display: flex;
+    /* justify-content: center; */
+    align-items: center;
+    color: #ec0d75;
 }
 
-.navItem:hover .navLayer {
+.navItem:hover {
+    color: #ec0d75;
+}
+
+/* .navItem:hover .navLayer {
     color: #9ee721;
     width: 100%;
 
-}
+} */
 
 .navLayer {
     width: 0px;

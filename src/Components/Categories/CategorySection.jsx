@@ -7,7 +7,6 @@ const CategorySection = () => {
     const dispatch = useDispatch()
     const { category } = useSelector(state => state.category)
 
-    console.log(category)
     return (
         <div className="categoyContainer">
             <div className="categoryTitle">
