@@ -1,8 +1,12 @@
 import React from 'react'
+import Filterbar from '../Filterbar/Filterbar'
+import "./Products.css"
 
 const Products = () => {
     return (
-        <div>Products</div>
+        <div className="productsComponent">
+            <Filterbar />
+        </div>
     )
 }
 

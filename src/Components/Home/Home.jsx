@@ -4,14 +4,22 @@ import Slider from '../Slider/Slider'
 import CategorySection from '../Categories/CategorySection'
 import HomeProducts from '../HomeProducts/HomeProducts'
 import "./Home.css"
+import { useNavigate } from 'react-router'
 
 const Home = () => {
+    const navigate = useNavigate()
+
+    const GotoProducts = () => {
+        navigate("/products")
+    }
     return (
         <>
             <Slider />
             <CategorySection />
             <HomeProducts />
-            <div style={{ width: "100%", marginBottom: "10px", display: "flex", justifyContent: "center", alignItems: "center" }} >
+            <div
+                onClick={GotoProducts}
+                style={{ width: "100%", marginBottom: "10px", display: "flex", justifyContent: "center", alignItems: "center" }} >
                 <p className='viewAllProductsButton'>View all products</p>
             </div>
         </>

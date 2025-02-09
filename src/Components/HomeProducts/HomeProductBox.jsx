@@ -5,6 +5,9 @@ import GradeIcon from '@mui/icons-material/Grade';
 const HomeProductBox = ({ products }) => {
     // const products = products[0]
     // console.log(products)
+
+    const randomDecimal = (Math.random() * 0.9);
+
     return (
         <div className="productbox">
             {
@@ -33,10 +36,10 @@ const HomeProductBox = ({ products }) => {
                                 <span style={{ fontSize: "10px", fontWeight: "600" }}>
                                     ₹
                                 </span>
-                                {parseInt(products.price * 0.4 + products.price)}
+                                {parseInt(products.price * randomDecimal + products.price)}
                             </s>
                             <p className='discountClass' >
-                                40%OFF
+                                {parseInt(randomDecimal * 100)}%OFF
                             </p>
                         </div>
                     </div>

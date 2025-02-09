@@ -1,0 +1,7 @@
+.productsComponent {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    margin-top: 20px;
+    overflow: hidden;
+}
