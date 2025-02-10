@@ -5,6 +5,7 @@ import CategorySection from '../Categories/CategorySection'
 import HomeProducts from '../HomeProducts/HomeProducts'
 import "./Home.css"
 import { useNavigate } from 'react-router'
+import { useDispatch, useSelector } from 'react-redux'
 
 const Home = () => {
     const navigate = useNavigate()

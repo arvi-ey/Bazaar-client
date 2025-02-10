@@ -9,9 +9,6 @@ const HomeProducts = () => {
     const dispatch = useDispatch()
     const { products } = useSelector(state => state.product)
 
-    useEffect(() => {
-        dispatch(GetAllProducts())
-    }, [dispatch])
     const settings = {
         dots: false,
         infinite: true,

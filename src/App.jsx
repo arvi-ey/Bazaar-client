@@ -14,6 +14,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Layout from './Components/Layout/Layout'
 import About from './Components/About/About'
 import Products from './Components/Products/Products'
+import { GetAllProducts } from '../Redux/Slice/productsSlicer'
 
 const router = createBrowserRouter([
   {
@@ -38,9 +39,11 @@ const router = createBrowserRouter([
 
 function App() {
   const dispatch = useDispatch()
+
   useEffect(() => {
     dispatch(GetBanners())
     dispatch(GetAllCategory())
+    dispatch(GetAllProducts())
   }, [dispatch])
 
 
