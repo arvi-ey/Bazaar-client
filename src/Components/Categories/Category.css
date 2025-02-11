@@ -19,11 +19,12 @@
 .categorybox {
     width: 100%;
     display: flex;
-    margin-top: 10px;
+    margin-top: 20px;
     align-items: center;
     justify-content: center;
     gap: 20px;
     flex-wrap: wrap;
+
 }
 
 .categoryItem {
