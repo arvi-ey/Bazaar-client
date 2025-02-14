@@ -15,6 +15,7 @@ import Layout from './Components/Layout/Layout'
 import About from './Components/About/About'
 import Products from './Components/Products/Products'
 import { GetAllProducts } from '../Redux/Slice/productsSlicer'
+import { getfavouriteItem } from '../Redux/Slice/favouriteItemSlicer'
 
 const router = createBrowserRouter([
   {
@@ -44,6 +45,7 @@ function App() {
     dispatch(GetBanners())
     dispatch(GetAllCategory())
     dispatch(GetAllProducts())
+    dispatch(getfavouriteItem())
   }, [dispatch])
 
 

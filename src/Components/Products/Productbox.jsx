@@ -1,10 +1,26 @@
-import React, { useState } from 'react'
-// import "../HomeProducts/HomeProduct.css"
+import React, { useEffect, useState } from 'react'
 import GradeIcon from '@mui/icons-material/Grade';
 import LocalShippingIcon from '@mui/icons-material/LocalShipping';
+import WishList from '../../Common/WishList';
+import { updateFavouriteItem, } from '../../../Redux/Slice/favouriteItemSlicer';
+import { useDispatch, useSelector } from 'react-redux';
+import SnackbarComponent from '../../Common/Snackbar';
 const Productbox = ({ products }) => {
-
     const [imageFocus, SetImageFocus] = useState(false)
+    const [selectWishLIst, setSelectWishList] = useState(false)
+    const dispatch = useDispatch()
+    const { items } = useSelector(state => state.favouriteproducts)
+    const [openSnackBar, setOpenSnackBar] = useState(false)
+    const [slectSnackBarMessage, setSelectSnackBarMessage] = useState("")
+
+
+    useEffect(() => {
+        if (products && items && items.length > 0) {
+            const exists = items.find(item => item._id == products._id)
+            if (!exists) setSelectWishList(false)
+            if (exists) setSelectWishList(true)
+        }
+    }, [products, items])
 
     const randomDecimal = (Math.random() * 0.9);
 
@@ -20,11 +36,25 @@ const Productbox = ({ products }) => {
         return today.toLocaleDateString('en-US', options);
     }
 
+    const SelecttoWishList = async () => {
+        dispatch(updateFavouriteItem(products))
+        setOpenSnackBar(true)
+        const exists = items.find(item => item._id == products._id)
+        if (!exists) setSelectSnackBarMessage("Item added into favourite list")
+        if (exists) setSelectSnackBarMessage("Item removed from favourite list")
+    }
+
+
 
     return (
         <div className="productBoxs">
             <div style={{ position: "relative", overflow: "hidden" }}>
                 <img src={imageFocus ? products.images[1] : products.images[0]} alt={products.category} className='productImages' onMouseOver={() => SetImageFocus(true)} onMouseOut={() => SetImageFocus(false)} />
+                <div onClick={() => SelecttoWishList()} style={{ position: "absolute", top: "15px", right: "5px", cursor: "pointer" }}>
+                    <WishList
+                        select={selectWishLIst}
+                    />
+                </div>
                 <div className='rating'>
                     <GradeIcon sx={{ color: "#FFD700" }} />
                     <p className='ratingText'>
@@ -57,6 +87,11 @@ const Productbox = ({ products }) => {
                     <p className='DeliveryDetailText'>Free Delivery by {GetDeliveryDate(products.deliveryTime)}</p>
                 </div>
             </div>
+            <SnackbarComponent
+                bgColor="#9ee721"
+                isOpen={openSnackBar}
+                message={slectSnackBarMessage}
+            />
         </div>
     )
 }

@@ -9,6 +9,7 @@ import { SinngleProductReducer } from '../Slice/productSlicer';
 import { cartRducer } from "../Slice/cartSlicer";
 import { addressReducer } from "../Slice/addressSlicer";
 import { orderReducer } from "../Slice/orderSlicer";
+import favouriteProductSlice from '../Slice/favouriteItemSlicer';
 
 export const store = configureStore({
     reducer: {
@@ -22,6 +23,7 @@ export const store = configureStore({
         cart: cartRducer,
         address: addressReducer,
         order: orderReducer,
+        favouriteproducts: favouriteProductSlice
     },
     middleware: (getDefaultMiddleware) => getDefaultMiddleware(),
 });
