@@ -16,6 +16,7 @@ import About from './Components/About/About'
 import Products from './Components/Products/Products'
 import { GetAllProducts } from '../Redux/Slice/productsSlicer'
 import { getfavouriteItem } from '../Redux/Slice/favouriteItemSlicer'
+import Favourite from './Components/Favourite/Favourite'
 
 const router = createBrowserRouter([
   {
@@ -33,6 +34,10 @@ const router = createBrowserRouter([
       {
         path: "products",
         element: <Products />,
+      },
+      {
+        path: "favourite",
+        element: <Favourite />,
       },
     ],
   },

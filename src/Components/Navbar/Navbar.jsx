@@ -6,8 +6,11 @@ import Search from "../../assets/search.svg"
 import { NavLink } from 'react-router-dom';
 import UserProfile from '../../Common/Avatar'
 import Cart from "../../Common/Cart"
+import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
+import { useNavigate } from 'react-router-dom'
 
 const Navbar = () => {
+    const navigate = useNavigate()
     const navItemArray = [
         {
             name: "Home",
@@ -45,15 +48,18 @@ const Navbar = () => {
             </div>
             <div className='searchBox'>
                 <div className="search">
+                    <img src={Search} alt='seachbar' className='SearchIcon' />
                     <input
                         className='searchBar'
                         placeholder='Search products...'
                     />
-                    <img src={Search} alt='seachbar' className='SearchIcon' />
                 </div>
 
             </div>
-            <div className='CartBox'>
+            <div className='FavouriteIcon' onClick={() => navigate("/favourite")} >
+                <FavoriteBorderOutlinedIcon />
+            </div>
+            <div className='cart'>
                 <Cart
                     count={0}
                 />
