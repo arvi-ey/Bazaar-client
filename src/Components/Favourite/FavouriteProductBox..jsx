@@ -4,7 +4,6 @@ import LocalShippingIcon from '@mui/icons-material/LocalShipping';
 
 const FavouriteProductBox = ({ item, key }) => {
     const [imageFocus, SetImageFocus] = useState(false)
-    console.log(item)
     const randomDecimal = (Math.random() * 0.9);
     const GetDeliveryDate = (days) => {
         if (!days) return
