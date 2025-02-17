@@ -13,6 +13,7 @@ import cash from "../../assets/cash.svg"
 import DeliveryTruck from "../../assets/deliveryTruck.svg"
 import WishList from '../../Common/WishList'
 import { updateFavouriteItem } from '../../../Redux/Slice/favouriteItemSlicer'
+import { GetProductsByCategory } from '../../../Redux/Slice/productsSlicer'
 
 const ProductDetail = () => {
     const dispatch = useDispatch()

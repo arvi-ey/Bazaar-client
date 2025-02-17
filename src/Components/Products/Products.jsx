@@ -2,13 +2,18 @@ import React from 'react'
 import Filterbar from '../Filterbar/Filterbar'
 import "./Products.css"
 import { useSelector, useDispatch } from 'react-redux'
+import { useLocation } from 'react-router'
 import ProductsComponent from './ProductsComponent'
 const Products = () => {
+    const location = useLocation();
+    const categoryName = location.state?.category || null;
 
     return (
         <div className="productsComponent">
             <Filterbar />
-            <ProductsComponent />
+            <ProductsComponent
+                categoryName={categoryName}
+            />
         </div>
     )
 }

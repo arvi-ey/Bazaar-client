@@ -64,13 +64,13 @@ const Productbox = ({ products }) => {
                 <div className='rating'>
                     <GradeIcon sx={{ color: "#FFD700" }} />
                     <p className='ratingText'>
-                        {products.ratings}
+                        {products?.ratings}
                     </p>
                 </div>
             </div>
             <div className='detailBoxs'>
                 <div style={{ display: "flex", justifyContent: "space-between", width: "100%" }}>
-                    <p className='productTitle'>{products.title.length > 30 ? `${products.title.substring(0, 30)}...` : products.title}</p>
+                    <p className='productTitle'>{products?.title.length > 20 ? `${products?.title.substring(0, 20)}...` : products?.title}</p>
                     <div onClick={() => SelecttoWishList()} style={{ cursor: "pointer" }}>
                         <WishList
                             select={selectWishLIst}
@@ -83,7 +83,7 @@ const Productbox = ({ products }) => {
                         <span style={{ fontSize: "12px", fontWeight: "600" }}>
                             ₹
                         </span>
-                        {products.price}
+                        {products?.price}
                     </p>
                     <s className='productReducedPrice'>
                         <span style={{ fontSize: "10px", fontWeight: "600" }}>
