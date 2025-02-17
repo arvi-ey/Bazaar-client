@@ -1,18 +1,29 @@
 import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router'
+import { useLocation, useParams } from 'react-router'
 import { useDispatch, useSelector } from 'react-redux'
 import { GetSingleProduct } from '../../../Redux/Slice/productSlicer'
 import "./ProductDetail.css"
 import StarRating from '../../Common/StarRating'
 import LocalShippingIcon from '@mui/icons-material/LocalShipping';
 import FmdGoodOutlinedIcon from '@mui/icons-material/FmdGoodOutlined';
+import Genuine from "../../assets/Genuine.svg"
+import secure from "../../assets/secure.svg"
+import exchange from "../../assets/exchange.svg"
+import cash from "../../assets/cash.svg"
+import DeliveryTruck from "../../assets/deliveryTruck.svg"
+import WishList from '../../Common/WishList'
+import { updateFavouriteItem } from '../../../Redux/Slice/favouriteItemSlicer'
 
 const ProductDetail = () => {
     const dispatch = useDispatch()
     const { product } = useSelector(state => state.singleproduct)
     const { id } = useParams()
     const [selectImageview, setSelectImageView] = useState({ image: "", index: null })
-    const [selectSize, setSelectSize] = useState("XS")
+    const [selectSize, setSelectSize] = useState("")
+    const location = useLocation();
+    const isFavourite = location.state?.favourite || false;
+
+
 
     useEffect(() => {
         dispatch(GetSingleProduct(id))
@@ -64,6 +75,11 @@ const ProductDetail = () => {
                 }
             </div>
             <div className="productImageView">
+                <div style={{ position: "absolute", top: "25px", right: "20%", cursor: "pointer" }}>
+                    <WishList
+                        select={isFavourite}
+                    />
+                </div>
                 <img src={selectImageview.image} alt='selected-image' className='detailImage' />
             </div>
             <div className="productDetailsBox">
@@ -110,7 +126,11 @@ const ProductDetail = () => {
                 </div>
                 <p style={{ opacity: 0.7, fontSize: "1vmax", fontWeight: "400", marginTop: "10px" }}>{`Only ${product?.stock} items remaining`}</p>
                 <div className='FavouriteDeliveryDetailBox'>
-                    <LocalShippingIcon fontSize="inherit" sx={{ color: '#ec0d75', }} />
+                    <img src={cash} alt='Cash-delivery' style={{ height: "2vmax", width: "2vmax" }} />
+                    <p className='FavouriteDeliveryDetailText' style={{ fontSize: "1vmax", opacity: 0.7, }}>Cash on delivery available</p>
+                </div>
+                <div className='FavouriteDeliveryDetailBox'>
+                    <img src={DeliveryTruck} alt='Delivery-Truck' style={{ height: "2vmax", width: "2vmax" }} />
                     <p className='FavouriteDeliveryDetailText' style={{ fontSize: "1vmax", opacity: 0.7, }}>Free Delivery by {GetDeliveryDate(product?.deliveryTime)}</p>
                 </div>
                 <div className="favouriteAddtocart" style={{ marginTop: "20px", width: "20vmax", height: "3vmax", fontSize: "1.5vmax", fontWeight: "400", padding: "10px 20px 10px 20px" }}>
@@ -128,7 +148,21 @@ const ProductDetail = () => {
                             placeholder='Enter Pincode'
                             className='inputLocation'
                         />
-                        <p style={{ cursor: 'pointer', fontSize: "1vmax", opacity: "0.7", color: "#ec0d75", justifyContent: "flex-end" }}>Chcek</p>
+                        <p style={{ cursor: 'pointer', fontWeight: "500", fontSize: "1vmax", opacity: "0.7", color: "#ec0d75", justifyContent: "flex-end" }}>Check</p>
+                    </div>
+                </div>
+                <div style={{ display: "flex", widows: "100%", justifyContent: "center", alignItems: "center", gap: "4vmax", marginTop: "2vmax" }}>
+                    <div style={{ display: 'flex', opacity: "0.8", width: "8vmax", flexDirection: "column", justifyContent: 'center', alignItems: "center", gap: "10px", }} >
+                        <img src={secure} style={{ height: "5vmax", width: "5vmax" }} />
+                        <p style={{ opacity: "0.5", fontSize: "0.6vmax", textAlign: "center", wordWrap: "break-word" }}>100% SECURE PAYMENT</p>
+                    </div>
+                    <div style={{ display: 'flex', opacity: "0.8", width: "8vmax", flexDirection: "column", justifyContent: 'center', alignItems: "center", gap: "10px", }} >
+                        <img src={exchange} style={{ height: "5vmax", width: "5vmax" }} />
+                        <p style={{ opacity: "0.5", fontSize: "0.6vmax", textAlign: "center", wordWrap: "break-word" }}>EASY RETURNS AND INSTANT REFUND</p>
+                    </div>
+                    <div style={{ display: 'flex', opacity: "0.8", width: "8vmax", flexDirection: "column", justifyContent: 'center', alignItems: "center", gap: "10px", }} >
+                        <img src={Genuine} style={{ height: "5vmax", width: "5vmax" }} />
+                        <p style={{ opacity: "0.5", fontSize: "0.6vmax", textAlign: "center", wordWrap: "break-word" }}>100% GENUINE PRODUCT</p>
                     </div>
                 </div>
             </div>

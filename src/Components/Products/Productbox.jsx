@@ -47,20 +47,20 @@ const Productbox = ({ products }) => {
         if (exists) setSelectSnackBarMessage("Item removed from favourite list")
     }
     const NavigateProductDetail = () => {
-        navigate(`/product/${products._id}`);
+        navigate(`/product/${products._id}`, { state: { favourite: selectWishLIst } });
     }
 
 
 
     return (
-        <div className="productBoxs" onClick={NavigateProductDetail} >
-            <div style={{ position: "relative", overflow: "hidden" }}>
+        <div className="productBoxs"  >
+            <div style={{ position: "relative", overflow: "hidden" }} onClick={NavigateProductDetail}>
                 <img src={imageFocus ? products.images[1] : products.images[0]} alt={products.category} className='productImages' onMouseOver={() => SetImageFocus(true)} onMouseOut={() => SetImageFocus(false)} />
-                <div onClick={() => SelecttoWishList()} style={{ position: "absolute", top: "15px", right: "5px", cursor: "pointer" }}>
+                {/* <div onClick={() => SelecttoWishList()} style={{ position: "absolute", top: "15px", right: "5px", cursor: "pointer" }}>
                     <WishList
                         select={selectWishLIst}
                     />
-                </div>
+                </div> */}
                 <div className='rating'>
                     <GradeIcon sx={{ color: "#FFD700" }} />
                     <p className='ratingText'>
@@ -69,7 +69,14 @@ const Productbox = ({ products }) => {
                 </div>
             </div>
             <div className='detailBoxs'>
-                <p className='productTitle'>{products.title.length > 30 ? `${products.title.substring(0, 30)}...` : products.title}</p>
+                <div style={{ display: "flex", justifyContent: "space-between", width: "100%" }}>
+                    <p className='productTitle'>{products.title.length > 30 ? `${products.title.substring(0, 30)}...` : products.title}</p>
+                    <div onClick={() => SelecttoWishList()} style={{ cursor: "pointer" }}>
+                        <WishList
+                            select={selectWishLIst}
+                        />
+                    </div>
+                </div>
                 <p className='productdesc'>{products.description.substring(0, 55)}...</p>
                 <div style={{ display: "flex", alignItems: "center", }}>
                     <p className='productPrice'>
