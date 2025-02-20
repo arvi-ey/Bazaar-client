@@ -5,38 +5,52 @@
     background-color: #ffff;
     display: flex;
     box-shadow: 0px 0px 3px 0px;
-    position: sticky;
     /* justify-content: center; */
     align-items: center;
     position: fixed;
     z-index: 999;
     top: 0;
+    left: 0;
+    gap: 1.5em;
+}
+
+.navInfo {
+    width: 20%;
+    display: flex;
+    justify-content: baseline;
+    align-items: center;
+    gap: 1.5rem;
 }
 
 .logo {
-    width: 25%;
+    width: 20%;
     display: flex;
     align-items: center;
+    justify-content: center;
     height: 100%;
-    /* background-color: aqua; */
-    padding-left: 50px;
+}
+
+.imageLogo {
+    height: 60px;
+    width: 60px;
 }
 
 .navItems {
-    /* background-color: aqua; */
-    width: 40%;
+    width: 65%;
+    height: 100%;
     /* justify-content: center; */
     display: flex;
     align-items: center;
     gap: 50px;
     font-weight: 500;
     position: relative;
+    justify-content: flex-end;
 }
 
 .navItem {
     cursor: pointer;
     width: auto;
-    font-size: 16px;
+    font-size: 1em;
     display: flex;
     /* justify-content: center; */
     align-items: center;
@@ -48,7 +62,7 @@
 .activeNav {
     cursor: pointer;
     width: auto;
-    font-size: 16px;
+    font-size: 1em;
     display: flex;
     /* justify-content: center; */
     align-items: center;
@@ -77,28 +91,23 @@
     cursor: pointer;
 }
 
-.searchBox {
-    width: 20%;
-    /* margin-left: 10px; */
-    /* background-color: antiquewhite; */
-}
 
 .search {
-    width: 250px;
-    height: 50px;
+    width: 20vmax;
+    height: 80%;
     background-color: #e1ecea;
     border-radius: 10px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    gap: 10px;
+    gap: 10%;
 }
 
 .searchBar {
-    padding: 10px;
-    font-size: 15px;
+    font-size: 1em;
     border: none;
     outline: none;
+    height: 100%;
 }
 
 .search:focus {
@@ -109,26 +118,25 @@
     height: 20px;
     width: 20px;
     cursor: pointer;
-    margin-right: 30px;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
 .FavouriteIcon {
-    height: 20px;
-    width: 20px;
+    height: 5em;
+    width: 5em;
     cursor: pointer;
-    margin-right: 30px;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
 .SearchIcon {
-    height: 20px;
-    width: 20px;
-    margin-left: 10px;
+    height: 3vmin;
+    width: 3vmin;
+    opacity: 0.5;
+    margin-left: 10%;
 }
 
 .AccountBox {
@@ -166,3 +174,78 @@
     font-weight: 300;
     font-size: small;
 }
+
+.hamberger {
+    display: none;
+    cursor: pointer;
+    /* align-items: center; */
+}
+
+.menuIcon {}
+
+.longNavbar {
+    position: absolute;
+    height: 100vh;
+    width: 0px;
+    right: 0;
+    top: 0px;
+    margin-top: 70px;
+    z-index: 999;
+    background-color: #ffff;
+    transition: width 1s ease-in-out;
+    overflow: hidden;
+}
+
+.ResponsivenavItems {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    /* justify-content: center; */
+    align-items: center;
+    height: 100%;
+    gap: 40px;
+    margin-top: 20px;
+}
+
+.longNavbar.show {
+    width: 250px
+}
+
+.closeIcon {
+    width: 100%;
+    display: flex;
+    padding-left: 20px;
+    margin-top: 20px;
+    cursor: pointer;
+}
+
+.close {
+    transition: transform 0.2s ease-in
+}
+
+.close:hover {
+    transform: rotate(180deg);
+}
+
+
+@media (max-width: 600px) {
+    .navItems {
+        display: none;
+    }
+
+    .hamberger {
+        display: block;
+    }
+
+    .navInfo {
+        width: 60%;
+        justify-content: flex-end;
+    }
+}
+
+/* @media (max-width: 600px) {
+    .imageLogo {
+        height: 40px;
+        width: 40px;
+    }
+} */

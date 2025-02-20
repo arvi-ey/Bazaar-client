@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import SnackbarComponent from '../../Common/Snackbar';
 import { useNavigate } from 'react-router-dom';
 
-const Productbox = ({ products }) => {
+const Productbox = ({ products, key, loading }) => {
     const navigate = useNavigate()
     const [imageFocus, SetImageFocus] = useState(false)
     const [selectWishLIst, setSelectWishList] = useState(false)
@@ -51,9 +51,8 @@ const Productbox = ({ products }) => {
     }
 
 
-
     return (
-        <div className="productBoxs"  >
+        <div className="productBoxs" key={key} >
             <div style={{ position: "relative", overflow: "hidden" }} onClick={NavigateProductDetail}>
                 <img src={imageFocus ? products.images[1] : products.images[0]} alt={products.category} className='productImages' onMouseOver={() => SetImageFocus(true)} onMouseOut={() => SetImageFocus(false)} />
                 {/* <div onClick={() => SelecttoWishList()} style={{ position: "absolute", top: "15px", right: "5px", cursor: "pointer" }}>
@@ -100,6 +99,7 @@ const Productbox = ({ products }) => {
                     <p className='DeliveryDetailText'>Free Delivery by {GetDeliveryDate(products.deliveryTime)}</p>
                 </div>
             </div>
+
             <SnackbarComponent
                 bgColor="#9ee721"
                 isOpen={openSnackBar}

@@ -72,9 +72,9 @@ export const productSlice = createSlice({
     name: 'products',
     initialState: {
         loading: false,
+        scrollLoading: false,
         products: [],
         error: null,
-        currentPage: 0,
         hasMore: true,
     },
     reducers: {},
