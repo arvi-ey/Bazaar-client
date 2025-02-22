@@ -54,7 +54,6 @@ function App() {
   useEffect(() => {
     dispatch(GetBanners())
     dispatch(GetAllCategory())
-    dispatch(GetAllProducts())
     dispatch(getfavouriteItem())
   }, [dispatch])
 

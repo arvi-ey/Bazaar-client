@@ -2,12 +2,14 @@ import React, { useEffect, useState } from 'react'
 import Productbox from './Productbox'
 import { useSelector } from 'react-redux'
 import { useDispatch } from 'react-redux'
-import { GetProductsByCategory, GetProducts } from '../../../Redux/Slice/productsSlicer'
+import { GetProductsByCategory, GetProducts, GetAllProducts } from '../../../Redux/Slice/productsSlicer'
+import LoaderBox from '../../Common/LoaderBox'
+import Loading from '../../Common/Loading'
+import SearchIcon from '@mui/icons-material/Search';
 const ProductsComponent = ({ categoryName }) => {
     const dispatch = useDispatch()
-    const { products, loading, hasMore } = useSelector(state => state.product)
+    const { products, loading, hasMore, scrollLoading } = useSelector(state => state.product)
     const [pageNo, setPageno] = useState(1)
-    const [loadingData, setLoadingData] = useState(false)
 
     useEffect(() => {
         window.addEventListener("scroll", HandleScroll)
@@ -22,26 +24,33 @@ const ProductsComponent = ({ categoryName }) => {
         }
     }
 
-
     useEffect(() => {
-        dispatch(GetProducts({ page: pageNo, limit: 8, dsc: 'dsc' }))
+        dispatch(GetProducts({ page: pageNo, limit: 8, dsc: 'dsc', category: categoryName || "" }))
     }, [pageNo])
 
-
-
     useEffect(() => {
-        console.log(hasMore, "hasMorehasMorehasMore")
-    }, [hasMore])
-
-    useEffect(() => {
-
         if (categoryName) {
             dispatch(GetProductsByCategory(categoryName))
         }
     }, [dispatch, categoryName])
 
+    const loadingArray = [1, 2, 3, 4, 4, 5, 5, 6, 7, 8, 8]
+
     return (
         <div className="productComponent">
+            <div className="searchbox">
+                <div className="seachContainer">
+                    <SearchIcon sx={{ opacity: "0.5" }} />
+                    <input
+                        placeholder='Search product ....'
+                        className='searchInputBox'
+                    />
+                </div>
+            </div>
+            {
+                loading && loadingArray.map((data, index) => <LoaderBox />)
+
+            }
             {
                 Array.isArray(products) && products?.map((data, index) => (
                     <Productbox
@@ -51,9 +60,9 @@ const ProductsComponent = ({ categoryName }) => {
                     />
                 ))
             }
-            {loading &&
-                <div style={{ fontSize: "50px", fontWeight: "900", marginTop: "100px" }}>
-                    Loading ...........
+            {scrollLoading &&
+                <div className='Loading'>
+                    <Loading />
                 </div>
             }
             {

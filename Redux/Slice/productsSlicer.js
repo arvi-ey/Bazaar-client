@@ -15,9 +15,10 @@ export const GetAllProducts = createAsyncThunk('getallproducts', async () => {
 
 // Async thunk to get products with pagination and sorting
 export const GetProducts = createAsyncThunk('getproducts', async (data) => {
-    const { page, limit, dsc } = data;
+    const { page, limit, dsc, category } = data;
+    console.log(data, "Inside redux slice")
     try {
-        const response = await axios.get(URL + `products/getproducts?page=${page}&limit=${limit}&sort=${dsc}`, { withCredentials: true });
+        const response = await axios.get(URL + `products/getproducts?page=${page}&limit=${limit}&sort=${dsc}&category=${category}`, { withCredentials: true });
         return response.data;
     } catch (error) {
         return isRejectedWithValue(error.response?.data?.message || "Failed to get products");
@@ -93,11 +94,17 @@ export const productSlice = createSlice({
                 state.error = action.payload;
             })
             .addCase(GetProducts.pending, (state) => {
-                state.loading = true;
+                if (state.products.length < 1) {
+                    state.loading = true;
+                }
+                if (state.products.length > 0) {
+                    state.scrollLoading = true;
+                }
                 state.error = null;
             })
             .addCase(GetProducts.fulfilled, (state, action) => {
                 state.loading = false;
+                state.scrollLoading = false;
                 if (action.payload.data.length === 0) {
                     state.hasMore = false;
                 } else {
@@ -105,6 +112,7 @@ export const productSlice = createSlice({
                 }
             })
             .addCase(GetProducts.rejected, (state, action) => {
+                state.scrollLoading = true;
                 state.loading = false;
                 state.error = action.payload;
             })
