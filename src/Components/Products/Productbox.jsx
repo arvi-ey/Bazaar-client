@@ -39,17 +39,25 @@ const Productbox = ({ products, key, loading }) => {
         return today.toLocaleDateString('en-US', options);
     }
 
+    setTimeout(() => {
+        if (openSnackBar) setOpenSnackBar(false)
+    }, [1000])
+
     const SelecttoWishList = async () => {
         dispatch(updateFavouriteItem(products))
-        setOpenSnackBar(true)
         const exists = items.find(item => item._id == products._id)
-        if (!exists) setSelectSnackBarMessage("Item added into favourite list")
-        if (exists) setSelectSnackBarMessage("Item removed from favourite list")
+        if (!exists) {
+            setOpenSnackBar(true)
+            setSelectSnackBarMessage("Item added into favourite list")
+        }
+        if (exists) {
+            setOpenSnackBar(true)
+            setSelectSnackBarMessage("Item removed from favourite list")
+        }
     }
     const NavigateProductDetail = () => {
         navigate(`/product/${products._id}`, { state: { favourite: selectWishLIst } });
     }
-
 
     return (
         <div className="productBoxs" key={key} >
@@ -94,12 +102,15 @@ const Productbox = ({ products, key, loading }) => {
                     <p className='DeliveryDetailText'>Free Delivery by {GetDeliveryDate(products.deliveryTime)}</p>
                 </div>
             </div>
+            {
+                slectSnackBarMessage &&
+                <SnackbarComponent
+                    bgColor="#9ee721"
+                    isOpen={openSnackBar}
+                    message={slectSnackBarMessage}
+                />
+            }
 
-            <SnackbarComponent
-                bgColor="#9ee721"
-                isOpen={openSnackBar}
-                message={slectSnackBarMessage}
-            />
         </div>
     )
 }
