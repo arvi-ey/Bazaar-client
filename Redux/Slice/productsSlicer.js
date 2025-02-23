@@ -75,6 +75,7 @@ export const productSlice = createSlice({
         loading: false,
         scrollLoading: false,
         products: [],
+        categoryProducts: [],
         error: null,
         hasMore: true,
     },
@@ -167,7 +168,7 @@ export const productSlice = createSlice({
             })
             .addCase(GetProductsByCategory.fulfilled, (state, action) => {
                 state.loading = false;
-                state.products = action.payload;
+                state.categoryProducts = action.payload;
             })
             .addCase(GetProductsByCategory.rejected, (state, action) => {
                 state.loading = false;

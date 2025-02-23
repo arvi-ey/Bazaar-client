@@ -5,7 +5,8 @@ const CategoryBox = ({ categoryImage, categoryName, id, key }) => {
     const navigate = useNavigate()
 
     const GoToProductCategory = () => {
-        navigate(`/products`, { state: { category: categoryName } });
+        navigate(`/products/${categoryName}`);
+
     }
     return (
         <div key={key} className="categoryItem" style={{

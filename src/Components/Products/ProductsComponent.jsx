@@ -28,16 +28,14 @@ const ProductsComponent = ({ categoryName }) => {
         dispatch(GetProducts({ page: pageNo, limit: 8, dsc: 'dsc', category: categoryName || "" }))
     }, [pageNo])
 
-    useEffect(() => {
-        if (categoryName) {
-            dispatch(GetProductsByCategory(categoryName))
-        }
-    }, [dispatch, categoryName])
 
     const loadingArray = [1, 2, 3, 4, 4, 5, 5, 6, 7, 8, 8]
 
     return (
         <div className="productComponent">
+            <div style={{ fontWeight: "600", fontSize: "1.5vmax", opacity: "0.7" }}>
+                All products
+            </div>
             <div className="searchbox">
                 <div className="seachContainer">
                     <SearchIcon sx={{ opacity: "0.5" }} />

@@ -55,11 +55,6 @@ const Productbox = ({ products, key, loading }) => {
         <div className="productBoxs" key={key} >
             <div style={{ position: "relative", overflow: "hidden" }} onClick={NavigateProductDetail}>
                 <img src={imageFocus ? products.images[1] : products.images[0]} alt={products.category} className='productImages' onMouseOver={() => SetImageFocus(true)} onMouseOut={() => SetImageFocus(false)} />
-                {/* <div onClick={() => SelecttoWishList()} style={{ position: "absolute", top: "15px", right: "5px", cursor: "pointer" }}>
-                    <WishList
-                        select={selectWishLIst}
-                    />
-                </div> */}
                 <div className='rating'>
                     <GradeIcon sx={{ color: "#FFD700" }} />
                     <p className='ratingText'>
