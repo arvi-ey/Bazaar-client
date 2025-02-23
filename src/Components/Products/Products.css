@@ -150,3 +150,11 @@
     height: 100%;
     outline: none;
 }
+
+.ViewSimilar {
+    padding-left: 20px;
+    font-size: 1.5vmax;
+    font-weight: 500;
+    opacity: 0.7;
+    margin-top: 50px;
+}

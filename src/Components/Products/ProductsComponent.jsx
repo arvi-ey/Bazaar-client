@@ -29,7 +29,7 @@ const ProductsComponent = ({ categoryName }) => {
     }, [pageNo])
 
 
-    const loadingArray = [1, 2, 3, 4, 4, 5, 5, 6, 7, 8, 8]
+    const loadingArray = [1, 2, 3, 4, 4, 5, 5, 6, 7, 8, 8, 2, 3]
 
     return (
         <div className="productComponent">

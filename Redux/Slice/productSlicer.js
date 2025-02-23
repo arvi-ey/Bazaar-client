@@ -29,9 +29,9 @@ export const singleProductSlice = createSlice({
     extraReducers: (builder) => {
         builder
             .addCase(GetSingleProduct.pending, (state) => {
+                state.product = null;
                 state.loading = true;
                 state.error = null;
-                state.product = null;
             })
             .addCase(GetSingleProduct.fulfilled, (state, action) => {
                 state.loading = false;

@@ -165,6 +165,7 @@ export const productSlice = createSlice({
             .addCase(GetProductsByCategory.pending, (state) => {
                 state.loading = true;
                 state.error = null;
+                state.categoryProducts = [];
             })
             .addCase(GetProductsByCategory.fulfilled, (state, action) => {
                 state.loading = false;
