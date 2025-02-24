@@ -19,7 +19,7 @@ import { getfavouriteItem } from '../Redux/Slice/favouriteItemSlicer'
 import Favourite from './Components/Favourite/Favourite'
 import ProductDetail from './Components/ProductDetail/ProductDetail'
 import ProductCategory from './Components/Category/ProductCategory'
-
+import Signup from './Components/Authentication/Signup'
 const router = createBrowserRouter([
   {
     path: "/",
@@ -48,6 +48,10 @@ const router = createBrowserRouter([
       {
         path: "products/:category",
         element: <ProductCategory />,
+      },
+      {
+        path: "signup",
+        element: <Signup />,
       },
     ],
   },
