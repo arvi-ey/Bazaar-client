@@ -52,5 +52,8 @@
     border-radius: 5px;
     color: #ffff;
     cursor: pointer;
+}
 
+.authButton:hover {
+    background-color: #dd1673;
 }
