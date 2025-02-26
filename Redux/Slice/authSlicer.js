@@ -3,15 +3,14 @@ import { createAsyncThunk, createSlice, isRejectedWithValue } from '@reduxjs/too
 import axios from 'axios';
 import { URL } from "../../config";
 
-// Initial state for authentication
+
 const initialState = {
     loading: false,
-    user: null, // Initially null
-    uid: null, // Initially null
+    user: null,
+    uid: null,
     error: null,
 };
 
-// Async thunk for signing up the user
 export const signupUser = createAsyncThunk(
     'auth/signupUser',
     async (userData) => {
@@ -26,7 +25,7 @@ export const signupUser = createAsyncThunk(
     }
 );
 
-// Async thunk for signing in the user
+
 export const signinUser = createAsyncThunk(
     'auth/signinUser',
     async (userData) => {
@@ -42,11 +41,15 @@ export const signinUser = createAsyncThunk(
     }
 );
 
-// Auth slice
+
 export const authSlice = createSlice({
     name: 'auth',
     initialState,
-    reducers: {},
+    reducers: {
+        AddUserId: (state, action) => {
+            state.uid = action.payload
+        }
+    },
     extraReducers: (builder) => {
         builder
             .addCase(signupUser.pending, (state) => {

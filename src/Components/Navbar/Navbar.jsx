@@ -33,6 +33,10 @@ const Navbar = () => {
             path: "/help"
         }
     ]
+
+    const GoToAccount = () => {
+        navigate("user/account")
+    }
     return (
         <div className="nav">
             <div className="logo">
@@ -59,7 +63,7 @@ const Navbar = () => {
                         count={0}
                     />
                 </div>
-                <div className="AccountBox" >
+                <div className="AccountBox" onClick={GoToAccount} >
                     <UserProfile
                         image={DemoUser}
                         name={""}

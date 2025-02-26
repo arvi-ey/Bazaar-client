@@ -4,8 +4,13 @@ import { useFormik } from 'formik';
 import { AuthvalidationSchema } from './authvalidation';
 import TextField from '@mui/material/TextField';
 import Google from "../../assets/google.svg"
+import { useLocation } from 'react-router';
 
 const Signin = () => {
+    const location = useLocation();
+    const productId = location.state?.productId;
+
+    console.log(productId)
     const formik = useFormik({
         initialValues: {
             email: '',

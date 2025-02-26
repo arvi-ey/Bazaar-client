@@ -17,9 +17,14 @@ import { GetProductsByCategory } from '../../../Redux/Slice/productsSlicer'
 import CommonCategory from '../Commoncategory/CommonCategory'
 import Skeleton from '@mui/material/Skeleton';
 import Stack from '@mui/material/Stack';
+import useAuth from '../Hooks/useAuth'
+import { useNavigate } from 'react-router-dom';
+
 
 const ProductDetail = () => {
     const dispatch = useDispatch()
+    const { auth } = useAuth()
+    const navigate = useNavigate()
     const { product } = useSelector(state => state.singleproduct)
     const { id } = useParams()
     const [selectImageview, setSelectImageView] = useState({ image: "", index: null })
@@ -89,6 +94,16 @@ const ProductDetail = () => {
             </div>
         )
     }
+
+    const AddToCart = () => {
+        if (!auth) navigate("/signin", { state: { productId: product._id } })
+        else {
+            console.log(product)
+        }
+
+    }
+
+
     return (
         <>
             <div className="productDetailContainer">
@@ -162,7 +177,9 @@ const ProductDetail = () => {
                         <img src={DeliveryTruck} alt='Delivery-Truck' style={{ height: "2vmax", width: "2vmax" }} />
                         <p className='FavouriteDeliveryDetailText' style={{ fontSize: "1vmax", opacity: 0.7, }}>Free Delivery by {GetDeliveryDate(product?.deliveryTime)}</p>
                     </div>
-                    <div className="favouriteAddtocart" style={{ marginTop: "20px", width: "20vmax", height: "3vmax", fontSize: "1.5vmax", fontWeight: "400", padding: "10px 20px 10px 20px" }}>
+                    <div className="favouriteAddtocart"
+                        onClick={AddToCart}
+                        style={{ marginTop: "20px", width: "20vmax", height: "3vmax", fontSize: "1.5vmax", fontWeight: "400", padding: "10px 20px 10px 20px" }}>
                         Add to cart
                     </div>
                     <div className="deliveryLocation">
