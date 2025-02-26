@@ -3,6 +3,7 @@ import "./Auth.css"
 import { useFormik } from 'formik';
 import { AuthvalidationSchema } from './authvalidation';
 import TextField from '@mui/material/TextField';
+import Google from "../../assets/google.svg"
 const Signup = () => {
 
 
@@ -23,8 +24,8 @@ const Signup = () => {
 
     return (
         <div className="signUpContainer">
-            <div className="signUpbox">
-                <p className='Authtext' >Sign UP</p>
+            <div className="AuthBox">
+                <p className='Authtext' >Sign Up</p>
 
                 <TextField
                     id="name"
@@ -47,6 +48,17 @@ const Signup = () => {
                     onBlur={formik.handleBlur}
                     error={formik.touched.email && Boolean(formik.errors.email)}
                     helperText={formik.touched.email && formik.errors.email}
+                />
+                <TextField
+                    id="phone_number"
+                    label="Phone"
+                    variant="outlined"
+                    className="InputField"
+                    value={formik.values.phone_number}
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                    error={formik.touched.phone_number && Boolean(formik.errors.phone_number)}
+                    helperText={formik.touched.phone_number && formik.errors.phone_number}
                 />
                 <TextField
                     id="password"
@@ -75,6 +87,15 @@ const Signup = () => {
                         Sign UP
                     </p>
                 </div>
+                <div className="childAuthText">
+                    <p>Alrady have an account ?</p>
+                    <p>Go to login</p>
+                </div>
+                <div className="otherOptions">
+                    <img src={Google} style={{ height: "2em", width: "2em" }} />
+                    <p>Sign Up with google</p>
+                </div>
+
 
             </div>
         </div>

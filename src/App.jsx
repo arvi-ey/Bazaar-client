@@ -20,6 +20,7 @@ import Favourite from './Components/Favourite/Favourite'
 import ProductDetail from './Components/ProductDetail/ProductDetail'
 import ProductCategory from './Components/Category/ProductCategory'
 import Signup from './Components/Authentication/Signup'
+import Signin from "./Components/Authentication/Signin"
 const router = createBrowserRouter([
   {
     path: "/",
@@ -52,6 +53,10 @@ const router = createBrowserRouter([
       {
         path: "signup",
         element: <Signup />,
+      },
+      {
+        path: "signin",
+        element: <Signin />,
       },
     ],
   },
