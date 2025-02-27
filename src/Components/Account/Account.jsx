@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import "./Account.css"
 import user from "../../assets/user.jpg"
 import Inventory2Icon from '@mui/icons-material/Inventory2';
@@ -9,12 +9,30 @@ import ShieldIcon from '@mui/icons-material/Shield';
 import PowerSettingsNewIcon from '@mui/icons-material/PowerSettingsNew';
 import SettingsIcon from '@mui/icons-material/Settings';
 import LogoutIcon from '@mui/icons-material/Logout';
+import TextField from '@mui/material/TextField';
+import { AuthvalidationSchema } from '../Authentication/authvalidation';
+import { useFormik } from 'formik';
 const Account = () => {
 
     const color = '#ec0d75'
     const height = "30px"
     const width = "30px"
 
+    const [editClicked, setEditClicked] = useState([])
+
+
+    const formik = useFormik({
+        initialValues: {
+            name: '',
+            email: '',
+            phone_number: '',
+        },
+        validationSchema: AuthvalidationSchema,
+        onSubmit: (values, { resetForm }) => {
+            console.log('Form Data:', values);
+            resetForm();
+        },
+    });
 
     const NavigationArray = [
         {
@@ -48,6 +66,30 @@ const Account = () => {
     ]
 
 
+    const EditFieldArray = [
+        {
+            title: "name",
+            label: "Name"
+        },
+        {
+            title: "email",
+            label: "Email Address"
+        },
+        {
+            title: "phone_number",
+            label: "Phone number"
+        }
+    ]
+
+    const OnEditClick = (data) => {
+
+        setEditClicked(prev => [...prev, data.title])
+    }
+
+
+    const OnCancelClick = (data) => {
+        setEditClicked(prev => prev.filter(value => value !== data.title))
+    }
 
     return (
         <div className="accountBox">
@@ -73,7 +115,37 @@ const Account = () => {
 
             </div>
             <div className="accountDetails">
+                <p className='accountDetailsTitle'>Personal Information</p>
+                <div className="accountEditDetails">
+                    {
+                        EditFieldArray.map((data, index) => {
+                            return (
+                                <div>
+                                    <div className='accountEditDetailsTitleBox' >
+                                        <p className='accountEditDetailsTitle'>{data.label}</p>
+                                        {
+                                            editClicked.includes(data.title) ?
+                                                <p className='accountEditDetailEdit' onClick={() => OnCancelClick(data)} >Cancel</p>
+                                                :
+                                                <p className='accountEditDetailEdit' onClick={() => OnEditClick(data)} >Edit</p>
+                                        }
+                                    </div>
+                                    <TextField
+                                        id={data.title}
+                                        variant="outlined"
+                                        className="InputField"
+                                        value={formik.values[data.title]}
+                                        onChange={formik.handleChange}
+                                        onBlur={formik.handleBlur}
+                                        error={formik.touched[data.title] && Boolean(formik.errors[data.title])}
+                                        helperText={formik.touched[data.title] && formik.errors[data.title]}
+                                    />
+                                </div>
 
+                            )
+                        })
+                    }
+                </div>
             </div>
         </div >
     )

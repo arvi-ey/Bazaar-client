@@ -67,12 +67,6 @@
     font-size: 1.2vmax;
 }
 
-.accountDetails {
-    width: 120vmin;
-    background-color: white;
-    height: 100%;
-    border-radius: 10px;
-}
 
 .UserImage {
     height: 60px;
@@ -86,4 +80,44 @@
     font-size: 1.3vmax;
     opacity: 0.8;
     font-weight: 500;
+}
+
+.accountDetails {
+    width: 120vmin;
+    background-color: white;
+    height: 100%;
+    border-radius: 10px;
+    padding-left: 20px;
+}
+
+.accountEditDetails {
+    display: flex;
+    flex-direction: column;
+    gap: 2em;
+    margin-top: 20px;
+}
+
+.accountEditDetailsTitle {
+    font-weight: 500;
+    font-size: 1.5;
+    opacity: 0.7;
+}
+
+.accountEditDetailsTitleBox {
+    display: flex;
+    gap: 1em;
+    margin-bottom: 20px;
+}
+
+.accountDetailsTitle {
+    font-weight: 600;
+    font-size: 1.5vmax;
+    margin-top: 20px;
+    opacity: 0.7;
+}
+
+.accountEditDetailEdit {
+    color: #ec0d75;
+    opacity: 0.8;
+    cursor: pointer;
 }
