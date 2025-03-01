@@ -34,12 +34,26 @@ export const signinUser = createAsyncThunk(
             if (response.data.authenticate === true && response.data.user && response.data.session) {
                 return response.data.user;
             }
-            return isRejectedWithValue("Sign in failed");
+            if (response.data.user === false) return response.data
         } catch (error) {
-            return isRejectedWithValue(error.response?.data?.message || "Sign in failed");
+            return error.response?.data;
         }
     }
 );
+
+
+export const logOutUser = createAsyncThunk(
+    'auth/logoutUser',
+    async () => {
+        try {
+            const response = await axios.post(URL + `auth/logout`, {}, { withCredentials: true })
+            return response.data
+        }
+        catch (error) {
+            return error.response?.message
+        }
+    }
+)
 
 
 export const authSlice = createSlice({
@@ -75,7 +89,18 @@ export const authSlice = createSlice({
             .addCase(signinUser.rejected, (state, action) => {
                 state.loading = false;
                 state.error = action.payload;
-            });
+            })
+            .addCase(logOutUser.pending, (state, action) => {
+                state.loading = true
+                state.error = null
+            })
+            .addCase(logOutUser.fulfilled, (state, action) => {
+                state.loading = false
+            })
+            .addCase(logOutUser.rejected, (state, action) => {
+                state.loading = false;
+                state.error = action.payload
+            })
     },
 });
 

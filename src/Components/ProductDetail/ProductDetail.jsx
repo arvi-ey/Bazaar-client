@@ -19,7 +19,7 @@ import Skeleton from '@mui/material/Skeleton';
 import Stack from '@mui/material/Stack';
 import useAuth from '../Hooks/useAuth'
 import { useNavigate } from 'react-router-dom';
-
+// import { CheckAuth } from '../../ulits/checkAuth'
 
 const ProductDetail = () => {
     const dispatch = useDispatch()
@@ -95,7 +95,9 @@ const ProductDetail = () => {
         )
     }
 
-    const AddToCart = () => {
+    const AddToCart = async () => {
+        // const auth = await CheckAuth()
+        console.log(auth, "Hello AUth")
         if (!auth) navigate("/signin", { state: { productId: product._id } })
         else {
             console.log(product)

@@ -1,16 +1,23 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import "./Auth.css"
 import { useFormik } from 'formik';
 import { AuthvalidationSchema } from './authvalidation';
 import TextField from '@mui/material/TextField';
 import Google from "../../assets/google.svg"
 import { useLocation } from 'react-router';
+import { useSelector, useDispatch } from 'react-redux';
+import { signinUser } from '../../../Redux/Slice/authSlicer';
+import { CircularProgress } from '@mui/material';
+import { useNavigate } from 'react-router';
 
 const Signin = () => {
+    const navigate = useNavigate()
+    const dispatch = useDispatch()
+    const { loading, error } = useSelector(state => state.auth)
     const location = useLocation();
     const productId = location.state?.productId;
+    const [errorText, setErrorText] = useState()
 
-    console.log(productId)
     const formik = useFormik({
         initialValues: {
             email: '',
@@ -18,10 +25,23 @@ const Signin = () => {
         },
         validationSchema: AuthvalidationSchema,
         onSubmit: (values, { resetForm }) => {
-            console.log('Form Data:', values);
-            resetForm();
         },
     });
+
+    const HandleSignIN = async () => {
+        const signinObj = formik.values
+        const response = await dispatch(signinUser(signinObj))
+        if (response.payload) {
+            if (response.payload._id) {
+                if (productId) navigate(`/product/${productId}`)
+                else navigate("/")
+            }
+            if (response.payload.user === false) {
+                setErrorText(response.payload.message)
+                return
+            }
+        }
+    }
 
     return (
         <div className="signINContainer">
@@ -49,14 +69,24 @@ const Signin = () => {
                     error={formik.touched.password && Boolean(formik.errors.password)}
                     helperText={formik.touched.password && formik.errors.password}
                 />
-                <div className="authButton">
-                    <p style={{ fontSize: "25px" }}>
-                        Sign In
-                    </p>
-                </div>
+                {
+                    errorText &&
+                    <p className='ErrrorText'>{errorText}</p>
+                }
+                {
+                    loading ?
+                        <CircularProgress sx={{ color: "#ec0d75" }} /> :
+
+                        <div className="authButton" onClick={HandleSignIN}>
+                            <p style={{ fontSize: "25px" }}>
+                                Sign In
+                            </p>
+                        </div>
+                }
+
                 <div className="childAuthText">
                     <p>Don't have an account ?</p>
-                    <p>Sign up</p>
+                    <p onClick={() => navigate("/signup")} > Sign up</p>
                 </div>
                 <div className="otherOptions">
                     <img src={Google} style={{ height: "4vmin", width: "4vmin" }} />

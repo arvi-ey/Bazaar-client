@@ -141,7 +141,7 @@ const Signup = () => {
                 }
                 <div className="childAuthText">
                     <p>Alrady have an account ?</p>
-                    <p>Go to login</p>
+                    <p onClick={() => navigate("/signin")}>Go to login</p>
                 </div>
                 <div className="otherOptions">
                     <img src={Google} style={{ height: "2em", width: "2em" }} />

@@ -11,8 +11,14 @@ import SettingsIcon from '@mui/icons-material/Settings';
 import LogoutIcon from '@mui/icons-material/Logout';
 import TextField from '@mui/material/TextField';
 import { AuthvalidationSchema } from '../Authentication/authvalidation';
+import { logOutUser } from "../../../Redux/Slice/authSlicer"
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router';
 import { useFormik } from 'formik';
 const Account = () => {
+    const navigate = useNavigate()
+    const { loading, error } = useSelector(state => state.auth)
+    const dispatch = useDispatch()
 
     const color = '#ec0d75'
     const height = "30px"
@@ -91,6 +97,17 @@ const Account = () => {
         setEditClicked(prev => prev.filter(value => value !== data.title))
     }
 
+
+    const HandleClick = (data) => {
+        if (data == "Log out") Logout()
+    }
+
+    const Logout = async () => {
+        const response = await dispatch(logOutUser())
+        if (response) {
+            navigate('/signin')
+        }
+    }
     return (
         <div className="accountBox">
             <div className="accountinfo">
@@ -101,7 +118,7 @@ const Account = () => {
                 <div className="accountNav">
                     {NavigationArray.map((data, index) => {
                         return (
-                            <div className="AccountnavInfo">
+                            <div className="AccountnavInfo" onClick={() => HandleClick(data.title)}>
                                 <div className="accountNavIcon">
                                     {data.icon}
                                 </div>

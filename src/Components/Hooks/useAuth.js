@@ -13,9 +13,9 @@ const useAuth = () => {
     useEffect(() => {
         const checkAuth = async () => {
             try {
-                const response = await axios.get(URL + "auth/checkauth", { withCredentials: true });
+                const response = await axios.post(URL + `auth/checkauth`, {}, { withCredentials: true });
 
-                if (response.data && response.data.id) {
+                if (response?.data?.id) {
                     setAuth({ userId: response.data.id, userType: response.data.role });
                 } else {
                     setAuth(null);
