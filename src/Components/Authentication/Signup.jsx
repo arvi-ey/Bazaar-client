@@ -1,10 +1,21 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import "./Auth.css"
 import { useFormik } from 'formik';
 import { AuthvalidationSchema } from './authvalidation';
 import TextField from '@mui/material/TextField';
 import Google from "../../assets/google.svg"
+import { useDispatch, useSelector } from 'react-redux';
+import { CircularProgress } from '@mui/material';
+import { signinUser, signupUser } from '../../../Redux/Slice/authSlicer';
+import SnackbarComponent from '../../Common/Snackbar';
+import { useNavigate } from 'react-router';
 const Signup = () => {
+    const dispatch = useDispatch()
+    const navigate = useNavigate()
+    const { loading } = useSelector(state => state.auth)
+    const [errorText, setErrorText] = useState()
+    const [openSnackBar, setOpenSnackBar] = useState(false)
+    const [snackBarMessage, setSnackbarMessage] = useState("")
 
 
     const formik = useFormik({
@@ -18,9 +29,41 @@ const Signup = () => {
         validationSchema: AuthvalidationSchema,
         onSubmit: (values, { resetForm }) => {
             console.log('Form Data:', values);
-            resetForm();
         },
     });
+
+    useEffect(() => {
+        if (openSnackBar) {
+            const timer = setTimeout(() => setOpenSnackBar(false), 500);
+            return () => clearTimeout(timer);
+        }
+    }, [openSnackBar]);
+
+    const HandleSignUp = async () => {
+        setErrorText("")
+        setSnackbarMessage("")
+        const signUpObj = {
+            name: formik.values.name,
+            email: formik.values.email,
+            password: formik.values.password,
+            phone_number: formik.values.phone_number
+        }
+        const data = await dispatch(signupUser(signUpObj))
+        if (data.payload) {
+            setOpenSnackBar(true)
+            if (data.payload.user == false) {
+                setErrorText(data.payload.message)
+                setSnackbarMessage("Sign up failed")
+                return
+            }
+            if (data.payload._id) {
+                setSnackbarMessage("Sign up successfull")
+                setTimeout(() => {
+                    navigate("/signin")
+                }, 1000)
+            }
+        }
+    }
 
     return (
         <div className="signUpContainer">
@@ -82,11 +125,20 @@ const Signup = () => {
                     error={formik.touched.confirmPassword && Boolean(formik.errors.confirmPassword)}
                     helperText={formik.touched.confirmPassword && formik.errors.confirmPassword}
                 />
-                <div className="authButton">
-                    <p style={{ fontSize: "25px" }}>
-                        Sign UP
-                    </p>
-                </div>
+                {
+                    errorText &&
+                    <p className='ErrrorText'>{errorText}</p>
+                }
+                {
+                    loading ?
+                        <CircularProgress sx={{ color: "#ec0d75" }} /> :
+
+                        <div className="authButton" onClick={HandleSignUp}>
+                            <p style={{ fontSize: "25px" }}>
+                                Sign UP
+                            </p>
+                        </div>
+                }
                 <div className="childAuthText">
                     <p>Alrady have an account ?</p>
                     <p>Go to login</p>
@@ -98,6 +150,9 @@ const Signup = () => {
 
 
             </div>
+            {
+                <SnackbarComponent bgColor="#9ee721" severity={snackBarMessage == "Sign up failed" ? "error" : 'success'} isOpen={openSnackBar} message={snackBarMessage} />
+            }
         </div>
     )
 }

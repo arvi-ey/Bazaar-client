@@ -3,7 +3,7 @@ import Button from '@mui/material/Button';
 import Snackbar from '@mui/material/Snackbar';
 import { Alert } from '@mui/material';
 
-export default function SnackbarComponent({ isOpen, message, bgColor }) {
+export default function SnackbarComponent({ isOpen, message, bgColor, severity }) {
 
     const [open, setOpen] = React.useState(false)
 
@@ -26,7 +26,7 @@ export default function SnackbarComponent({ isOpen, message, bgColor }) {
                 message={message}
             >
                 <Alert
-                    severity="success"
+                    severity={severity}
                     variant="filled"
                     sx={{ width: '100%' }}
                 >

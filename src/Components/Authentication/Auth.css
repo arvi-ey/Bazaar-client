@@ -82,6 +82,7 @@
     border-radius: 5px;
     color: #ffff;
     cursor: pointer;
+    position: relative;
 }
 
 .authButton:hover {
@@ -117,18 +118,25 @@
     width: 55vmin;
     gap: 1em;
     height: 50px;
-    border: 2px solid black;
+    border: 2px solid rgba(0, 0, 0, 0.239);
     border-radius: 5px;
     cursor: pointer;
-    background-color: rgb(226, 231, 235);
 }
 
 .otherOptions:hover {
-    background-color: rgb(230, 237, 243);
+    background-color: rgb(226, 231, 235);
+
 }
 
 .otherOptions p {
     font-weight: 500;
     font-size: 2vmin;
 
+}
+
+.ErrrorText {
+    /* position: absolute;
+    top: -23px;
+    left: 0; */
+    color: red;
 }

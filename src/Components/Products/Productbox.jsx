@@ -85,7 +85,7 @@ const Productbox = ({ products, key, loading }) => {
                 </div>
             </div>
             {slectSnackBarMessage && (
-                <SnackbarComponent bgColor="#9ee721" isOpen={openSnackBar} message={slectSnackBarMessage} />
+                <SnackbarComponent severity="success" bgColor="#9ee721" isOpen={openSnackBar} message={slectSnackBarMessage} />
             )}
         </div>
     );
