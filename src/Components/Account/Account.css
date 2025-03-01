@@ -121,3 +121,22 @@
     opacity: 0.8;
     cursor: pointer;
 }
+
+.inPutSection {
+    display: flex;
+    /* justify-content: center; */
+    align-items: center;
+    gap: 15px;
+}
+
+.SaveButton {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #ec0d75;
+    width: 120px;
+    height: 55px;
+    border-radius: 5px;
+    color: #F1F3F6;
+    font-weight: 600;
+}

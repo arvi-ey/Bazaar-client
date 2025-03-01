@@ -130,16 +130,26 @@ const Account = () => {
                                                 <p className='accountEditDetailEdit' onClick={() => OnEditClick(data)} >Edit</p>
                                         }
                                     </div>
-                                    <TextField
-                                        id={data.title}
-                                        variant="outlined"
-                                        className="InputField"
-                                        value={formik.values[data.title]}
-                                        onChange={formik.handleChange}
-                                        onBlur={formik.handleBlur}
-                                        error={formik.touched[data.title] && Boolean(formik.errors[data.title])}
-                                        helperText={formik.touched[data.title] && formik.errors[data.title]}
-                                    />
+                                    <div className='inPutSection'>
+                                        <TextField
+                                            id={data.title}
+                                            variant="outlined"
+                                            className="InputField"
+                                            value={formik.values[data.title]}
+                                            onChange={formik.handleChange}
+                                            onBlur={formik.handleBlur}
+                                            error={formik.touched[data.title] && Boolean(formik.errors[data.title])}
+                                            helperText={formik.touched[data.title] && formik.errors[data.title]}
+                                        />
+                                        {
+                                            editClicked.includes(data.title) ?
+
+                                                <div className='SaveButton' >
+                                                    Save
+                                                </div>
+                                                : null
+                                        }
+                                    </div>
                                 </div>
 
                             )
