@@ -58,7 +58,7 @@ const Navbar = () => {
                 <div className='FavouriteIcon' onClick={() => navigate("/favourite")} >
                     <FavoriteBorderOutlinedIcon />
                 </div>
-                <div className='cart'>
+                <div className='cart' onClick={() => navigate("/user/cart")}>
                     <Cart
                         count={0}
                     />

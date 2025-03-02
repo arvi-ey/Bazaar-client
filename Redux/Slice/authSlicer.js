@@ -7,7 +7,8 @@ import { URL } from "../../config";
 const initialState = {
     loading: false,
     user: null,
-    uid: null,
+    userInfo: null,
+    role: null,
     error: null,
 };
 
@@ -60,9 +61,9 @@ export const authSlice = createSlice({
     name: 'auth',
     initialState,
     reducers: {
-        AddUserId: (state, action) => {
-            state.uid = action.payload
-        }
+        AddUserInfo: (state, action) => {
+            state.userInfo = action.payload
+        },
     },
     extraReducers: (builder) => {
         builder
@@ -106,3 +107,4 @@ export const authSlice = createSlice({
 
 // Export the reducer
 export const authReducer = authSlice.reducer;
+export const { AddUserInfo } = authSlice.actions;

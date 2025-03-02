@@ -11,7 +11,7 @@ import SettingsIcon from '@mui/icons-material/Settings';
 import LogoutIcon from '@mui/icons-material/Logout';
 import TextField from '@mui/material/TextField';
 import { AuthvalidationSchema } from '../Authentication/authvalidation';
-import { logOutUser } from "../../../Redux/Slice/authSlicer"
+import { logOutUser, AddUserInfo } from "../../../Redux/Slice/authSlicer"
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router';
 import { useFormik } from 'formik';
@@ -104,6 +104,7 @@ const Account = () => {
 
     const Logout = async () => {
         const response = await dispatch(logOutUser())
+        await dispatch(AddUserInfo(null))
         if (response) {
             navigate('/signin')
         }

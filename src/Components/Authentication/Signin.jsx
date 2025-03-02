@@ -6,7 +6,7 @@ import TextField from '@mui/material/TextField';
 import Google from "../../assets/google.svg"
 import { useLocation } from 'react-router';
 import { useSelector, useDispatch } from 'react-redux';
-import { signinUser } from '../../../Redux/Slice/authSlicer';
+import { signinUser, AddUserInfo } from '../../../Redux/Slice/authSlicer';
 import { CircularProgress } from '@mui/material';
 import { useNavigate } from 'react-router';
 
@@ -33,6 +33,7 @@ const Signin = () => {
         const response = await dispatch(signinUser(signinObj))
         if (response.payload) {
             if (response.payload._id) {
+                dispatch(AddUserInfo({ userId: response.payload._id, userType: response.payload.userType }))
                 if (productId) navigate(`/product/${productId}`)
                 else navigate("/")
             }

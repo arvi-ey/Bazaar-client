@@ -96,8 +96,6 @@ const ProductDetail = () => {
     }
 
     const AddToCart = async () => {
-        // const auth = await CheckAuth()
-        console.log(auth, "Hello AUth")
         if (!auth) navigate("/signin", { state: { productId: product._id } })
         else {
             console.log(product)
