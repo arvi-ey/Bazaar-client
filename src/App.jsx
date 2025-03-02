@@ -49,18 +49,6 @@ const router = createBrowserRouter([
 function App() {
   const dispatch = useDispatch()
 
-  useEffect(() => {
-    // logoutUser()
-  }, [])
-
-  const logoutUser = async () => {
-    try {
-      await axios.post(URL + "auth/logout", { withCredentials: true });
-    } catch (error) {
-      console.error("Logout failed:", error);
-    }
-  };
-
 
   useEffect(() => {
     dispatch(GetBanners())

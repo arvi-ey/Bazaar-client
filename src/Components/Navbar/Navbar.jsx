@@ -41,7 +41,7 @@ const Navbar = () => {
     return (
         <div className="nav">
             <div className="logo">
-                <img src={Logo} alt='Logo' className='imageLogo' />
+                <img src={Logo} alt='Logo' className='imageLogo' onClick={() => navigate('/')} />
             </div>
             <div className="navItems">
                 {navItemArray.map((data, index) => {
