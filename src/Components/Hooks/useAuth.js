@@ -10,18 +10,15 @@ const useAuth = () => {
     const dispatch = useDispatch();
     const { userInfo } = useSelector(state => state.auth)
 
-    console.log(userInfo, "userInfo")
     useEffect(() => {
         const checkAuth = async () => {
             try {
                 setLoading(true)
                 const response = await axios.post(URL + `auth/checkauth`, {}, { withCredentials: true });
-                console.log("Inside fetch")
                 if (response?.data?.id) {
                     setAuth({ userId: response.data.id, userType: response.data.role });
                     dispatch(AddUserInfo({ userId: response.data.id, userType: response.data.role }))
                     setLoading(false);
-                    console.log("Inside fetch2")
                 } else {
                     setAuth(null);
                     dispatch(AddUserInfo(null))
@@ -38,8 +35,9 @@ const useAuth = () => {
         }
         if (userInfo) {
             setAuth(userInfo)
+            setLoading(false)
         }
-    }, [dispatch]);
+    }, [dispatch, userInfo]);
     return { auth, loading };
 };
 

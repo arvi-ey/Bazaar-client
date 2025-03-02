@@ -48,6 +48,11 @@ const Signup = () => {
             password: formik.values.password,
             phone_number: formik.values.phone_number
         }
+        formik.handleSubmit()
+        const errors = await formik.validateForm()
+        if (!formik.isValid || Object.keys(errors).length > 0) {
+            return;
+        }
         const data = await dispatch(signupUser(signUpObj))
         if (data.payload) {
             setOpenSnackBar(true)

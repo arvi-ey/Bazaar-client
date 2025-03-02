@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import "./Auth.css"
 import { useFormik } from 'formik';
-import { AuthvalidationSchema } from './authvalidation';
+import { AuthvalidationSignin } from './authvalidation';
 import TextField from '@mui/material/TextField';
 import Google from "../../assets/google.svg"
 import { useLocation } from 'react-router';
@@ -23,13 +23,18 @@ const Signin = () => {
             email: '',
             password: '',
         },
-        validationSchema: AuthvalidationSchema,
+        validationSchema: AuthvalidationSignin,
         onSubmit: (values, { resetForm }) => {
         },
     });
 
     const HandleSignIN = async () => {
         const signinObj = formik.values
+        formik.handleSubmit()
+        const errors = await formik.validateForm()
+        if (!formik.isValid || Object.keys(errors).length > 0) {
+            return;
+        }
         const response = await dispatch(signinUser(signinObj))
         if (response.payload) {
             if (response.payload._id) {

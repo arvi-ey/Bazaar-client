@@ -11,10 +11,13 @@ import { useNavigate } from 'react-router-dom'
 import MenuIcon from '@mui/icons-material/Menu';
 import MenuOpenIcon from '@mui/icons-material/MenuOpen';
 import CloseIcon from '@mui/icons-material/Close';
+import useAuth from '../Hooks/useAuth'
+import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined';
 
 const Navbar = () => {
     const navigate = useNavigate()
     const [showLongNavbar, setShowLongNavbar] = useState(false)
+    const { auth } = useAuth()
     const navItemArray = [
         {
             name: "Home",
@@ -24,18 +27,16 @@ const Navbar = () => {
             name: "Products",
             path: "/products"
         },
-        {
-            name: "About",
-            path: "/about"
-        },
-        {
-            name: "Help",
-            path: "/help"
-        }
     ]
 
     const GoToAccount = () => {
-        navigate("user/account")
+        if (!auth) {
+            navigate("/signin")
+        }
+        else {
+
+            navigate("user/account")
+        }
     }
     return (
         <div className="nav">
@@ -64,10 +65,14 @@ const Navbar = () => {
                     />
                 </div>
                 <div className="AccountBox" onClick={GoToAccount} >
-                    <UserProfile
-                        image={DemoUser}
-                        name={""}
-                    />
+                    {auth ?
+                        <UserProfile
+                            image={DemoUser}
+                            name={""}
+                        />
+                        :
+                        <PersonOutlineOutlinedIcon style={{ fontSize: 30 }} />
+                    }
                 </div>
             </div>
             <div className="hamberger" onClick={() => setShowLongNavbar(true)}>

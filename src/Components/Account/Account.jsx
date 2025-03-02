@@ -15,10 +15,13 @@ import { logOutUser, AddUserInfo } from "../../../Redux/Slice/authSlicer"
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router';
 import { useFormik } from 'formik';
+import useAuth from '../Hooks/useAuth';
 const Account = () => {
     const navigate = useNavigate()
     const { loading, error } = useSelector(state => state.auth)
     const dispatch = useDispatch()
+    const { auth } = useAuth()
+
 
     const color = '#ec0d75'
     const height = "30px"
@@ -103,6 +106,7 @@ const Account = () => {
     }
 
     const Logout = async () => {
+        if (!auth) return
         const response = await dispatch(logOutUser())
         await dispatch(AddUserInfo(null))
         if (response) {
