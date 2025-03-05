@@ -8,12 +8,13 @@
 
 .allProductsText {
     margin-left: 50px;
-    font-size: x-large;
+    font-size: 1.5vmax;
+    font-weight: 500;
 }
 
 .productbox {
     margin-top: 10PX;
-    width: 300px;
+    width: 400px;
     height: 450px;
     cursor: pointer;
     border-radius: 5px;

@@ -11,25 +11,6 @@ const useAuth = () => {
     const { userInfo } = useSelector(state => state.auth)
 
     useEffect(() => {
-        const checkAuth = async () => {
-            try {
-                setLoading(true)
-                const response = await axios.post(URL + `auth/checkauth`, {}, { withCredentials: true });
-                if (response?.data?.id) {
-                    setAuth({ userId: response.data.id, userType: response.data.role });
-                    dispatch(AddUserInfo({ userId: response.data.id, userType: response.data.role }))
-                    setLoading(false);
-                } else {
-                    setAuth(null);
-                    dispatch(AddUserInfo(null))
-                    setLoading(false);
-                }
-            } catch (error) {
-                setAuth(null);
-            } finally {
-                setLoading(false);
-            }
-        };
         if (!userInfo) {
             checkAuth();
         }
@@ -38,6 +19,24 @@ const useAuth = () => {
             setLoading(false)
         }
     }, [dispatch, userInfo]);
+
+    const checkAuth = async () => {
+        try {
+            const response = await axios.post(URL + `auth/checkauth`, {}, { withCredentials: true });
+            if (response?.data?.id) {
+                setAuth({ userId: response.data.id, userType: response.data.role });
+                dispatch(AddUserInfo({ userId: response.data.id, userType: response.data.role }))
+                console.log("This part is runing 22222")
+            } else {
+                setAuth(null);
+                dispatch(AddUserInfo(null))
+            }
+        } catch (error) {
+            setAuth(null);
+        } finally {
+            setLoading(false);
+        }
+    };
     return { auth, loading };
 };
 

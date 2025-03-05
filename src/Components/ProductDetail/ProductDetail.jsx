@@ -19,6 +19,7 @@ import Skeleton from '@mui/material/Skeleton';
 import Stack from '@mui/material/Stack';
 import useAuth from '../Hooks/useAuth'
 import { useNavigate } from 'react-router-dom';
+import { addrecentView, getRecentView } from '../../../Redux/Slice/recentlyView'
 // import { CheckAuth } from '../../ulits/checkAuth'
 
 const ProductDetail = () => {
@@ -26,16 +27,17 @@ const ProductDetail = () => {
     const { auth } = useAuth()
     const navigate = useNavigate()
     const { product } = useSelector(state => state.singleproduct)
+    const { items } = useSelector(state => state.recentView)
     const { id } = useParams()
     const [selectImageview, setSelectImageView] = useState({ image: "", index: null })
     const [selectSize, setSelectSize] = useState("")
     const location = useLocation();
     const isFavourite = location.state?.favourite || false;
 
-
-
+    console.log(items)
     useEffect(() => {
         dispatch(GetSingleProduct(id))
+        dispatch(getRecentView())
     }, [dispatch, id])
 
     useEffect(() => {
@@ -45,6 +47,9 @@ const ProductDetail = () => {
                 index: 0
             })
 
+        }
+        if (product && product._id) {
+            dispatch(addrecentView(product))
         }
     }, [product])
 

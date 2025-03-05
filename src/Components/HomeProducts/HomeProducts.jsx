@@ -7,6 +7,10 @@ import { GetAllProducts } from '../../../Redux/Slice/productsSlicer'
 import Slider from 'react-slick'
 const HomeProducts = () => {
     const dispatch = useDispatch()
+    useEffect(() => {
+        dispatch(GetAllProducts())
+
+    }, [dispatch])
     const { products } = useSelector(state => state.product)
 
     const settings = {
