@@ -5,7 +5,7 @@ import GradeIcon from '@mui/icons-material/Grade';
 const Recentviewbox = ({ item }) => {
     const randomDecimal = (Math.random() * 0.9);
     return (
-        <div className="productbox">
+        <div className="RecentviewBox">
             {
                 item &&
                 <>
