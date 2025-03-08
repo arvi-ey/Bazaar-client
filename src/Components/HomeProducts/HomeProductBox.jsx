@@ -1,15 +1,19 @@
 import React from 'react'
 import "./HomeProduct.css"
 import GradeIcon from '@mui/icons-material/Grade';
+import { useNavigate } from 'react-router';
 
 const HomeProductBox = ({ products }) => {
-    // const products = products[0]
-    // console.log(products)
+    const navigate = useNavigate()
+
+    const NavigateProductDetail = () => {
+        navigate(`/product/${products._id}`);
+    };
 
     const randomDecimal = (Math.random() * 0.9);
 
     return (
-        <div className="productbox">
+        <div className="productbox" onClick={NavigateProductDetail}>
             {
                 products &&
                 <>
