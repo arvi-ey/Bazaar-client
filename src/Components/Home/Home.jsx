@@ -10,13 +10,11 @@ import Recentview from '../RecentlyViewed/Recentview'
 import { getRecentView } from '../../../Redux/Slice/recentlyView'
 const Home = () => {
     const navigate = useNavigate()
-    const dispatch = useDispatch()
-    const { items } = useSelector(state => state.recentView)
 
 
-    useEffect(() => {
-        dispatch(getRecentView())
-    }, [dispatch])
+
+
+
 
     const GotoProducts = () => {
         navigate("/products")
@@ -26,10 +24,7 @@ const Home = () => {
             <Slider />
             <CategorySection />
             <HomeProducts />
-            {items && items.length > 0 ?
-                <Recentview recentViewItems={items} />
-                : null
-            }
+            <Recentview />
             <div
                 onClick={GotoProducts}
                 style={{ width: "100%", marginBottom: "10px", display: "flex", justifyContent: "center", alignItems: "center" }} >

@@ -20,6 +20,7 @@ import Stack from '@mui/material/Stack';
 import useAuth from '../Hooks/useAuth'
 import { useNavigate } from 'react-router-dom';
 import { addrecentView, getRecentView } from '../../../Redux/Slice/recentlyView'
+import Recentview from "../RecentlyViewed/Recentview"
 // import { CheckAuth } from '../../ulits/checkAuth'
 
 const ProductDetail = () => {
@@ -226,6 +227,7 @@ const ProductDetail = () => {
                 category={product?.category}
                 mainProductId={product?._id}
             />
+            <Recentview />
         </>
     )
 }

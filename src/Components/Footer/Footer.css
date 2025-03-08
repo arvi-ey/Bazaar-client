@@ -1,0 +1,131 @@
+@import url('https://fonts.googleapis.com/css2?family=Archivo+Black&display=swap');
+
+.footerContainer {
+    margin-top: 30px;
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    height: 500px;
+    background-color: #101820;
+    padding: 20px;
+    color: white;
+    position: relative;
+}
+
+.FooterHeader {
+    width: 100%;
+    height: 90%;
+    display: flex;
+    justify-content: space-around;
+
+}
+
+.div1 {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    width: 60vmin;
+    gap: 1em;
+    /* background-color: aqua */
+
+
+}
+
+.div1title {
+    font-family: "Archivo Black", sans-serif;
+    font-size: 3vmax;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.914);
+
+}
+
+.div1Inputbox {}
+
+.div1Input {
+    outline: none;
+    width: 100%;
+    border: 1px solid white;
+    padding: 5px;
+    font-size: 0.9vmax;
+    color: rgba(255, 255, 255, 0.822);
+}
+
+.div1Input::placeholder {
+    font-size: 0.9vmax;
+    color: white;
+}
+
+.socialBox {
+    margin-top: 10px;
+    display: flex;
+    gap: 2em;
+    width: 90%;
+}
+
+.socialIcon {
+    border-right: 1px solid white;
+    display: flex;
+    /* justify-content: center; */
+    align-items: center;
+    border-style: dotted;
+    cursor: pointer;
+    width: 10vmin;
+}
+
+.downLoadOptionDiv {
+    display: flex;
+    width: 100%;
+    gap: 3em;
+}
+
+.downLoadIMage {
+    height: 150px;
+    width: 150px;
+    cursor: pointer;
+}
+
+.div2 {
+    height: 90%;
+    width: 30vmin;
+
+}
+
+.div2Title {
+    font-family: "Archivo Black", sans-serif;
+    color: rgba(255, 255, 255, 0.822);
+}
+
+.div2Contect {
+    display: flex;
+    flex-direction: column;
+    font-weight: 500;
+    height: 100%;
+    gap: 10px;
+    margin-top: 20px;
+
+}
+
+.div2Text {
+    font-size: 1.2vmax;
+    color: rgba(255, 255, 255, 0.822);
+}
+
+.LastDiv {
+    right: 10;
+    bottom: 2;
+    width: 80%;
+    display: flex;
+    justify-content: flex-end;
+    gap: 1em;
+}
+
+.lastDivText {
+    color: rgba(255, 255, 255, 0.822);
+    font-size: 1vmax;
+    border-right: 1px solid white;
+    border-style: dashed;
+    padding: 0px 10px 0px 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

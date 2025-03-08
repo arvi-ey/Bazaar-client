@@ -1,11 +1,15 @@
 import React from 'react'
 import "./Recentview.css"
 import GradeIcon from '@mui/icons-material/Grade';
-
+import { useNavigate } from 'react-router';
 const Recentviewbox = ({ item }) => {
+    const navigate = useNavigate()
     const randomDecimal = (Math.random() * 0.9);
+    const NavigateProductDetail = () => {
+        navigate(`/product/${item._id}`);
+    };
     return (
-        <div className="RecentviewBox">
+        <div className="RecentviewBox" onClick={NavigateProductDetail}>
             {
                 item &&
                 <>

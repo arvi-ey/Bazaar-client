@@ -4,16 +4,24 @@ import Recentviewbox from './Recentviewbox'
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import { useRef, useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { getRecentView } from '../../../Redux/Slice/recentlyView';
 
 const Recentview = ({ recentViewItems }) => {
     const boxref = useRef(null)
+    const { items } = useSelector(state => state.recentView)
+    const dispatch = useDispatch()
     const [hideLeft, setHideLeft] = useState(true)
     const [hideRight, setHideRight] = useState(false)
+
+
+    useEffect(() => {
+        dispatch(getRecentView())
+    }, [dispatch])
 
     const ScrollToNext = () => {
         const { scrollWidth, scrollLeft, clientWidth } = boxref.current
         if (scrollLeft == 0) {
-            console.log(scrollLeft)
             setHideLeft(true)
         }
         else {
@@ -51,6 +59,7 @@ const Recentview = ({ recentViewItems }) => {
     }
 
     return (
+
         <div className='recentViewDiv'>
             <p className='recetViewText' >Recently viewed</p>
             <div style={{ display: "flex", width: "100vw", justifyContent: "center" }} >
@@ -59,7 +68,7 @@ const Recentview = ({ recentViewItems }) => {
                 </div>
                 <div className='RecentViewComp' ref={boxref}>
                     {
-                        recentViewItems && recentViewItems.map((item, index) => <Recentviewbox item={item} />)
+                        items && items.map((item, index) => <Recentviewbox item={item} />)
                     }
                 </div>
                 <div style={{ height: "500px", width: "50px", display: "flex", justifyContent: "center", alignItems: "center" }}>

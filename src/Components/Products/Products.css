@@ -2,9 +2,9 @@
     width: 100%;
     height: 100%;
     display: flex;
-    margin-top: 20px;
     overflow: hidden;
     margin-top: 100px;
+    gap: 1.6em;
 }
 
 .productBoxs {
@@ -17,7 +17,6 @@
 
 .productComponent {
     width: 100%;
-    margin-left: 22%;
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     column-gap: 10px;
