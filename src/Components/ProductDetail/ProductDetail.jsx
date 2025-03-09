@@ -21,6 +21,8 @@ import useAuth from '../Hooks/useAuth'
 import { useNavigate } from 'react-router-dom';
 import { addrecentView, getRecentView } from '../../../Redux/Slice/recentlyView'
 import Recentview from "../RecentlyViewed/Recentview"
+import SnackbarComponent from '../../Common/Snackbar'
+import { AddToCart } from '../../../Redux/Slice/cartSlicer'
 // import { CheckAuth } from '../../ulits/checkAuth'
 
 const ProductDetail = () => {
@@ -34,6 +36,9 @@ const ProductDetail = () => {
     const [selectSize, setSelectSize] = useState("")
     const location = useLocation();
     const isFavourite = location.state?.favourite || false;
+    const [openSnackBar, setOpenSnackbar] = useState(false)
+    const [selectSnackbarMessage, setSelectSnackBarMessage] = useState("")
+    const [sizeerror, setSizeerror] = useState("")
 
     useEffect(() => {
         dispatch(GetSingleProduct(id))
@@ -100,10 +105,40 @@ const ProductDetail = () => {
         )
     }
 
-    const AddToCart = async () => {
+    const AddtoCart = async () => {
+        setSizeerror("")
+        if (!selectSize) {
+            setSizeerror("Please select size")
+        }
         if (!auth) navigate("/signin", { state: { productId: product._id } })
         else {
-            console.log(product)
+            const cartObj = {
+                title: product?.title,
+                userId: auth?.userId,
+                subTotal: product?.price && product.price * (1 - 0.40) || 0,
+                count: 1,
+                product_id: product?._id,
+                description: product?.description || '',
+                stock: product?.stock || 0,
+                image: product?.images?.[0] || '',
+                numReviews: product?.numReviews || 0,
+                ratings: product?.ratings || 0,
+                deliveryTime: product?.deliveryTime || 0,
+                createdAt: Date.now().toString(),
+                category: product?.category || '',
+                price: product?.price && product.price * (1 - 0.40) || 0,
+                size: selectSize || ""
+            }
+            console.log(cartObj)
+            const data = await dispatch(AddToCart(cartObj))
+            if (data.payload._id) {
+                setOpenSnackbar(true)
+                setSelectSnackBarMessage("Item Aded to Cart")
+                setTimeout(() => {
+                    setOpenSnackbar(false)
+                }, 1500)
+                return
+            }
         }
 
     }
@@ -183,9 +218,14 @@ const ProductDetail = () => {
                         <p className='FavouriteDeliveryDetailText' style={{ fontSize: "1vmax", opacity: 0.7, }}>Free Delivery by {GetDeliveryDate(product?.deliveryTime)}</p>
                     </div>
                     <div className="favouriteAddtocart"
-                        onClick={AddToCart}
+                        onClick={AddtoCart}
                         style={{ marginTop: "20px", width: "20vmax", height: "3vmax", fontSize: "1.5vmax", fontWeight: "400", padding: "10px 20px 10px 20px" }}>
                         Add to cart
+                    </div>
+                    <div style={{ color: "red", fontSize: "1vmax", marginTop: "5px", height: "10px" }}>
+                        {sizeerror &&
+                            <p>{sizeerror}</p>
+                        }
                     </div>
                     <div className="deliveryLocation">
                         <FmdGoodOutlinedIcon sx={{ opacity: "0.7" }} />
@@ -217,6 +257,9 @@ const ProductDetail = () => {
                         </div>
                     </div>
                 </div>
+                {selectSnackbarMessage &&
+                    <SnackbarComponent severity="success" bgColor="#9ee721" isOpen={openSnackBar} message={selectSnackbarMessage} />
+                }
             </div>
             <div className='ViewSimilar'>
                 You May Also Like

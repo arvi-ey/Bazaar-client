@@ -2,10 +2,11 @@ import { URL } from "../../config";  // Adjust path based on your file structure
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
-// AddToCart async thunk
+
 export const AddToCart = createAsyncThunk(
     'cart/addtocart', async (data) => {
         try {
+            console.log(data)
             const response = await axios.post(URL + `cart/addcart`, data);
             if (response.data.success === true) {
                 return response.data.item;
@@ -127,4 +128,4 @@ export const cartSlice = createSlice({
 });
 
 // Export the reducer
-export const cartRducer = cartSlice.reducer;
+export const cartReducer = cartSlice.reducer;

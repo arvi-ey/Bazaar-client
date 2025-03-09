@@ -6,7 +6,7 @@ import { bannerReducer } from '../Slice/bannerSlicer';
 import { CategoryReducer } from '../Slice/categorySlicer';
 import { ProductRedducer } from '../Slice/productsSlicer';
 import { SinngleProductReducer } from '../Slice/productSlicer';
-import { cartRducer } from "../Slice/cartSlicer";
+import { cartReducer } from "../Slice/cartSlicer";
 import { addressReducer } from "../Slice/addressSlicer";
 import { orderReducer } from "../Slice/orderSlicer";
 import recentViewSlice from '../Slice/recentlyView';
@@ -21,7 +21,7 @@ export const store = configureStore({
         category: CategoryReducer,
         product: ProductRedducer,
         singleproduct: SinngleProductReducer,
-        cart: cartRducer,
+        cart: cartReducer,
         address: addressReducer,
         order: orderReducer,
         favouriteproducts: favouriteProductSlice,
