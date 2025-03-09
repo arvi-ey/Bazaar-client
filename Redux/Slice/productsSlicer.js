@@ -16,7 +16,6 @@ export const GetAllProducts = createAsyncThunk('getallproducts', async () => {
 // Async thunk to get products with pagination and sorting
 export const GetProducts = createAsyncThunk('getproducts', async (data) => {
     const { page, limit, dsc, category } = data;
-    console.log(data, "Inside redux slice")
     try {
         const response = await axios.get(URL + `products/getproducts?page=${page}&limit=${limit}&sort=${dsc}&category=${category}`, { withCredentials: true });
         return response.data;
@@ -25,11 +24,22 @@ export const GetProducts = createAsyncThunk('getproducts', async (data) => {
     }
 });
 
+export const GetHomeProducts = createAsyncThunk('gethomeproducts', async (limit) => {
+    try {
+        const response = await axios.get(URL + `products/gethomeproducts?limit=${limit}`)
+        if (response.data.status == "successfull") {
+            return response.data.data;
+        }
+    }
+    catch (error) {
+        return error.response.data;
+    }
+})
+
 // Async thunk to add a new product
 export const AddProduct = createAsyncThunk('addproduct', async (data) => {
     try {
         const response = await axios.post(URL + `products/addproduct`, data, { withCredentials: true });
-        console.log(response.data.data);
         return response.data;
     } catch (error) {
         return isRejectedWithValue(error.response?.data?.message || "Failed to add categories");
@@ -76,6 +86,7 @@ export const productSlice = createSlice({
         scrollLoading: false,
         products: [],
         categoryProducts: [],
+        homeProducts: [],
         error: null,
         hasMore: true,
     },
@@ -174,7 +185,19 @@ export const productSlice = createSlice({
             .addCase(GetProductsByCategory.rejected, (state, action) => {
                 state.loading = false;
                 state.error = action.payload;
-            });
+            })
+            .addCase(GetHomeProducts.pending, (state, action) => {
+                state.loading = true
+                state.homeProducts = []
+            })
+            .addCase(GetHomeProducts.fulfilled, (state, action) => {
+                state.loading = false;
+                state.homeProducts = action.payload
+            })
+            .addCase(GetHomeProducts.rejected, (state, action) => {
+                state.loading = false,
+                    state.error = action.payload
+            })
     }
 });
 

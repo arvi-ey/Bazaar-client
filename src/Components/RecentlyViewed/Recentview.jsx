@@ -27,7 +27,7 @@ const Recentview = ({ recentViewItems }) => {
         else {
             setHideLeft(false)
         }
-        if (scrollLeft + clientWidth >= scrollWidth) {
+        if (scrollLeft + clientWidth + 1 >= scrollWidth) {
             setHideRight(true)
         }
         else {
@@ -38,11 +38,14 @@ const Recentview = ({ recentViewItems }) => {
 
 
     useEffect(() => {
-        boxref.current.addEventListener("scroll", ScrollToNext)
+        if (items && items.length > 0) {
+
+            boxref.current.addEventListener("scroll", ScrollToNext)
+        }
         return () => {
             document.removeEventListener("scroll", ScrollToNext);
         };
-    }, [])
+    }, [items])
 
 
 
@@ -58,24 +61,29 @@ const Recentview = ({ recentViewItems }) => {
 
     }
 
-    return (
 
-        <div className='recentViewDiv'>
-            <p className='recetViewText' >Recently viewed</p>
-            <div style={{ display: "flex", width: "100vw", justifyContent: "center" }} >
-                <div style={{ height: "500px", width: "50px", display: "flex", justifyContent: "center", alignItems: "center", opacity: hideLeft ? "0.2" : "1" }}>
-                    <ArrowBackIosNewIcon sx={{ cursor: "pointer", fontSize: "35px" }} onClick={ScrollLeft} />
+    return (
+        <>
+            {
+                items && items.length > 0 &&
+                <div className='recentViewDiv'>
+                    <p className='recetViewText' >Recently viewed</p>
+                    <div style={{ display: "flex", width: "100vw", justifyContent: "center" }} >
+                        <div style={{ height: "500px", width: "50px", display: "flex", justifyContent: "center", alignItems: "center", opacity: hideLeft ? "0.2" : "1" }}>
+                            <ArrowBackIosNewIcon sx={{ cursor: "pointer", fontSize: "35px" }} onClick={ScrollLeft} />
+                        </div>
+                        <div className='RecentViewComp' ref={boxref}>
+                            {
+                                items && items.map((item, index) => <Recentviewbox item={item} />)
+                            }
+                        </div>
+                        <div style={{ height: "500px", width: "50px", display: "flex", justifyContent: "center", alignItems: "center" }}>
+                            <ArrowForwardIosIcon sx={{ cursor: "pointer", fontSize: "35px", opacity: hideRight ? "0.2" : "1" }} onClick={ScrollRight} />
+                        </div>
+                    </div>
                 </div>
-                <div className='RecentViewComp' ref={boxref}>
-                    {
-                        items && items.map((item, index) => <Recentviewbox item={item} />)
-                    }
-                </div>
-                <div style={{ height: "500px", width: "50px", display: "flex", justifyContent: "center", alignItems: "center" }}>
-                    <ArrowForwardIosIcon sx={{ cursor: "pointer", fontSize: "35px", opacity: hideRight ? "0.2" : "1" }} onClick={ScrollRight} />
-                </div>
-            </div>
-        </div>
+            }
+        </>
     )
 }
 

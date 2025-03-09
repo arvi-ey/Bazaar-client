@@ -35,7 +35,6 @@ const ProductDetail = () => {
     const location = useLocation();
     const isFavourite = location.state?.favourite || false;
 
-    console.log(items)
     useEffect(() => {
         dispatch(GetSingleProduct(id))
         dispatch(getRecentView())

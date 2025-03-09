@@ -3,18 +3,20 @@ import "./HomeProduct.css"
 import HomeProductBox from './HomeProductBox'
 import { useSelector, useDispatch } from 'react-redux'
 import { useState, useEffect } from 'react'
-import { GetAllProducts } from '../../../Redux/Slice/productsSlicer'
+import { GetAllProducts, GetHomeProducts } from '../../../Redux/Slice/productsSlicer'
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
+import Skeleton from '@mui/material/Skeleton';
+import Stack from '@mui/material/Stack';
 const HomeProducts = () => {
     const boxref = useRef(null)
     const dispatch = useDispatch()
-    const { products } = useSelector(state => state.product)
+    const { homeProducts } = useSelector(state => state.product)
     const [hideLeft, setHideLeft] = useState(true)
     const [hideRight, setHideRight] = useState(false)
 
     useEffect(() => {
-        dispatch(GetAllProducts())
+        dispatch(GetHomeProducts(20))
     }, [dispatch])
 
     const ScrollToNext = () => {
@@ -51,6 +53,34 @@ const HomeProducts = () => {
 
     }
 
+    const LoaderAray = [1, 2, 3, 4, 5, 6]
+
+    if (!homeProducts) {
+        return (
+            <div style={{ marginTop: "20px", width: "100%", }}>
+                <p className='recetViewText' >All Items</p>
+                <div style={{ display: "flex", width: "100vw", justifyContent: "center" }} ></div>
+                <div style={{ display: "flex", width: "100vw", justifyContent: "center" }} >
+                    <div className='RecentViewComp' ref={boxref}>
+                        {
+                            LoaderAray.map((data, index) => {
+                                return (
+                                    <Stack style={{ display: "flex", flexDirection: "column" }} >
+                                        <Skeleton variant="rounded" width={350} height={470} />
+                                        <Skeleton variant='text' width={350} height={50} />
+                                    </Stack>
+                                )
+                            })
+
+                        }
+                    </div>
+                </div>
+
+            </div>
+        )
+    }
+
+
 
     return (
         <div style={{ marginTop: "20px", width: "100%", }}>
@@ -62,7 +92,18 @@ const HomeProducts = () => {
                 </div>
                 <div className='RecentViewComp' ref={boxref}>
                     {
-                        products && products.slice(0, 30).map((product, index) => <HomeProductBox products={product} />)
+                        !homeProducts && [...Array(4)].map((data, index) => {
+                            return (
+                                <Stack style={{ display: "flex", flexDirection: "column" }} >
+                                    <Skeleton variant="rounded" width={350} height={470} />
+                                    <Skeleton variant='text' width={350} height={50} />
+                                </Stack>
+                            )
+                        })
+
+                    }
+                    {
+                        homeProducts && homeProducts.slice(0, 30).map((product, index) => <HomeProductBox products={product} />)
                     }
                 </div>
                 <div style={{ height: "500px", width: "50px", display: "flex", justifyContent: "center", alignItems: "center" }}>

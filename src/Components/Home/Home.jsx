@@ -24,12 +24,12 @@ const Home = () => {
             <Slider />
             <CategorySection />
             <HomeProducts />
-            <Recentview />
             <div
                 onClick={GotoProducts}
                 style={{ width: "100%", marginBottom: "10px", display: "flex", justifyContent: "center", alignItems: "center" }} >
                 <p className='viewAllProductsButton'>View all products</p>
             </div>
+            <Recentview />
         </>
     )
 }
