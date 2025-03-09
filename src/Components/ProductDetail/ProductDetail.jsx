@@ -43,6 +43,8 @@ const ProductDetail = () => {
     useEffect(() => {
         dispatch(GetSingleProduct(id))
         dispatch(getRecentView())
+        setSizeerror("")
+        setSelectSize("")
     }, [dispatch, id])
 
     useEffect(() => {
@@ -109,6 +111,7 @@ const ProductDetail = () => {
         setSizeerror("")
         if (!selectSize) {
             setSizeerror("Please select size")
+            return
         }
         if (!auth) navigate("/signin", { state: { productId: product._id } })
         else {
@@ -129,7 +132,6 @@ const ProductDetail = () => {
                 price: product?.price && product.price * (1 - 0.40) || 0,
                 size: selectSize || ""
             }
-            console.log(cartObj)
             const data = await dispatch(AddToCart(cartObj))
             if (data.payload._id) {
                 setOpenSnackbar(true)
