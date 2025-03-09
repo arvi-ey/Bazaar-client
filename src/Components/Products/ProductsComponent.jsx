@@ -25,7 +25,9 @@ const ProductsComponent = ({ categoryName }) => {
     }
 
     useEffect(() => {
-        dispatch(GetProducts({ page: pageNo, limit: 8, dsc: 'dsc', category: categoryName || "" }))
+        if (hasMore) {
+            dispatch(GetProducts({ page: pageNo, limit: 8, dsc: 'dsc', category: categoryName || "" }))
+        }
     }, [pageNo])
 
 
@@ -60,7 +62,7 @@ const ProductsComponent = ({ categoryName }) => {
             }
             {scrollLoading &&
                 <div className='Loading'>
-                    <Loading />
+                    <p style={{ fontSize: "1.5vmax", color: "black", opacity: "0.6" }} >Loading.....</p>
                 </div>
             }
             {
