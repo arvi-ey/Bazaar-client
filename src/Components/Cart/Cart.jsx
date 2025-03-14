@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import Cartbox from './Cartbox'
 import "./Cart.css"
 import { useDispatch, useSelector } from 'react-redux'
@@ -6,13 +6,31 @@ import { GetCartItems } from '../../../Redux/Slice/cartSlicer'
 import useAuth from '../Hooks/useAuth'
 
 const Cart = () => {
-    const dispatch = useDispatch()
     const { auth } = useAuth()
+    const dispatch = useDispatch()
     const { cartitems } = useSelector(state => state.cart)
+    const [subTotal, setSubTotal] = useState({ price: 0, totalItem: 0 })
 
     useEffect(() => {
-        dispatch(GetCartItems(auth.userId))
-    }, [dispatch])
+        if (cartitems && cartitems.length > 0) {
+            let price = 0
+            let totalItem = 0
+            for (let i in cartitems) {
+                price = price + cartitems[i].subTotal
+                totalItem = totalItem + cartitems[i].count
+            }
+            setSubTotal((prev) => ({ ...prev, price, totalItem }))
+        }
+    }, [cartitems])
+
+    useEffect(() => {
+        console.log(subTotal)
+    }, [subTotal])
+
+    useEffect(() => {
+        if (auth?.userId) dispatch(GetCartItems(auth.userId))
+    }, [dispatch, auth])
+
     return (
         <div className="userCartComponet">
             <div className="cartItems">

@@ -48,6 +48,7 @@ export const RemoveFromCart = createAsyncThunk(
 // UpdateCartItem async thunk
 export const UpdateCartItem = createAsyncThunk('cart/updateitem',
     async ({ cartId, body }) => {
+        console.log(body)
         try {
             const response = await axios.patch(URL + `cart/updateCart/${cartId}`, { body });
             if (response.data.success === true) {
