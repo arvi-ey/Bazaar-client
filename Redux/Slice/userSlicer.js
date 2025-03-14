@@ -15,6 +15,20 @@ export const GetUserInfo = createAsyncThunk(
     }
 );
 
+
+export const UpdateUser = createAsyncThunk(
+    'user/upateuser',
+    async (userId, reqBody) => {
+        try {
+            const response = await axios.patch(URL + `user/updateuser/${userId}`)
+            if (response.data.success == true) return response.data.data
+        }
+        catch (error) {
+            return error.response.data
+        }
+    }
+)
+
 // User slice
 export const userSlice = createSlice({
     name: "user",
@@ -37,7 +51,19 @@ export const userSlice = createSlice({
             .addCase(GetUserInfo.rejected, (state, action) => {
                 state.loading = false;
                 state.error = action.payload;
-            });
+            })
+            .addCase(UpdateUser.pending, (state, action) => {
+                state.loading = true,
+                    state.error = null
+            })
+            .addCase(UpdateUser.fulfilled, (state, action) => {
+                state.user = { ...state.user, ...action.payload }
+                state.loading = false
+            })
+            .addCase(UpdateUser.rejected, (state, action) => {
+                state.error = action.payload
+                state.loading = false
+            })
     }
 });
 

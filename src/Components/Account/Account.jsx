@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import "./Account.css"
 import user from "../../assets/user.jpg"
 import Inventory2Icon from '@mui/icons-material/Inventory2';
@@ -16,11 +16,18 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router';
 import { useFormik } from 'formik';
 import useAuth from '../Hooks/useAuth';
+import { GetUserInfo, UpdateUser } from '../../../Redux/Slice/userSlicer';
 const Account = () => {
     const navigate = useNavigate()
     const { loading, error } = useSelector(state => state.auth)
+    const { user } = useSelector(state => state.user)
     const dispatch = useDispatch()
     const { auth } = useAuth()
+
+
+    useEffect(() => {
+        if (auth?.userId) dispatch(GetUserInfo(auth?.userId))
+    }, [dispatch, auth])
 
 
     const color = '#ec0d75'
@@ -32,11 +39,13 @@ const Account = () => {
 
     const formik = useFormik({
         initialValues: {
-            name: '',
-            email: '',
-            phone_number: '',
+            name: user?.name || "",
+            email: user?.email || "",
+            phone_number: user?.phone_number || " ",
         },
         validationSchema: AuthvalidationSchema,
+        enableReinitialize: true,
+        validateOnChange: true,
         onSubmit: (values, { resetForm }) => {
             console.log('Form Data:', values);
             resetForm();
@@ -105,10 +114,16 @@ const Account = () => {
         if (data == "Log out") Logout()
     }
 
+
+    const HandleEditUserInfo = (value) => {
+        dispatch(UpdateUser(user?._id))
+
+    }
+
     const Logout = async () => {
         if (!auth) return
         const response = await dispatch(logOutUser())
-        await dispatch(AddUserInfo(null))
+        dispatch(AddUserInfo(null))
         if (response) {
             navigate('/signin')
         }
@@ -160,13 +175,14 @@ const Account = () => {
                                             value={formik.values[data.title]}
                                             onChange={formik.handleChange}
                                             onBlur={formik.handleBlur}
+                                            disabled={!editClicked.includes(data.title)}
                                             error={formik.touched[data.title] && Boolean(formik.errors[data.title])}
                                             helperText={formik.touched[data.title] && formik.errors[data.title]}
                                         />
                                         {
                                             editClicked.includes(data.title) ?
 
-                                                <div className='SaveButton' >
+                                                <div className='SaveButton' onClick={() => HandleEditUserInfo({ [data.title]: formik.values[data.title] })} >
                                                     Save
                                                 </div>
                                                 : null
