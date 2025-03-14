@@ -15,18 +15,16 @@
     height: 100vh;
     display: flex;
     flex-direction: column;
-    /* background-color: rgba(240, 248, 255, 0.798); */
-    /* background-color: rgba(240, 248, 255, 0.798); */
 }
 
 .cartAmoutBox {
     width: 60vmin;
-    background-color: antiquewhite;
+    /* background-color: rgb(235, 231, 226); */
     height: 100%;
-    /* position: sticky; */
-    /* top: 10px;
-    overflow-y: hidden; */
-
+    padding: 10px;
+    position: sticky;
+    top: 10px;
+    overflow-y: hidden;
 }
 
 .cartBoxComponent {
@@ -38,6 +36,7 @@
     /* align-items: center; */
     margin-bottom: 3em;
     gap: 10px;
+    cursor: pointer;
 }
 
 .CartImageBox {
@@ -143,8 +142,7 @@
 }
 
 .PlaceOrder:hover {
-    background-color: #8ad20c;
-
+    background-color: #a7ec30
 }
 
 .RemoveItem {
@@ -161,5 +159,21 @@
 
 .RemoveItem:hover {
     background-color: #c80a63;
+}
+
+.PlaceTotalOrder {
+    font-size: 1.5vmax;
+    cursor: pointer;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: #9ee721;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 500;
+}
+
+.PlaceTotalOrder:hover {
+    background-color: #a7ec30;
 
 }
