@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import "./Navbar.css"
 import Logo from "../../assets/Bazaarlogo.svg"
 import DemoUser from "../../assets/user.jpg"
@@ -13,11 +13,28 @@ import MenuOpenIcon from '@mui/icons-material/MenuOpen';
 import CloseIcon from '@mui/icons-material/Close';
 import useAuth from '../Hooks/useAuth'
 import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined';
+import { useDispatch, useSelector } from 'react-redux'
+import { GetCartItems } from '../../../Redux/Slice/cartSlicer'
 
 const Navbar = () => {
+    const dispatch = useDispatch()
+    const { cartitems } = useSelector(state => state.cart)
     const navigate = useNavigate()
     const [showLongNavbar, setShowLongNavbar] = useState(false)
     const { auth } = useAuth()
+    const [cartNumber, setCartNumbers] = useState(0)
+
+
+    useEffect(() => {
+        if (auth?.userId) dispatch(GetCartItems(auth.userId))
+    }, [dispatch, auth])
+
+
+    useEffect(() => {
+        if (cartitems && auth?.userId) setCartNumbers(cartitems.length)
+        else setCartNumbers(0)
+    }, [cartitems, auth])
+
     const navItemArray = [
         {
             name: "Home",
@@ -61,7 +78,7 @@ const Navbar = () => {
                 </div>
                 <div className='cart' onClick={() => navigate("/user/cart")}>
                     <Cart
-                        count={0}
+                        count={cartNumber}
                     />
                 </div>
                 <div className="AccountBox" onClick={GoToAccount} >
