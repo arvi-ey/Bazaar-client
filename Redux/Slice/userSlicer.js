@@ -18,9 +18,9 @@ export const GetUserInfo = createAsyncThunk(
 
 export const UpdateUser = createAsyncThunk(
     'user/upateuser',
-    async (userId, reqBody) => {
+    async ({ userId, obj }) => {
         try {
-            const response = await axios.patch(URL + `user/updateuser/${userId}`)
+            const response = await axios.patch(URL + `user/updateuser/${userId}`, obj)
             if (response.data.success == true) return response.data.data
         }
         catch (error) {

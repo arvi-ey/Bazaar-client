@@ -23,6 +23,7 @@ const Account = () => {
     const { user } = useSelector(state => state.user)
     const dispatch = useDispatch()
     const { auth } = useAuth()
+    const [editClicked, setEditClicked] = useState([])
 
 
     useEffect(() => {
@@ -34,7 +35,6 @@ const Account = () => {
     const height = "30px"
     const width = "30px"
 
-    const [editClicked, setEditClicked] = useState([])
 
 
     const formik = useFormik({
@@ -100,7 +100,6 @@ const Account = () => {
     ]
 
     const OnEditClick = (data) => {
-
         setEditClicked(prev => [...prev, data.title])
     }
 
@@ -115,8 +114,9 @@ const Account = () => {
     }
 
 
-    const HandleEditUserInfo = (value) => {
-        dispatch(UpdateUser(user?._id))
+    const HandleEditUserInfo = async (value) => {
+        await dispatch(UpdateUser({ userId: user?._id, obj: value }))
+        setEditClicked((prev) => prev.filter(data => data != Object.keys(value)[0]))
 
     }
 
@@ -128,6 +128,12 @@ const Account = () => {
             navigate('/signin')
         }
     }
+
+
+    useEffect(() => {
+        console.log(editClicked, "KKKKK")
+    }, [editClicked])
+
     return (
         <div className="accountBox">
             <div className="accountinfo">
@@ -161,7 +167,7 @@ const Account = () => {
                                     <div className='accountEditDetailsTitleBox' >
                                         <p className='accountEditDetailsTitle'>{data.label}</p>
                                         {
-                                            editClicked.includes(data.title) ?
+                                            editClicked?.length > 0 && editClicked.includes(data.title) ?
                                                 <p className='accountEditDetailEdit' onClick={() => OnCancelClick(data)} >Cancel</p>
                                                 :
                                                 <p className='accountEditDetailEdit' onClick={() => OnEditClick(data)} >Edit</p>
@@ -175,12 +181,12 @@ const Account = () => {
                                             value={formik.values[data.title]}
                                             onChange={formik.handleChange}
                                             onBlur={formik.handleBlur}
-                                            disabled={!editClicked.includes(data.title)}
+                                            disabled={!editClicked?.includes(data.title)}
                                             error={formik.touched[data.title] && Boolean(formik.errors[data.title])}
                                             helperText={formik.touched[data.title] && formik.errors[data.title]}
                                         />
                                         {
-                                            editClicked.includes(data.title) ?
+                                            editClicked?.length > 0 && editClicked?.includes(data.title) ?
 
                                                 <div className='SaveButton' onClick={() => HandleEditUserInfo({ [data.title]: formik.values[data.title] })} >
                                                     Save
