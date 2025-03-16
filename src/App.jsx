@@ -18,9 +18,9 @@ import Signup from './Components/Authentication/Signup'
 import Signin from "./Components/Authentication/Signin"
 import Cart from './Components/Cart/Cart'
 import ProtectedRoute from './Components/ProtectedRoute/ProtectedRoute'
-import axios from 'axios'
-import { URL } from '../config'
 import Account from './Components/Account/Account'
+import Order from './Components/Order/Order'
+import Payment from './Components/Payment/Payment'
 const router = createBrowserRouter([
   {
     path: "/",
@@ -33,13 +33,15 @@ const router = createBrowserRouter([
       { path: "products/:category", element: <ProductCategory /> },
       { path: "signup", element: <Signup /> },
       { path: "signin", element: <Signin /> },
-      { path: "user/account", element: <Account /> },
 
       {
         element: <ProtectedRoute />,
         children: [
+          { path: "user/account", element: <Account /> },
           { path: "user/cart", element: <Cart /> },
           { path: "user/about", element: <About /> },
+          { path: "user/payment", element: <Payment /> },
+          { path: "user/order", element: <Order /> },
         ],
       },
     ],

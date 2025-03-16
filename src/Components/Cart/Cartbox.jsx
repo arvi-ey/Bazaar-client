@@ -18,6 +18,19 @@ const Cartbox = ({ cartData, key }) => {
         dispatch(UpdateCartItem({ cartId: cartData._id, body }));
     };
 
+
+
+
+
+    const NavigateToPayment = () => {
+
+        const data = {
+            // pro
+        }
+
+        navigate(`/user/payment`, { state: { cartData } })
+    }
+
     const GetDeliveryDate = (days) => {
         if (!days) return
         const today = new Date();
@@ -39,9 +52,9 @@ const Cartbox = ({ cartData, key }) => {
         navigate(`/product/${cartData.product_id}`)
     }
     return (
-        <div className="cartBoxComponent" onClick={HandleNavigateToDetail}>
+        <div className="cartBoxComponent" >
             <div className='CartImageBox' >
-                <img src={cartData.image} alt='product-Image' className='cartImage' />
+                <img src={cartData.image} alt='product-Image' className='cartImage' onClick={HandleNavigateToDetail} />
             </div>
             <div className="cartDetail">
                 <p className='cartItemTitle'>{cartData.title}</p>
@@ -62,7 +75,7 @@ const Cartbox = ({ cartData, key }) => {
                         </div>
                     </div>
                     <div className='Option'>
-                        <p className='PlaceOrder'>Place Order</p>
+                        <p className='PlaceOrder' onClick={NavigateToPayment} >Place Order</p>
                         <p className='RemoveItem' onClick={RemoveCartItem} >Remove Item</p>
                     </div>
                 </div>

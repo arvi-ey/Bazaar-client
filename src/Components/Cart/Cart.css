@@ -22,8 +22,7 @@
     /* background-color: rgb(235, 231, 226); */
     height: 100%;
     padding: 10px;
-    position: sticky;
-    top: 10px;
+
     overflow-y: hidden;
 }
 
@@ -36,7 +35,7 @@
     /* align-items: center; */
     margin-bottom: 3em;
     gap: 10px;
-    cursor: pointer;
+
 }
 
 .CartImageBox {
@@ -50,6 +49,7 @@
     height: 100%;
     object-fit: cover;
     border-radius: 10px;
+    cursor: pointer;
 }
 
 .cartDetail {
