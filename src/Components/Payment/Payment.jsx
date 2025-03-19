@@ -17,7 +17,7 @@ const Payment = () => {
                 <Address />
             </div>
             <div className="payment">
-                <PaymentSection />
+                <PaymentSection data={paymentData} />
             </div>
 
         </div>

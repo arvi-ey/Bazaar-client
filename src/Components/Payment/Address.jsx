@@ -41,8 +41,6 @@ const Address = () => {
                 console.log(field);
                 formik.setFieldTouched(field, true);
             });
-
-            // Set formik errors
             formik.setErrors(errors);
             return
         }
