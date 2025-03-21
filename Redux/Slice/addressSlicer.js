@@ -7,7 +7,7 @@ export const AddAddress = createAsyncThunk(
     'address/addaddress',
     async (data) => {
         try {
-            console.log(data);
+            // console.log(data);
             const response = await axios.post(URL + 'address/addaddress', data);
             if (response.data.success === true) {
                 return response.data.data;

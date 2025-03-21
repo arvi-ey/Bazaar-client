@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import "./Payment.css"
 import { useLocation } from 'react-router'
 import { useFormik } from 'formik'
@@ -7,17 +7,23 @@ import PaymentSection from './PaymentSection'
 const Payment = () => {
 
     const location = useLocation()
-    const paymentData = location.state.cartData
-
+    const paymentData = location.state.cartData || []
+    const [enableCheckout, setEnableCheckout] = useState(false)
 
 
     return (
         <div className="paymentDiv">
             <div className="address">
-                <Address />
+                <Address
+                    enableCheckout={enableCheckout}
+                    setEnableCheckout={setEnableCheckout}
+                />
             </div>
             <div className="payment">
-                <PaymentSection data={paymentData} />
+                <PaymentSection data={paymentData}
+                    enableCheckout={enableCheckout}
+                    setEnableCheckout={setEnableCheckout}
+                />
             </div>
 
         </div>

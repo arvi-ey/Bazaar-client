@@ -5,8 +5,10 @@ import { useDispatch, useSelector } from 'react-redux'
 import { GetCartItems } from '../../../Redux/Slice/cartSlicer'
 import useAuth from '../Hooks/useAuth'
 import Recentview from '../RecentlyViewed/Recentview'
+import { useNavigate } from 'react-router'
 
 const Cart = () => {
+    const navigate = useNavigate()
     const { auth } = useAuth()
     const dispatch = useDispatch()
     const { cartitems } = useSelector(state => state.cart)
@@ -28,6 +30,9 @@ const Cart = () => {
         }
     }, [cartitems])
 
+    const PLaceAllOrder = () => {
+        navigate(`/user/payment`, { state: { cartData: cartitems } })
+    }
 
 
     return (
@@ -61,7 +66,7 @@ const Cart = () => {
                             <p style={{ fontSize: "2vmax", fontWeight: "500" }}>Total Amount</p>
                             <p style={{ fontSize: "2vmax", fontWeight: "500", }}>₹ {Math.floor(subTotal.price)}</p>
                         </div>
-                        <p className='PlaceTotalOrder' >PlaceOrder</p>
+                        <p className='PlaceTotalOrder' onClick={PLaceAllOrder} >PlaceOrder</p>
                     </div>
 
                 </div>

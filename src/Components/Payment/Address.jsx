@@ -2,8 +2,13 @@ import React, { useEffect } from 'react';
 import { useFormik } from 'formik';
 import TextField from '@mui/material/TextField';
 import { AddressValidationSchema } from './addressValidation';
-
-const Address = () => {
+import { AddAddress } from '../../../Redux/Slice/addressSlicer';
+import { useDispatch, useSelector } from 'react-redux';
+import useAuth from '../Hooks/useAuth';
+import Button from "@mui/material/Button";
+const Address = ({ enableCheckout, setEnableCheckout }) => {
+    const dispatch = useDispatch()
+    const { auth } = useAuth()
     const formik = useFormik({
         initialValues: {
             name: "",
@@ -24,12 +29,13 @@ const Address = () => {
 
     const HandleBlur = (value) => {
         formik.setFieldTouched(value, true);
-        formik.validateField(value); // Validate only the field that lost focus
+        formik.validateField(value);
     };
 
     const AddressTypeArray = ["HOME", "OFFICE", "OTHER"];
 
     const HandleAddressType = (data) => {
+        if (enableCheckout) return
         formik.setFieldValue("addressType", data);
     };
 
@@ -44,7 +50,15 @@ const Address = () => {
             formik.setErrors(errors);
             return
         }
-        console.log(formik.values);
+        const AddresData = {
+            ...formik.values,
+            userId: auth.userId
+        }
+        const resData = await dispatch(AddAddress(AddresData))
+        if (resData && resData?.payload?._id) {
+            setEnableCheckout(true)
+
+        }
     }
     return (
         <div className="addressComponent">
@@ -57,6 +71,7 @@ const Address = () => {
                 label="Name"
                 variant="outlined"
                 onBlur={() => HandleBlur("name")}
+                disabled={enableCheckout}
                 error={formik.touched.name && (formik.errors.name)}
                 helperText={formik.touched.name && formik.errors.name}
             />
@@ -72,6 +87,7 @@ const Address = () => {
                 variant="outlined"
                 inputMode='numeric'
                 onBlur={() => HandleBlur("phone")}
+                disabled={enableCheckout}
                 error={formik.touched.phone && (formik.errors.phone)}
                 helperText={formik.touched.phone && formik.errors.phone}
             />
@@ -81,6 +97,7 @@ const Address = () => {
                     id="state"
                     sx={{ width: "50%" }}
                     value={formik.values.state}
+                    disabled={enableCheckout}
                     label="State"
                     onChange={formik.handleChange}
                     variant="outlined"
@@ -92,6 +109,7 @@ const Address = () => {
                     required
                     sx={{ width: "50%" }}
                     id="city"
+                    disabled={enableCheckout}
                     value={formik.values.city}
                     label="City"
                     onChange={formik.handleChange}
@@ -107,6 +125,7 @@ const Address = () => {
                 value={formik.values.street}
                 label="Street"
                 onChange={formik.handleChange}
+                disabled={enableCheckout}
                 variant="outlined"
                 onBlur={() => HandleBlur("street")}
                 error={formik.touched.street && (formik.errors.street)}
@@ -120,6 +139,7 @@ const Address = () => {
                     value={formik.values.pinCode}
                     label="Pin Code"
                     onChange={formik.handleChange}
+                    disabled={enableCheckout}
                     inputMode='numeric'
                     variant="outlined"
                     onBlur={() => HandleBlur("pinCode")}
@@ -133,6 +153,7 @@ const Address = () => {
                     value={formik.values.houseNumber}
                     label="House number"
                     onChange={formik.handleChange}
+                    disabled={enableCheckout}
                     variant="outlined"
                     onBlur={() => HandleBlur("houseNumber")}
                     error={formik.touched.houseNumber && (formik.errors.houseNumber)}
@@ -144,6 +165,7 @@ const Address = () => {
                 value={formik.values.landMark}
                 label="Landmark"
                 onChange={formik.handleChange}
+                disabled={enableCheckout}
                 variant="outlined"
                 onBlur={() => HandleBlur("landMark")}
                 helperText="Enter landmark for better search"
@@ -161,7 +183,7 @@ const Address = () => {
                                 display: "flex",
                                 justifyContent: "center",
                                 alignItems: "center",
-                                cursor: "pointer",
+                                cursor: enableCheckout ? "auto" : "pointer",
                                 border: formik.values.addressType === data ? "1px solid #ecacca" : "1px solid rgba(24, 23, 23, 0.249)",
                                 backgroundColor: formik.values.addressType === data ? "#ecacca" : "white",
                             }}
@@ -171,9 +193,11 @@ const Address = () => {
                     ))}
                 </div>
             </div>
-            <div
+            <Button
                 onClick={HandleSaveAddress}
-                style={{
+                disabled={enableCheckout}
+                variant="contained"
+                sx={{
                     width: "50vmin",
                     cursor: "pointer",
                     display: "flex",
@@ -182,10 +206,16 @@ const Address = () => {
                     padding: "10px",
                     backgroundColor: "#ec0d75",
                     borderRadius: "5px",
+                    fontWeight: "500",
+                    fontSize: "1.3vmax",
+                    color: "white",
+                    "&:hover": {
+                        backgroundColor: "#c00b60",
+                    },
                 }}
             >
-                <p style={{ color: "white", fontWeight: "500", cursor: "pointer", fontSize: "1.3vmax" }}>Save Address</p>
-            </div>
+                Save Address
+            </Button>
         </div>
     );
 };

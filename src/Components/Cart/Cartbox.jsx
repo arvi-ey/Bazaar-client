@@ -23,12 +23,7 @@ const Cartbox = ({ cartData, key }) => {
 
 
     const NavigateToPayment = () => {
-
-        const data = {
-            // pro
-        }
-
-        navigate(`/user/payment`, { state: { cartData } })
+        navigate(`/user/payment`, { state: { cartData: [cartData] } })
     }
 
     const GetDeliveryDate = (days) => {

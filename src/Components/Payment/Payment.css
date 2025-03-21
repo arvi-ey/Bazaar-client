@@ -15,7 +15,6 @@
 }
 
 .paymentContainer {
-    /* background-color: aquamarine; */
     height: 90%;
     display: flex;
     align-items: center;
@@ -32,6 +31,7 @@
 }
 
 .Checkout {
+    width: 30vmin;
     width: 30vmin;
     background-color: #ec0d75;
     padding: 15px;
