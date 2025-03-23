@@ -25,7 +25,7 @@ const PaymentSection = ({ data, enableCheckout, setEnableCheckout }) => {
         }
     }, [data])
 
-
+    console.log(data)
 
     const HandlePaymentCheckout = async () => {
         if (isProcessing) return
@@ -41,6 +41,7 @@ const PaymentSection = ({ data, enableCheckout, setEnableCheckout }) => {
                     size: data?.size,
                     image: data?.image,
                     productTitle: data?.title,
+                    cartId: data?._id,
                     paymentMode: "CARD",
                     paymentStatus: "PAID",
                     orderDate: Date.now(),
@@ -53,7 +54,7 @@ const PaymentSection = ({ data, enableCheckout, setEnableCheckout }) => {
                     name: auth?.name,
                     phone: auth?.phone,
                     userId: auth?.userId,
-                    orderStatus: "PLACED"
+                    orderStatus: "PLACED",
                 }
             )
         })

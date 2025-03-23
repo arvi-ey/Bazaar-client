@@ -1,6 +1,8 @@
 import React, { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import { PlaceOrder } from '../../../Redux/Slice/orderSlicer'
+import { UpdateCartItem, RemoveFromCart } from '../../../Redux/Slice/cartSlicer';
+
 const Success = () => {
     const dispatch = useDispatch()
 
@@ -18,6 +20,7 @@ const Success = () => {
     const PlaceUserOrder = async (orderObj) => {
         for (let i in orderObj) {
             await dispatch(PlaceOrder(orderObj[i]))
+            await dispatch(RemoveFromCart(orderObj[i].cartId))
         }
         localStorage.removeItem("orderobj")
     }

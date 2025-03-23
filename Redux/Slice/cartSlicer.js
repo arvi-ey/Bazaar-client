@@ -31,7 +31,7 @@ export const GetCartItems = createAsyncThunk(
     }
 );
 
-// RemoveFromCart async thunk
+
 export const RemoveFromCart = createAsyncThunk(
     'cart/removefromcart', async (cartId) => {
         try {
