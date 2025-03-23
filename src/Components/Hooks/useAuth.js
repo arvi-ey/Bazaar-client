@@ -24,7 +24,7 @@ const useAuth = () => {
         try {
             const response = await axios.post(URL + `auth/checkauth`, {}, { withCredentials: true });
             if (response?.data?.id) {
-                setAuth({ userId: response.data.id, userType: response.data.role });
+                setAuth({ userId: response.data.id, name: response.data.name, email: response.data.email, userType: response.data.role });
                 dispatch(AddUserInfo({ userId: response.data.id, userType: response.data.role }))
                 console.log("This part is runing 22222")
             } else {

@@ -69,6 +69,7 @@ export const addressSlice = createSlice({
     name: "address",
     initialState: {
         address: [],
+        currentOrderAddress: null,
         loading: false,
         error: null,
     },
@@ -82,6 +83,7 @@ export const addressSlice = createSlice({
             .addCase(AddAddress.fulfilled, (state, action) => {
                 state.loading = false;
                 state.address = [...state.address, action.payload];
+                state.currentOrderAddress = action.payload
             })
             .addCase(AddAddress.rejected, (state, action) => {
                 state.loading = false;
@@ -129,3 +131,19 @@ export const addressSlice = createSlice({
 
 // Export address reducer
 export const addressReducer = addressSlice.reducer;
+
+
+
+// {
+//     "name": "Tuhin Roy",
+//         "phone": 6290450030,
+//             "userId": "67c301006fa8c011473aa584",
+//                 "street": "Angless nagar",
+//                     "city": "Kolkata",
+//                         "state": "West Bengal",
+//                             "pinCode": "700114",
+//                                 "addressType": "OFFICE",
+//                                     "isDefault": false,
+//                                         "_id": "67dfb4516a6b97fd107cd94e",
+//                                             "__v": 0
+// }

@@ -7,7 +7,7 @@ import PaymentSection from './PaymentSection'
 const Payment = () => {
 
     const location = useLocation()
-    const paymentData = location.state.cartData || []
+    const paymentData = location?.state?.cartData || []
     const [enableCheckout, setEnableCheckout] = useState(false)
 
 

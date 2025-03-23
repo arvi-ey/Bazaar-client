@@ -1,9 +1,19 @@
 import React, { useEffect, useState } from 'react'
 import Button from "@mui/material/Button";
+import { loadStripe } from '@stripe/stripe-js';
+import { URL } from '../../../config';
+import axios from 'axios';
+import useAuth from '../Hooks/useAuth';
+import { useDispatch, useSelector } from 'react-redux';
+import { PlaceOrder } from '../../../Redux/Slice/orderSlicer';
+const stripePromise = loadStripe('pk_test_51QSNCoFEhO3EtVp5yMk2GSHB6RfLRUJGbsIf2aRFBqRAUT73iZZ9Uora9o1kUDoGx14Md9QfbSJNelk5ugRgHpc8005Ii5UlvA')
 
 const PaymentSection = ({ data, enableCheckout, setEnableCheckout }) => {
-
+    const { auth } = useAuth()
+    const dispatch = useDispatch()
+    const { currentOrderAddress } = useSelector(state => state.address)
     const [paybleAmount, setPaybleAmount] = useState()
+    const [isProcessing, setIsProcessing] = useState(false);
 
     useEffect(() => {
         if (data) {
@@ -14,6 +24,68 @@ const PaymentSection = ({ data, enableCheckout, setEnableCheckout }) => {
             setPaybleAmount(totalamount)
         }
     }, [data])
+
+
+
+    const HandlePaymentCheckout = async () => {
+        if (isProcessing) return
+        setIsProcessing(true)
+        const baseURl = window.location.origin
+        let orderObj = data?.map((data, id) => {
+            return (
+                {
+                    productId: data?.product_id,
+                    totalPrice: Math.floor(data?.subTotal),
+                    quantity: data?.count,
+                    deliveryTime: data?.deliveryTime,
+                    size: data?.size,
+                    image: data?.image,
+                    productTitle: data?.title,
+                    paymentMode: "CARD",
+                    paymentStatus: "PAID",
+                    orderDate: Date.now(),
+                    orderAddress: currentOrderAddress?.street,
+                    city: currentOrderAddress?.city,
+                    state: currentOrderAddress?.state,
+                    pinCode: currentOrderAddress?.pinCode,
+                    addressType: currentOrderAddress?.addressType,
+                    houseNumber: currentOrderAddress?.houseNumber,
+                    name: auth?.name,
+                    phone: auth?.phone,
+                    userId: auth?.userId,
+                    orderStatus: "PLACED"
+                }
+            )
+        })
+        const orderJson = JSON.stringify(orderObj)
+        localStorage.setItem("orderobj", orderJson);
+        try {
+            const reqBody = {
+                itemData: data,
+                successURL: `${baseURl}/user/success`,
+                failedUrl: `${baseURl}/user/failed`
+
+
+            }
+            const response = await axios.post(URL + 'payment/checkout-session', reqBody);
+            const sessionId = response.data.id;
+            const stripe = await stripePromise;
+            const { error } = await stripe.redirectToCheckout({ sessionId });
+
+            if (error) {
+                console.error(error);
+                return
+            }
+        } catch (error) {
+            console.error('Error during checkout:', error);
+            return
+        }
+        finally {
+            setIsProcessing(false)
+        }
+
+
+    }
 
     return (
         <div className="paymentContainer">
@@ -36,6 +108,7 @@ const PaymentSection = ({ data, enableCheckout, setEnableCheckout }) => {
             </div>
             <div style={{ width: "90%", marginTop: "20px" }}>
                 <Button
+                    onClick={HandlePaymentCheckout}
                     disabled={!enableCheckout}
                     variant="contained"
                     sx={{

@@ -21,6 +21,8 @@ import ProtectedRoute from './Components/ProtectedRoute/ProtectedRoute'
 import Account from './Components/Account/Account'
 import Order from './Components/Order/Order'
 import Payment from './Components/Payment/Payment'
+import Success from './Components/Success/Success'
+import Failed from './Components/Success/Failed'
 const router = createBrowserRouter([
   {
     path: "/",
@@ -42,6 +44,8 @@ const router = createBrowserRouter([
           { path: "user/about", element: <About /> },
           { path: "user/payment", element: <Payment /> },
           { path: "user/order", element: <Order /> },
+          { path: "user/success", element: <Success /> },
+          { path: "user/failed", element: <Failed /> },
         ],
       },
     ],
