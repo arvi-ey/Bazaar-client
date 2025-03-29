@@ -28,8 +28,7 @@ const PaymentSection = ({ data, enableCheckout, setEnableCheckout }) => {
     console.log(data)
 
     const HandlePaymentCheckout = async () => {
-        if (isProcessing) return
-        setIsProcessing(true)
+
         const baseURl = window.location.origin
         let orderObj = data?.map((data, id) => {
             return (
@@ -82,7 +81,7 @@ const PaymentSection = ({ data, enableCheckout, setEnableCheckout }) => {
             return
         }
         finally {
-            setIsProcessing(false)
+            // setIsProcessing(false)
         }
 
 
