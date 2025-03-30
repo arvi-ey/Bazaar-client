@@ -1,3 +1,94 @@
 .orderPageDiv {
     margin-top: 90px;
+    width: 100vw;
+    /* height: 100vh; */
+}
+
+.orderPageTitle {
+    margin-left: 2%;
+    font-size: 1.8vmax;
+    font-weight: 600;
+    color: rgba(0, 0, 0, 0.611);
+}
+
+.OrderCompBox {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    gap: 20px;
+}
+
+.OrderBoxContainer {
+    width: 100%;
+    height: 20vmax;
+    display: flex;
+    align-items: center;
+}
+
+.orderProductImage {
+    height: 20vmax;
+    width: 20vmax;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.OrderProduct {
+    height: 100%;
+    width: 100%;
+    object-fit: contain;
+    border-radius: 5px;
+}
+
+.orderProductDesc {
+    height: 20vmax;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding-top: 10px;
+    color: rgba(0, 0, 0, 0.647);
+}
+
+.orderProductTitle {
+    font-size: 1.5vmax;
+    font-weight: 500;
+}
+
+.orderProductPrice {
+    font-weight: 500;
+    font-size: 1.5vmax;
+    /* color: #ec0d75; */
+}
+
+.orderProductAddress {
+    font-size: 1vmax;
+}
+
+.orderProductDate {
+    font-size: 1vmax;
+}
+
+.orderProducPayment {
+    font-size: 1vmax;
+
+}
+
+.paymentStatusText {
+    background-color: #f563a7;
+    padding: 2px 5px 2px 5px;
+    border-radius: 2px;
+    color: aliceblue;
+}
+
+.orderStatusText {
+    background-color: #9ee721;
+    padding: 2px 5px 2px 5px;
+    border-radius: 2px;
+}
+
+.orderExpecedDelivery {
+    font-size: 1vmax;
 }

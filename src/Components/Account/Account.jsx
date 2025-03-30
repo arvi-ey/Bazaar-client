@@ -110,6 +110,7 @@ const Account = () => {
 
 
     const HandleClick = (data) => {
+        if (data == "My orders") navigate("/user/orders")
         if (data == "Log out") Logout()
     }
 

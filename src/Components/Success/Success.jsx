@@ -26,7 +26,7 @@ const Success = () => {
         }
         localStorage.removeItem("orderobj")
         setTimeout(() => {
-            navigate("/user/order")
+            navigate("/user/orders")
         }, 2000);
     }
 
