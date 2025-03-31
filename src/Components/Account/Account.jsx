@@ -130,11 +130,6 @@ const Account = () => {
         }
     }
 
-
-    useEffect(() => {
-        console.log(editClicked, "KKKKK")
-    }, [editClicked])
-
     return (
         <div className="accountBox">
             <div className="accountinfo">

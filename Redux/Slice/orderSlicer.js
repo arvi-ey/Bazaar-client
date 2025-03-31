@@ -2,7 +2,7 @@ import { URL } from "../../config";  // Adjust path based on your file structure
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 import { RemoveFromCart } from "./cartSlicer";
-// PlaceOrder async thunk
+
 export const PlaceOrder = createAsyncThunk(
     'order/placeorder', async (data) => {
         try {
@@ -14,7 +14,6 @@ export const PlaceOrder = createAsyncThunk(
     }
 );
 
-// GetUserOrder async thunk
 export const GetUserOrder = createAsyncThunk(
     'order/getuserorder', async (id) => {
         try {
@@ -26,7 +25,6 @@ export const GetUserOrder = createAsyncThunk(
     }
 );
 
-// GetOrderById async thunk
 export const GetOrderById = createAsyncThunk(
     'order/getsingleorder', async (id) => {
         try {
@@ -38,7 +36,6 @@ export const GetOrderById = createAsyncThunk(
     }
 );
 
-// Initial state for the order slice
 
 const initialState = {
     orderItems: [],

@@ -23,6 +23,7 @@ import Order from './Components/Order/Order'
 import Payment from './Components/Payment/Payment'
 import Success from './Components/Success/Success'
 import Failed from './Components/Success/Failed'
+import OrderDetails from './Components/Order/OrderDetails'
 const router = createBrowserRouter([
   {
     path: "/",
@@ -46,6 +47,7 @@ const router = createBrowserRouter([
           { path: "user/orders", element: <Order /> },
           { path: "user/success", element: <Success /> },
           { path: "user/failed", element: <Failed /> },
+          { path: "user/orderdetails/:id", element: <OrderDetails /> },
         ],
       },
     ],

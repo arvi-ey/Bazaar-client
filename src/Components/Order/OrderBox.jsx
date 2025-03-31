@@ -1,6 +1,8 @@
 import React from 'react'
+import { useNavigate } from 'react-router';
 
 const OrderBox = ({ data }) => {
+    const navigate = useNavigate()
     //     {
     //   "_id": "67e950f31b2efcaed6e19b62",
     //   "productId": "6739f02851c69411aa42ddd6",
@@ -57,19 +59,20 @@ const OrderBox = ({ data }) => {
         return today.toLocaleDateString('en-US', options);
     }
     return (
-        <div className='OrderBoxContainer' >
-            <div className='orderProductImage' >
+        <div className='OrderBoxContainer' key={data?._id} >
+            <div className='orderProductImage' onClick={() => navigate(`/user/orderdetails/${data?._id}`)} >
                 <img src={data?.image} alt='Order-Product' className='OrderProduct' />
             </div>
             <div className='orderProductDesc' >
-                <p className='orderProductTitle' >{data?.productTitle}</p>
+                <p className='orderProductTitle' >{data?.productTitle} (<span style={{ fontSize: "1vmax" }}>Qty:{data?.quantity}</span>) </p>
                 <p className='orderProductPrice'>₹ {Math.floor(data?.totalPrice)}</p>
-                <p className='orderProductAddress'>{`${data?.state}, ${data?.orderAddress}, ${data?.city}, pin code:${data?.pinCode}, ${data?.houseNumber && `House no.${data.houseNumber}`}`}</p>
+                <p className='orderProductSize' >Size: {data?.size}</p>
+                <p className='orderProductAddress'>{`${data?.state}, ${data?.orderAddress}, ${data?.city},${data?.pinCode}, ${data?.houseNumber && `House no.${data.houseNumber}`}`}</p>
                 <p className='orderProductDate'>Order placed on {formatFriendlyDate(data?.orderDate)}</p>
                 <p className='orderProducPayment'>Payment Status: <span className='paymentStatusText' >{data?.paymentStatus}</span> </p>
                 <p className='orderProducStatus'>Order Status: <span className='orderStatusText' >{data?.orderStatus}</span> </p>
                 <p className='orderExpecedDelivery'>Delivery expected by : {GetDeliveryDate(data?.deliveryTime)}</p>
-
+                <p className='orderAddressType'>Address Type : {data?.addressType}</p>
             </div>
         </div>
     )

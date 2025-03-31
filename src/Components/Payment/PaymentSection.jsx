@@ -119,7 +119,6 @@ const PaymentSection = ({ data, enableCheckout, setEnableCheckout }) => {
                         justifyContent: "center",
                         alignItems: " center",
                         padding: "15px",
-                        padding: "15px",
                         fontWeight: "600",
                         backgroundColor: "#ec0d75",
                         "&:hover": {
