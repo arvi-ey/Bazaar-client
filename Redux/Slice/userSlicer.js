@@ -29,6 +29,46 @@ export const UpdateUser = createAsyncThunk(
     }
 )
 
+
+// export const UploadImage = createAsyncThunk(
+//     'user/updateImage',
+//     async ({ userId, file }) => {
+//         const formData = new FormData();
+//         formData.append("image", file);
+//         console.log(formData, "___")
+//         try {
+//             const response = await axios.patch(URL + `user/updateuserimage/${userId}`, formData, {
+//                 headers: { "Content-Type": "multipart/form-data" }
+//             })
+//             if (response.data.success == true) return response.data.data
+//         }
+//         catch (error) {
+//             return error.response.data
+//         }
+//     }
+// )
+
+
+export const UploadImage = createAsyncThunk(
+    'user/updateImage',
+    async ({ userId, file }) => {
+        const formData = new FormData();
+        formData.append("image", file);
+        console.log(file, "File being uploaded");
+        try {
+            const response = await axios.patch(URL + `user/updateuserimage/${userId}`, formData, {
+                headers: { "Content-Type": "multipart/form-data" }
+            })
+            console.log(response.data, "Response from server");
+            if (response.data.success == true) return response.data.data
+        }
+        catch (error) {
+            console.error("Upload error:", error.response || error);
+            return error.response?.data || error.message;
+        }
+    }
+)
+
 // User slice
 export const userSlice = createSlice({
     name: "user",
@@ -61,6 +101,18 @@ export const userSlice = createSlice({
                 state.loading = false
             })
             .addCase(UpdateUser.rejected, (state, action) => {
+                state.error = action.payload
+                state.loading = false
+            })
+            .addCase(UploadImage.pending, (state, action) => {
+                state.loading = true,
+                    state.error = null
+            })
+            .addCase(UploadImage.fulfilled, (state, action) => {
+                state.user = { ...state.user, ...action.payload }
+                state.loading = false
+            })
+            .addCase(UploadImage.rejected, (state, action) => {
                 state.error = action.payload
                 state.loading = false
             })

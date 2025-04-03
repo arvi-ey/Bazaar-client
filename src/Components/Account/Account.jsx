@@ -16,7 +16,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router';
 import { useFormik } from 'formik';
 import useAuth from '../Hooks/useAuth';
-import { GetUserInfo, UpdateUser } from '../../../Redux/Slice/userSlicer';
+import { GetUserInfo, UpdateUser, UploadImage } from '../../../Redux/Slice/userSlicer';
 const Account = () => {
     const navigate = useNavigate()
     const { loading, error } = useSelector(state => state.auth)
@@ -24,6 +24,28 @@ const Account = () => {
     const dispatch = useDispatch()
     const { auth } = useAuth()
     const [editClicked, setEditClicked] = useState([])
+
+    const [selectedFile, setSelectedFile] = useState(null);
+
+    const handleFileChange = async (event) => {
+        // console.log(event.target.files[0])
+        const file = event.target.files[0];
+        if (file) {
+            const obj = { userId: user._id, file };
+            await dispatch(UploadImage(obj))
+        }
+    };
+
+    const handleUploadClick = () => {
+        if (!selectedFile) {
+            alert("Please select a file first!");
+            return;
+        }
+
+        // Here you can send the file to your server
+        console.log("Uploading file:", selectedFile);
+        // Add your API call here
+    };
 
 
     useEffect(() => {
@@ -134,8 +156,24 @@ const Account = () => {
         <div className="accountBox">
             <div className="accountinfo">
                 <div className="accountImageBox">
-                    <img src={user} className='UserImage' />
-                    <p className='AccountUserName'>Arman Tsarukyan</p>
+                    <img src={user?.profile_image} className='UserImage' />
+                    <input
+                        type="file"
+                        id="image-upload"
+                        name="image"
+                        accept="image/*"
+                        onChange={handleFileChange}
+                        style={{ display: 'none' }} // Hide the default input
+                    />
+                    {/* <div
+                        style={{ backgroundColor: "red", padding: "5px", cursor: "pointer" }}
+                        onClick={() => {
+                            document.getElementById('image-upload').click();
+                        }}
+                    >
+                        Upload Image
+                    </div> */}
+                    <p style={{ fontSize: "2vmax", fontWeight: "500", opacity: "0.8" }} >{user?.name}</p>
                 </div>
                 <div className="accountNav">
                     {NavigationArray.map((data, index) => {
