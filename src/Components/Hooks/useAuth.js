@@ -26,7 +26,6 @@ const useAuth = () => {
             if (response?.data?.id) {
                 setAuth({ userId: response.data.id, name: response.data.name, email: response.data.email, userType: response.data.role });
                 dispatch(AddUserInfo({ userId: response.data.id, userType: response.data.role }))
-                console.log("This part is runing 22222")
             } else {
                 setAuth(null);
                 dispatch(AddUserInfo(null))

@@ -21,7 +21,7 @@
 }
 
 .OrderBoxContainer {
-    width: 100%;
+    width: 70%;
     height: 22vmax;
     display: flex;
     align-items: center;
@@ -106,4 +106,7 @@
 .OrderDetailComp {
     margin-top: 90px;
     width: 100vw;
+    display: flex;
+    height: 100vh;
+
 }

@@ -3,6 +3,7 @@ import { useParams } from 'react-router'
 import { useDispatch, useSelector } from 'react-redux'
 import { GetOrderById } from '../../../Redux/Slice/orderSlicer'
 import { useEffect, useState } from 'react'
+import OrderTrack from './OrderTrack'
 
 const OrderDetails = () => {
     const productId = useParams().id
@@ -46,6 +47,14 @@ const OrderDetails = () => {
 
     return (
         <div className='OrderDetailComp' >
+            <div style={{ width: "20%", marginLeft: 20 }} >
+                <OrderTrack
+                    orderStatus={singleOrder?.orderStatus}
+                    orderDate={formatFriendlyDate(singleOrder?.orderDate)}
+                    deliveryDate={GetDeliveryDate(singleOrder?.deliveryTime)}
+
+                />
+            </div>
             <div className='OrderBoxContainer'  >
                 <div className='orderProductImage' onClick={() => navigate(`/user/orderdetails/${singleOrder?._id}`)} >
                     <img src={singleOrder?.image} alt='Order-Product' className='OrderProduct' />
