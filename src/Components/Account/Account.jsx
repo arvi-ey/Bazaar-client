@@ -17,10 +17,13 @@ import { useNavigate } from 'react-router';
 import { useFormik } from 'formik';
 import useAuth from '../Hooks/useAuth';
 import { GetUserInfo, UpdateUser, UploadImage } from '../../../Redux/Slice/userSlicer';
+import CameraAltIcon from '@mui/icons-material/CameraAlt';
+import CircularProgress from '@mui/material/CircularProgress';
+
 const Account = () => {
     const navigate = useNavigate()
     const { loading, error } = useSelector(state => state.auth)
-    const { user } = useSelector(state => state.user)
+    const { user, uploadImageLoading } = useSelector(state => state.user)
     const dispatch = useDispatch()
     const { auth } = useAuth()
     const [editClicked, setEditClicked] = useState([])
@@ -152,11 +155,30 @@ const Account = () => {
         }
     }
 
+    useEffect(() => {
+        console.log("uploadImageLoading", uploadImageLoading)
+    }, [uploadImageLoading])
+
     return (
         <div className="accountBox">
             <div className="accountinfo">
                 <div className="accountImageBox">
-                    <img src={user?.profile_image} className='UserImage' />
+                    <div style={{ position: "relative", width: "30%", height: "100%", display: 'flex', justifyContent: 'center', alignItems: 'center' }} >
+                        {
+                            uploadImageLoading ? <CircularProgress size={30} sx={{ color: '#ec0d75', }} /> :
+                                <>
+                                    <img src={user?.profile_image} className='UserImage' />
+                                    <div style={{ cursor: "pointer", right: 20, bottom: 10, height: "20px", width: "20px", position: "absolute", borderRadius: "10px", backgroundColor: "#ec0d75", display: 'flex', justifyContent: 'center', alignItems: 'center' }}
+                                        onClick={() => {
+                                            document.getElementById('image-upload').click();
+                                        }}
+                                    >
+                                        <CameraAltIcon sx={{ color: "white", height: "10px", width: "10px", }} />
+                                    </div>
+                                </>
+                        }
+
+                    </div>
                     <input
                         type="file"
                         id="image-upload"

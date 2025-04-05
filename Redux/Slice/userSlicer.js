@@ -54,7 +54,6 @@ export const UploadImage = createAsyncThunk(
     async ({ userId, file }) => {
         const formData = new FormData();
         formData.append("image", file);
-        console.log(file, "File being uploaded");
         try {
             const response = await axios.patch(URL + `user/updateuserimage/${userId}`, formData, {
                 headers: { "Content-Type": "multipart/form-data" }
@@ -76,6 +75,7 @@ export const userSlice = createSlice({
         loading: false,
         user: null, // This would now be either an object or null
         error: null,
+        uploadImageLoading: false
     },
     reducers: {},
     extraReducers: (builder) => {
@@ -105,16 +105,16 @@ export const userSlice = createSlice({
                 state.loading = false
             })
             .addCase(UploadImage.pending, (state, action) => {
-                state.loading = true,
+                state.uploadImageLoading = true,
                     state.error = null
             })
             .addCase(UploadImage.fulfilled, (state, action) => {
                 state.user = { ...state.user, ...action.payload }
-                state.loading = false
+                state.uploadImageLoading = false
             })
             .addCase(UploadImage.rejected, (state, action) => {
                 state.error = action.payload
-                state.loading = false
+                state.uploadImageLoading = false
             })
     }
 });

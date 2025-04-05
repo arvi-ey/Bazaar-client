@@ -15,10 +15,12 @@ import useAuth from '../Hooks/useAuth'
 import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined';
 import { useDispatch, useSelector } from 'react-redux'
 import { GetCartItems } from '../../../Redux/Slice/cartSlicer'
+import { GetUserInfo } from '../../../Redux/Slice/userSlicer'
 
 const Navbar = () => {
     const dispatch = useDispatch()
     const { cartitems } = useSelector(state => state.cart)
+    const { user } = useSelector(state => state.user)
     const navigate = useNavigate()
     const [showLongNavbar, setShowLongNavbar] = useState(false)
     const { auth } = useAuth()
@@ -27,8 +29,11 @@ const Navbar = () => {
 
     useEffect(() => {
         if (auth?.userId) dispatch(GetCartItems(auth.userId))
+        if (auth?.userId) dispatch(GetUserInfo(auth?.userId))
     }, [dispatch, auth])
 
+
+    console.log(user?.name.charAt(0))
 
     useEffect(() => {
         if (cartitems && auth?.userId) setCartNumbers(cartitems.length)
@@ -84,8 +89,8 @@ const Navbar = () => {
                 <div className="AccountBox" onClick={GoToAccount} >
                     {auth ?
                         <UserProfile
-                            image={DemoUser}
-                            name={""}
+                            image={user?.profile_image && user?.profile_image}
+                            name={`${user?.name.charAt(0)}`}
                         />
                         :
                         <PersonOutlineOutlinedIcon style={{ fontSize: 30 }} />
