@@ -32,9 +32,6 @@ const Navbar = () => {
         if (auth?.userId) dispatch(GetUserInfo(auth?.userId))
     }, [dispatch, auth])
 
-
-    console.log(user?.name.charAt(0))
-
     useEffect(() => {
         if (cartitems && auth?.userId) setCartNumbers(cartitems.length)
         else setCartNumbers(0)
