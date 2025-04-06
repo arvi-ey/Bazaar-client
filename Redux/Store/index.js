@@ -11,7 +11,7 @@ import { addressReducer } from "../Slice/addressSlicer";
 import { orderReducer } from "../Slice/orderSlicer";
 import recentViewSlice from '../Slice/recentlyView';
 import favouriteProductSlice from '../Slice/favouriteItemSlicer';
-
+import { filterReducer } from '../Slice/filterSlicer';
 export const store = configureStore({
     reducer: {
         auth: authReducer,
@@ -25,7 +25,8 @@ export const store = configureStore({
         address: addressReducer,
         order: orderReducer,
         favouriteproducts: favouriteProductSlice,
-        recentView: recentViewSlice
+        recentView: recentViewSlice,
+        filter: filterReducer
     },
     middleware: (getDefaultMiddleware) => getDefaultMiddleware(),
 });

@@ -9,7 +9,20 @@ import SearchIcon from '@mui/icons-material/Search';
 const ProductsComponent = ({ categoryName }) => {
     const dispatch = useDispatch()
     const { products, loading, hasMore, scrollLoading } = useSelector(state => state.product)
+    const { pricerange } = useSelector(state => state.filter)
     const [pageNo, setPageno] = useState(1)
+    const [filteredProduct, setfilteredProduct] = useState([])
+
+    useEffect(() => {
+        if (pricerange && products) {
+            const data = products.filter(data => data.price < pricerange)
+            setfilteredProduct(data)
+        }
+        if (!pricerange && products) {
+            setfilteredProduct(products)
+        }
+
+    }, [pricerange, products])
 
     useEffect(() => {
         window.addEventListener("scroll", HandleScroll)
@@ -52,7 +65,7 @@ const ProductsComponent = ({ categoryName }) => {
 
             }
             {
-                Array.isArray(products) && products?.map((data, index) => (
+                Array.isArray(filteredProduct) && filteredProduct?.map((data, index) => (
                     <Productbox
                         products={data}
                         key={index}
