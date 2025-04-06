@@ -62,7 +62,7 @@ const ProductsComponent = ({ categoryName }) => {
             }
             {scrollLoading &&
                 <div className='Loading'>
-                    <p style={{ fontSize: "1.5vmax", color: "black", opacity: "0.6" }} >Loading.....</p>
+                    <p style={{ fontSize: "1.5vmax", color: "black", opacity: "0.7" }} >Loading.....</p>
                 </div>
             }
             {
