@@ -42,6 +42,7 @@ const Filterbar = () => {
     }
 
     const HandleSelectPriceRange = (e) => {
+        // console.log(e.target.value)
         dispatch(AddPriceRange(e.target.value))
 
     }

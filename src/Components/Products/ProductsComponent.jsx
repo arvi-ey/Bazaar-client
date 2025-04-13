@@ -8,20 +8,19 @@ import Loading from '../../Common/Loading'
 import SearchIcon from '@mui/icons-material/Search';
 const ProductsComponent = ({ categoryName }) => {
     const dispatch = useDispatch()
-    const { products, loading, hasMore, scrollLoading } = useSelector(state => state.product)
+    const { products, allProducts, loading, hasMore, scrollLoading } = useSelector(state => state.product)
     const { pricerange } = useSelector(state => state.filter)
     const [pageNo, setPageno] = useState(1)
     const [filteredProduct, setfilteredProduct] = useState([])
 
     useEffect(() => {
         if (pricerange && products) {
-            const data = products.filter(data => data.price < pricerange)
+            const data = products.filter(data => data.price < Number(pricerange))
             setfilteredProduct(data)
         }
         if (!pricerange && products) {
             setfilteredProduct(products)
         }
-
     }, [pricerange, products])
 
     useEffect(() => {

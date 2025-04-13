@@ -129,7 +129,9 @@ const ProductDetail = () => {
                 deliveryTime: product?.deliveryTime || 0,
                 createdAt: Date.now().toString(),
                 category: product?.category || '',
-                price: product?.price && product.price * (1 - 0.40) || 0,
+                price: product?.price,
+                discount: product?.discount,
+                actualprice: Math.floor(product?.price + product?.price * product?.discount / 100),
                 size: selectSize || ""
             }
             const data = await dispatch(AddToCart(cartObj))
@@ -191,10 +193,10 @@ const ProductDetail = () => {
                             <span style={{ fontSize: "0.6", fontWeight: "600" }}>
                                 ₹
                             </span>
-                            {parseInt(product?.price * randomDecimal + product?.price)}
+                            {Math.floor(product?.price + product?.price * product?.discount / 100)}
                         </s>
                         <p className='discountClass' style={{ fontSize: "1.5vmax" }} >
-                            {parseInt(randomDecimal * 100)}%OFF
+                            {product?.discount}%OFF
                         </p>
                     </div>
                     <p style={{ opacity: 0.6, fontSize: "0.7vmax", fontWeight: "400" }} >

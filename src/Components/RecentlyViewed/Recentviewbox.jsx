@@ -36,10 +36,10 @@ const Recentviewbox = ({ item }) => {
                                 <span style={{ fontSize: "10px", fontWeight: "600" }}>
                                     ₹
                                 </span>
-                                {parseInt(item.price * randomDecimal + item.price)}
+                                {Math.floor(item?.price + item?.price * item?.discount / 100)}
                             </s>
                             <p className='discountClass' >
-                                {parseInt(randomDecimal * 100)}%OFF
+                                {item?.discount}%OFF
                             </p>
                         </div>
                     </div>

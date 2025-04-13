@@ -75,9 +75,9 @@ const Productbox = ({ products, key, loading }) => {
                     </p>
                     <s className='productReducedPrice'>
                         <span style={{ fontSize: "10px", fontWeight: "600" }}>₹</span>
-                        {parseInt(products?.price * randomDecimal + products?.price)}
+                        {Math.floor(products?.price + products?.price * products?.discount / 100)}
                     </s>
-                    <p className='discountClass'>{parseInt(randomDecimal * 100)}%OFF</p>
+                    <p className='discountClass'>{products.discount}%OFF</p>
                 </div>
                 <div className='DeliveryDetail'>
                     <LocalShippingIcon sx={{ color: '#ec0d75' }} />

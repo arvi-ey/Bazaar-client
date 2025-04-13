@@ -35,16 +35,16 @@ const FavouriteProductBox = ({ item, key }) => {
                         <span style={{ fontSize: "1vmax", fontWeight: "600" }}>
                             ₹
                         </span>
-                        {item.price}
+                        {item?.price}
                     </p>
                     <s className='productReducedPrice' style={{ fontSize: "1vmax" }}>
                         <span style={{ fontSize: "0.6", fontWeight: "600" }}>
                             ₹
                         </span>
-                        {parseInt(item.price * randomDecimal + item.price)}
+                        {Math.floor(item?.price + item?.price * item?.discount / 100)}
                     </s>
                     <p className='discountClass' style={{ fontSize: "1.5vmax" }} >
-                        {parseInt(randomDecimal * 100)}%OFF
+                        {item?.discount}%OFF
                     </p>
                 </div>
                 <div className="favouriteProductCategory">

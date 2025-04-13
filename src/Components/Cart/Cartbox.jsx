@@ -56,7 +56,18 @@ const Cartbox = ({ cartData, key }) => {
                 <p className='cartItemdesc'>{cartData?.description?.length > 100 ? `${cartData?.description.slice(0, 100)}...` : cartData.description}</p>
                 <p className='cartItemSize'>Size: {cartData.size}</p>
                 <p className='cartItemDeliveryDate'>Delivery by : {GetDeliveryDate(cartData.deliveryTime)}</p>
-                <p className='cartItemprice'>₹ {Math.floor(cartData.price * cartData.count)}</p>
+                <div style={{ width: "100%", display: "flex", gap: "5px", alignItems: "center" }} >
+                    <p className='cartItemprice'>₹ {Math.floor(cartData.price * cartData.count)}</p>
+                    <s className='productReducedPrice' style={{ fontSize: "1vmax" }}>
+                        <span style={{ fontSize: "0.6", fontWeight: "600" }}>
+                            ₹
+                        </span>
+                        {cartData?.actualprice}
+                    </s>
+                    <p className='discountClass' style={{ fontSize: "1.1vmax" }} >
+                        {cartData?.discount}%OFF
+                    </p>
+                </div>
 
                 <div className='CartFooter' >
                     <div className="updateCountbox">

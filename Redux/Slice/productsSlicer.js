@@ -89,6 +89,7 @@ export const productSlice = createSlice({
         homeProducts: [],
         error: null,
         hasMore: true,
+        allProducts: []
     },
     reducers: {},
     extraReducers: (builder) => {
@@ -99,7 +100,8 @@ export const productSlice = createSlice({
             })
             .addCase(GetAllProducts.fulfilled, (state, action) => {
                 state.loading = false;
-                state.products = action.payload;
+                // state.products = action.payload;
+                state.allProducts = action.payload;
             })
             .addCase(GetAllProducts.rejected, (state, action) => {
                 state.loading = false;
