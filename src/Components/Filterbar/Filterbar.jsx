@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import "./Filterbar.css"
 import CheckboxLabels from '../../Common/Checkbox'
 import Divider from '@mui/material/Divider';
@@ -10,6 +10,10 @@ const Filterbar = () => {
     const dispatch = useDispatch()
 
     const priceRangeArray = [
+        {
+            price: 0,
+            range: "All"
+        },
         {
             price: 499,
             range: "₹199 - ₹499"
@@ -41,8 +45,11 @@ const Filterbar = () => {
         console.log(e.target.value)
     }
 
+    useEffect(() => {
+        dispatch(AddPriceRange(0))
+    }, [dispatch])
+
     const HandleSelectPriceRange = (e) => {
-        // console.log(e.target.value)
         dispatch(AddPriceRange(e.target.value))
 
     }

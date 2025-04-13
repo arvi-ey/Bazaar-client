@@ -24,6 +24,15 @@ export const GetProducts = createAsyncThunk('getproducts', async (data) => {
     }
 });
 
+export const GetFilteredProducts = createAsyncThunk('getFilteredproducts', async (price) => {
+    try {
+        const response = await axios.get(URL + `products/filteredProduct?price=${price}`, { withCredentials: true });
+        return response.data;
+    } catch (error) {
+        return isRejectedWithValue(error.response?.data?.message || "Failed to get products");
+    }
+});
+
 export const GetHomeProducts = createAsyncThunk('gethomeproducts', async (limit) => {
     try {
         const response = await axios.get(URL + `products/gethomeproducts?limit=${limit}`)
@@ -89,7 +98,8 @@ export const productSlice = createSlice({
         homeProducts: [],
         error: null,
         hasMore: true,
-        allProducts: []
+        allProducts: [],
+        filteredProducts: []
     },
     reducers: {},
     extraReducers: (builder) => {
@@ -199,6 +209,17 @@ export const productSlice = createSlice({
             .addCase(GetHomeProducts.rejected, (state, action) => {
                 state.loading = false,
                     state.error = action.payload
+            })
+            .addCase(GetFilteredProducts.pending, (state, action) => {
+                state.loading = true,
+                    state.error = null
+                state.filteredProducts = []
+            })
+            .addCase(GetFilteredProducts.fulfilled, (state, action) => {
+                // state.products = [],
+                state.loading = false
+                state.filteredProducts = action.payload.data
+
             })
     }
 });

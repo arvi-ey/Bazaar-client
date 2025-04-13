@@ -2,26 +2,30 @@ import React, { useEffect, useState } from 'react'
 import Productbox from './Productbox'
 import { useSelector } from 'react-redux'
 import { useDispatch } from 'react-redux'
-import { GetProductsByCategory, GetProducts, GetAllProducts } from '../../../Redux/Slice/productsSlicer'
+import { GetProductsByCategory, GetProducts, GetFilteredProducts, GetAllProducts } from '../../../Redux/Slice/productsSlicer'
 import LoaderBox from '../../Common/LoaderBox'
 import Loading from '../../Common/Loading'
 import SearchIcon from '@mui/icons-material/Search';
 const ProductsComponent = ({ categoryName }) => {
     const dispatch = useDispatch()
-    const { products, allProducts, loading, hasMore, scrollLoading } = useSelector(state => state.product)
+    const { products, allProducts, filteredProducts, loading, hasMore, scrollLoading } = useSelector(state => state.product)
     const { pricerange } = useSelector(state => state.filter)
     const [pageNo, setPageno] = useState(1)
     const [filteredProduct, setfilteredProduct] = useState([])
 
+
     useEffect(() => {
-        if (pricerange && products) {
-            const data = products.filter(data => data.price < Number(pricerange))
-            setfilteredProduct(data)
+        if (pricerange > 0) {
+            dispatch(GetFilteredProducts(pricerange))
         }
-        if (!pricerange && products) {
+        if (pricerange == 0) {
             setfilteredProduct(products)
         }
-    }, [pricerange, products])
+    }, [pricerange, dispatch, products])
+
+    useEffect(() => {
+        setfilteredProduct(filteredProducts)
+    }, [filteredProducts])
 
     useEffect(() => {
         window.addEventListener("scroll", HandleScroll)
@@ -37,10 +41,10 @@ const ProductsComponent = ({ categoryName }) => {
     }
 
     useEffect(() => {
-        if (hasMore) {
+        if (hasMore && pricerange == 0) {
             dispatch(GetProducts({ page: pageNo, limit: 8, dsc: 'dsc', category: categoryName || "" }))
         }
-    }, [pageNo])
+    }, [pageNo, pricerange])
 
 
     const loadingArray = [1, 2, 3, 4, 4, 5, 5, 6, 7, 8, 8, 2, 3]
