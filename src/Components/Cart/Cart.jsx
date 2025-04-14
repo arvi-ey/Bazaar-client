@@ -6,7 +6,8 @@ import { GetCartItems } from '../../../Redux/Slice/cartSlicer'
 import useAuth from '../Hooks/useAuth'
 import Recentview from '../RecentlyViewed/Recentview'
 import { useNavigate } from 'react-router'
-import Empty_cart from "../../assets/Empty_cart.svg"
+// import Empty_cart from "../../assets/Empty_cart.svg"
+import Empty_cart from "../../assets/Empty_cart.png"
 
 const Cart = () => {
     const navigate = useNavigate()
