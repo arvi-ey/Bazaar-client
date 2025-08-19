@@ -19,7 +19,7 @@ const CategoryProducts = ({ category }) => {
 
     return (
         <div className="productComponent">
-            <div style={{ fontWeight: "600", fontSize: "1.5vmax", opacity: "0.7" }}>
+            <div className='ProductPageTitle'>
                 {category}
             </div>
             <div className="searchbox">
@@ -35,14 +35,17 @@ const CategoryProducts = ({ category }) => {
                 loading && loadingArray.map((data, index) => <LoaderBox />)
 
             }
-            {
-                Array.isArray(categoryProducts) && categoryProducts?.map((data, index) => (
-                    <Productbox
-                        products={data}
-                        key={index}
-                    />
-                ))
-            }
+            <div className='ProductList' >
+
+                {
+                    Array.isArray(categoryProducts) && categoryProducts?.map((data, index) => (
+                        <Productbox
+                            products={data}
+                            key={index}
+                        />
+                    ))
+                }
+            </div>
             <div className='Hasmore'>
                 No more products to load ....
             </div>

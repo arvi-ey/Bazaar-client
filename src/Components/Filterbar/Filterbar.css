@@ -12,6 +12,11 @@
     padding-bottom: 20px;
 }
 
+@media (max-width:842px) {
+    .filterContainer {
+        display: none;
+    }
+}
 
 .FilterText {
     font-weight: 500;

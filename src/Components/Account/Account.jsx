@@ -57,8 +57,6 @@ const Account = () => {
 
 
     const color = '#ec0d75'
-    const height = "30px"
-    const width = "30px"
 
 
 
@@ -80,31 +78,31 @@ const Account = () => {
     const NavigationArray = [
         {
             title: "My orders",
-            icon: <Inventory2Icon sx={{ color, height, width }} />
+            icon: <Inventory2Icon sx={{ color, }} />
         },
         {
             title: "Favourite products",
-            icon: <FavoriteBorderIcon sx={{ color, height, width }} />
+            icon: <FavoriteBorderIcon sx={{ color, }} />
         },
         {
             title: "Payments",
-            icon: <AccountBalanceWalletIcon sx={{ color, height, width }} />
+            icon: <AccountBalanceWalletIcon sx={{ color, }} />
         },
         {
             title: "Gift card",
-            icon: <CardGiftcardIcon sx={{ color, height, width }} />
+            icon: <CardGiftcardIcon sx={{ color, }} />
         },
         {
             title: "Privacy",
-            icon: <ShieldIcon sx={{ color, height, width }} />
+            icon: <ShieldIcon sx={{ color, }} />
         },
         {
             title: "Settings",
-            icon: <SettingsIcon sx={{ color, height, width }} />
+            icon: <SettingsIcon sx={{ color, }} />
         },
         {
             title: "Log out",
-            icon: <LogoutIcon sx={{ color: "red", height, width }} />
+            icon: <LogoutIcon sx={{ color: "red", }} />
         },
     ]
 
@@ -163,19 +161,19 @@ const Account = () => {
         <div className="accountBox">
             <div className="accountinfo">
                 <div className="accountImageBox">
-                    <div style={{ position: "relative", width: "30%", height: "100%", display: 'flex', justifyContent: 'center', alignItems: 'center' }} >
+                    <div className='userInfoDetail' >
                         {
                             uploadImageLoading ? <CircularProgress size={30} sx={{ color: '#ec0d75', }} /> :
-                                <>
+                                <div style={{ position: 'relative' }}>
                                     <img src={user?.profile_image} className='UserImage' />
-                                    <div style={{ cursor: "pointer", right: 20, bottom: 10, height: "20px", width: "20px", position: "absolute", borderRadius: "10px", backgroundColor: "#ec0d75", display: 'flex', justifyContent: 'center', alignItems: 'center' }}
+                                    <div style={{ cursor: "pointer", right: 2, bottom: 2, height: "20px", width: "20px", position: "absolute", borderRadius: "10px", backgroundColor: "#ec0d75", display: 'flex', justifyContent: 'center', alignItems: 'center' }}
                                         onClick={() => {
                                             document.getElementById('image-upload').click();
                                         }}
                                     >
                                         <CameraAltIcon sx={{ color: "white", height: "10px", width: "10px", }} />
                                     </div>
-                                </>
+                                </div>
                         }
 
                     </div>
@@ -187,23 +185,15 @@ const Account = () => {
                         onChange={handleFileChange}
                         style={{ display: 'none' }} // Hide the default input
                     />
-                    {/* <div
-                        style={{ backgroundColor: "red", padding: "5px", cursor: "pointer" }}
-                        onClick={() => {
-                            document.getElementById('image-upload').click();
-                        }}
-                    >
-                        Upload Image
-                    </div> */}
-                    <p style={{ fontSize: "2vmax", fontWeight: "500", opacity: "0.8" }} >{user?.name}</p>
+                    <p style={{ fontSize: "25px", fontWeight: "600", opacity: "0.7" }} >{user?.name}</p>
                 </div>
                 <div className="accountNav">
                     {NavigationArray.map((data, index) => {
                         return (
                             <div className="AccountnavInfo" onClick={() => HandleClick(data.title)}>
-                                <div className="accountNavIcon">
+                                <span className="accountNavIcon">
                                     {data.icon}
-                                </div>
+                                </span>
                                 <p className='AccountNavText' style={{ color: index == NavigationArray.length - 1 ? "red" : "", opacity: index == NavigationArray.length - 1 ? "1" : "" }}>
                                     {data.title}
                                 </p>

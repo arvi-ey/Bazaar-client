@@ -51,7 +51,7 @@ const ProductsComponent = ({ categoryName }) => {
 
     return (
         <div className="productComponent">
-            <div style={{ fontWeight: "600", fontSize: "1.5vmax", opacity: "0.7" }}>
+            <div className='ProductPageTitle'>
                 All products
             </div>
             <div className="searchbox">
@@ -67,15 +67,17 @@ const ProductsComponent = ({ categoryName }) => {
                 loading && loadingArray.map((data, index) => <LoaderBox />)
 
             }
-            {
-                Array.isArray(filteredProduct) && filteredProduct?.map((data, index) => (
-                    <Productbox
-                        products={data}
-                        key={index}
-                        loading={loading}
-                    />
-                ))
-            }
+            <div className='ProductList' >
+                {
+                    Array.isArray(filteredProduct) && filteredProduct?.map((data, index) => (
+                        <Productbox
+                            products={data}
+                            key={index}
+                            loading={loading}
+                        />
+                    ))
+                }
+            </div>
             {scrollLoading &&
                 <div className='Loading'>
                     <p style={{ fontSize: "1.5vmax", color: "black", opacity: "0.7" }} >Loading.....</p>
