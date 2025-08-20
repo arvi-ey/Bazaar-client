@@ -31,12 +31,12 @@ const Home = () => {
         <>
             <Slider />
             <CategorySection />
-            <HomeProducts />
             <div
                 onClick={GotoProducts}
-                style={{ width: "100%", marginBottom: "10px", display: "flex", justifyContent: "center", alignItems: "center" }} >
+                style={{ width: "100%", marginBottom: "10px", marginTop: "10px", display: "flex", justifyContent: "center", alignItems: "center" }} >
                 <p className='viewAllProductsButton'>View all products</p>
             </div>
+            <HomeProducts />
             <Recentview />
         </>
     )

@@ -23,7 +23,7 @@ const CategoryProducts = ({ category }) => {
             <div className='ProductPageTitle'>
                 {category}
             </div>
-            <div className="searchbox">
+            {/* <div className="searchbox">
                 <div className="seachContainer">
                     <SearchIcon sx={{ opacity: "0.5" }} />
                     <input
@@ -32,7 +32,7 @@ const CategoryProducts = ({ category }) => {
                     />
                 </div>
             </div>
-            <Filterbar />
+            <Filterbar /> */}
             {
                 loading && loadingArray.map((data, index) => <LoaderBox />)
 

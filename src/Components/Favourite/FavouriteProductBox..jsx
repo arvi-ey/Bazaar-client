@@ -59,11 +59,13 @@ const FavouriteProductBox = ({ item, key }) => {
                     <LocalShippingIcon sx={{ color: '#ec0d75' }} />
                     <p className='FavouriteDeliveryDetailText'>Free Delivery by {GetDeliveryDate(item.deliveryTime)}</p>
                 </div>
-                <div className="favouriteAddtocart">
-                    Add to cart
-                </div>
-                <div className="favouriteRemove">
-                    Remove
+                <div className='Add-removediv' >
+                    <div className="favouriteAddtocart">
+                        Add to cart
+                    </div>
+                    <div className="favouriteRemove">
+                        Remove
+                    </div>
                 </div>
 
             </div>

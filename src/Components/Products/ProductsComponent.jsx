@@ -57,7 +57,7 @@ const ProductsComponent = ({ categoryName }) => {
             <div className='ProductPageTitle'>
                 All products
             </div>
-            <div className="searchbox">
+            {/* <div className="searchbox">
                 <div className="seachContainer">
                     <SearchIcon sx={{ opacity: "0.5" }} />
                     <input
@@ -65,7 +65,7 @@ const ProductsComponent = ({ categoryName }) => {
                         className='searchInputBox'
                     />
                 </div>
-            </div>
+            </div> */}
             <Filterbar />
 
 
