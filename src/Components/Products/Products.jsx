@@ -14,7 +14,6 @@ const Products = () => {
 
     return (
         <div className="productsComponent">
-            <Filterbar />
             <ProductsComponent
                 categoryName={categoryName}
             />

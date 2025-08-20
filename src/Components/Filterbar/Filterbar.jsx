@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import "./Filterbar.css"
 import CheckboxLabels from '../../Common/Checkbox'
 import Divider from '@mui/material/Divider';
@@ -8,11 +8,12 @@ import { useDispatch } from 'react-redux';
 import { AddPriceRange, AddSize, AddRating } from "../../../Redux/Slice/filterSlicer"
 const Filterbar = () => {
     const dispatch = useDispatch()
+    const [selectedPrice, setSelectedPrice] = useState(0);
 
     const priceRangeArray = [
         {
             price: 0,
-            range: "All"
+            range: "₹0 - ₹6000"
         },
         {
             price: 499,
@@ -36,20 +37,16 @@ const Filterbar = () => {
         },
     ]
 
-    const DiscountArray = ["20%", "40%", "50%", "60%", "70%"]
-    const RatingArray = ["4.5", "4", "3", "0"]
 
 
 
-    const HandleSizeSelect = (e) => {
-        console.log(e.target.value)
-    }
 
     useEffect(() => {
         dispatch(AddPriceRange(0))
     }, [dispatch])
 
     const HandleSelectPriceRange = (e) => {
+        setSelectedPrice(e.target.value)
         dispatch(AddPriceRange(e.target.value))
 
     }
@@ -58,32 +55,24 @@ const Filterbar = () => {
 
     return (
         <div className="filterContainer">
-            <p className='FilterTextHeading' >Filters</p>
-            <p className='FilterDesc'>Apply filters for better search results</p>
-            <Divider sx={{ marginTop: "10px" }} />
-            <p className='FilterText' >Size</p>
-            <RadioButtonsGroup
-                label="Size"
-                items={["S", "M", "L", "XL", "XXL"]}
-                HandleSelect={HandleSizeSelect}
-            />
-            <Divider />
-            <p className='FilterText'>Price Range</p>
-            <PriceRange
-                items={priceRangeArray}
-                HandleSelect={HandleSelectPriceRange}
-            />
-            <Divider sx={{ marginTop: "10px" }} />
-            {/* <p className='FilterText'>Ratings</p>
-            <RadioButtonsGroup
-                label="Rating"
-                items={RatingArray}
-            /> */}
-            <Divider />
-            <p className='FilterText'>Discounts</p>
-            <RadioButtonsGroup
-                items={DiscountArray}
-            />
+            <div className="select-container">
+                <label htmlFor="priceRange" className="select-label">
+                    Price Range
+                </label>
+                <select
+                    id="priceRange"
+                    className="custom-select"
+                    value={selectedPrice}
+                    onChange={HandleSelectPriceRange}
+                >
+                    {priceRangeArray.map((item, index) => (
+                        <option key={index} value={item.price}>
+                            {item.range}
+                        </option>
+                    ))}
+                </select>
+            </div>
+            {/* <p className='FilterDesc'>Apply filters for better search results</p> */}
         </div>
 
     )

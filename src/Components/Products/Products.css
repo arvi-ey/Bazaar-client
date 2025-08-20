@@ -42,6 +42,7 @@
     display: flex;
     flex-direction: column;
     gap: 1em;
+    align-items: center;
 }
 
 @media (max-width:842px) {
@@ -175,8 +176,12 @@ em .detailBoxs {
 
 .ProductPageTitle {
     font-weight: 600;
-    font-size: 1.5vmax;
+    font-size: 25px;
     opacity: 0.8;
+    align-self: start;
+    width: 100%;
+    /* background-color: #70a11a; */
+    padding-left: 20px;
 }
 
 @media (max-width:840px) {
@@ -188,26 +193,8 @@ em .detailBoxs {
         width: 90%;
     }
 
-    .ProductPageTitle {
-        font-size: 3vmax;
-    }
 }
 
-@media (max-width:540px) {
-
-
-    .ProductPageTitle {
-        font-size: 4vmax;
-    }
-}
-
-@media (max-width:280px) {
-
-
-    .ProductPageTitle {
-        font-size: 3vmax;
-    }
-}
 
 .seachContainer {
     background-color: rgb(240, 244, 245);

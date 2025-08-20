@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react'
 import { GetProductsByCategory } from '../../../Redux/Slice/productsSlicer'
 import SearchIcon from '@mui/icons-material/Search';
 import LoaderBox from '../../Common/LoaderBox'
+import Filterbar from '../Filterbar/Filterbar'
 
 const CategoryProducts = ({ category }) => {
     const { categoryProducts, loading } = useSelector(state => state.product)
@@ -31,20 +32,31 @@ const CategoryProducts = ({ category }) => {
                     />
                 </div>
             </div>
+            <Filterbar />
             {
                 loading && loadingArray.map((data, index) => <LoaderBox />)
 
             }
-            <div className='ProductList' >
+            <div className='ProductList'>
+                {loading ? (
 
-                {
-                    Array.isArray(categoryProducts) && categoryProducts?.map((data, index) => (
+                    Array.from({ length: 20 }).map((data, index) => {
+                        return (
+                            <LoaderBox />
+                        )
+                    }
+                    )
+
+                ) : (
+                    Array.isArray(categoryProducts) &&
+                    categoryProducts.map((data, index) => (
                         <Productbox
                             products={data}
                             key={index}
+                            loading={loading}
                         />
                     ))
-                }
+                )}
             </div>
             <div className='Hasmore'>
                 No more products to load ....

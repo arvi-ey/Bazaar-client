@@ -6,6 +6,9 @@ import { GetProductsByCategory, GetProducts, GetFilteredProducts, GetAllProducts
 import LoaderBox from '../../Common/LoaderBox'
 import Loading from '../../Common/Loading'
 import SearchIcon from '@mui/icons-material/Search';
+import Filterbar from '../Filterbar/Filterbar'
+import Skeleton from '@mui/material/Skeleton';
+import Stack from '@mui/material/Stack';
 const ProductsComponent = ({ categoryName }) => {
     const dispatch = useDispatch()
     const { products, allProducts, filteredProducts, loading, hasMore, scrollLoading } = useSelector(state => state.product)
@@ -47,7 +50,7 @@ const ProductsComponent = ({ categoryName }) => {
     }, [pageNo, pricerange])
 
 
-    const loadingArray = [1, 2, 3, 4, 4, 5, 5, 6, 7, 8, 8, 2, 3]
+
 
     return (
         <div className="productComponent">
@@ -63,21 +66,32 @@ const ProductsComponent = ({ categoryName }) => {
                     />
                 </div>
             </div>
-            {
-                loading && loadingArray.map((data, index) => <LoaderBox />)
+            <Filterbar />
 
-            }
-            <div className='ProductList' >
-                {
-                    Array.isArray(filteredProduct) && filteredProduct?.map((data, index) => (
+
+            <div className='ProductList'>
+                {loading ? (
+
+                    Array.from({ length: 20 }).map((data, index) => {
+                        return (
+                            <LoaderBox />
+                        )
+                    }
+                    )
+
+                ) : (
+                    Array.isArray(filteredProduct) &&
+                    filteredProduct.map((data, index) => (
                         <Productbox
                             products={data}
                             key={index}
                             loading={loading}
                         />
                     ))
-                }
+                )}
             </div>
+
+
             {scrollLoading &&
                 <div className='Loading'>
                     <p style={{ fontSize: "1.5vmax", color: "black", opacity: "0.7" }} >Loading.....</p>

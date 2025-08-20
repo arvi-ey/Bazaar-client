@@ -9,7 +9,6 @@ const ProductCategory = () => {
     const { category } = useParams()
     return (
         <div className="productsComponent">
-            <Filterbar />
             <CategoryProducts
                 category={category}
             />
