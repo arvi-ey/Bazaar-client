@@ -47,6 +47,21 @@ const Navbar = () => {
             path: "/products"
         },
     ]
+    const LongnavItemArray = [
+        {
+            name: "Home",
+            path: "/"
+        },
+        {
+            name: "Products",
+            path: "/products"
+        },
+        {
+            name: "Wishlist",
+            path: '/favourite'
+        }
+
+    ]
 
     const GoToAccount = () => {
         if (!auth) {
@@ -103,7 +118,7 @@ const Navbar = () => {
                         <CloseIcon className='close' onClick={() => setShowLongNavbar(false)} />
                     </div>
                     <div className="ResponsivenavItems">
-                        {navItemArray.map((data, index) => {
+                        {LongnavItemArray.map((data, index) => {
                             return (
                                 <NavLink key={index} to={data.path} className={({ isActive }) => (isActive ? 'activeNav' : 'navItem')}>
                                     <p>

@@ -233,6 +233,10 @@
         display: block;
     }
 
+    .FavouriteIcon {
+        display: none;
+    }
+
     .navInfo {
         width: 60%;
         justify-content: flex-end;
