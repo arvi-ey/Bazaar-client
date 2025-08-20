@@ -104,7 +104,9 @@ const Navbar = () => {
 
                         <img src={user?.profile_image || DemoUser} className='user-image' />
                         :
-                        <PersonOutlineOutlinedIcon style={{ fontSize: 30 }} />
+                        <div className='demo-user'>
+                            <PersonOutlineOutlinedIcon style={{ fontSize: 30 }} />
+                        </div>
                     }
                 </div>
             </div>

@@ -121,10 +121,23 @@
     align-items: center;
 }
 
+.demo-user {
+    height: 3em;
+    width: 3em;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .cart:hover {
     background-color: #E7E9EB;
     border-radius: 30px;
+}
 
+.demo-user:hover {
+    background-color: #E7E9EB;
+    border-radius: 30px;
 }
 
 .FavouriteIcon {
