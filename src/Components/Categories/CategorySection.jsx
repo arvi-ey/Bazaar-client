@@ -1,14 +1,21 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import "./Category.css"
 import CategoryBox from './CategoryBox'
 import { useSelector, useDispatch } from 'react-redux'
 import Skeleton from '@mui/material/Skeleton';
+import { GetAllCategory } from '../../../Redux/Slice/categorySlicer';
 
 const CategorySection = () => {
     const dispatch = useDispatch()
-    const { category } = useSelector(state => state.category)
+    const { category, loading } = useSelector(state => state.category)
 
-    if (!category) {
+
+    useEffect(() => {
+        dispatch(GetAllCategory())
+    }, [dispatch]
+    )
+
+    if (loading) {
         return (
             <div className="categoyContainer">
                 <div className="categorybox">
@@ -19,8 +26,8 @@ const CategorySection = () => {
                                 <Skeleton
                                     key={index}
                                     variant="rounded"
-                                    height={450}
-                                    width={350}
+                                    height={400}
+                                    width={300}
                                 />
                             )
                         })

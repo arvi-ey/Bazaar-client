@@ -55,14 +55,8 @@ const router = createBrowserRouter([
 ]);
 
 function App() {
-  const dispatch = useDispatch()
 
 
-  useEffect(() => {
-    dispatch(GetBanners())
-    dispatch(GetAllCategory())
-    dispatch(getfavouriteItem())
-  }, [dispatch])
 
 
   return (

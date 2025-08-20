@@ -19,6 +19,8 @@ import useAuth from '../Hooks/useAuth';
 import { GetUserInfo, UpdateUser, UploadImage } from '../../../Redux/Slice/userSlicer';
 import CameraAltIcon from '@mui/icons-material/CameraAlt';
 import CircularProgress from '@mui/material/CircularProgress';
+import MenuOpenIcon from '@mui/icons-material/MenuOpen';
+import CloseIcon from '@mui/icons-material/Close';
 
 const Account = () => {
     const navigate = useNavigate()
@@ -27,8 +29,7 @@ const Account = () => {
     const dispatch = useDispatch()
     const { auth } = useAuth()
     const [editClicked, setEditClicked] = useState([])
-
-    const [selectedFile, setSelectedFile] = useState(null);
+    const [showresponsiveMenu, setShowresponsiveMenu] = useState(false)
 
     const handleFileChange = async (event) => {
         // console.log(event.target.files[0])
@@ -39,16 +40,16 @@ const Account = () => {
         }
     };
 
-    const handleUploadClick = () => {
-        if (!selectedFile) {
-            alert("Please select a file first!");
-            return;
-        }
+    // const handleUploadClick = () => {
+    //     if (!selectedFile) {
+    //         alert("Please select a file first!");
+    //         return;
+    //     }
 
-        // Here you can send the file to your server
-        console.log("Uploading file:", selectedFile);
-        // Add your API call here
-    };
+    //     // Here you can send the file to your server
+    //     console.log("Uploading file:", selectedFile);
+    //     // Add your API call here
+    // };
 
 
     useEffect(() => {
@@ -153,39 +154,38 @@ const Account = () => {
         }
     }
 
-    useEffect(() => {
-        console.log("uploadImageLoading", uploadImageLoading)
-    }, [uploadImageLoading])
-
     return (
         <div className="accountBox">
             <div className="accountinfo">
                 <div className="accountImageBox">
-                    <div className='userInfoDetail' >
-                        {
-                            uploadImageLoading ? <CircularProgress size={30} sx={{ color: '#ec0d75', }} /> :
-                                <div style={{ position: 'relative' }}>
-                                    <img src={user?.profile_image} className='UserImage' />
-                                    <div style={{ cursor: "pointer", right: 2, bottom: 2, height: "20px", width: "20px", position: "absolute", borderRadius: "10px", backgroundColor: "#ec0d75", display: 'flex', justifyContent: 'center', alignItems: 'center' }}
-                                        onClick={() => {
-                                            document.getElementById('image-upload').click();
-                                        }}
-                                    >
-                                        <CameraAltIcon sx={{ color: "white", height: "10px", width: "10px", }} />
+                    <div style={{ display: 'flex', justifyContent: 'center', alignItems: "center", gap: "10px" }}>
+                        <div className='userInfoDetail' >
+                            {
+                                uploadImageLoading ? <CircularProgress size={30} sx={{ color: '#ec0d75', }} /> :
+                                    <div style={{ position: 'relative' }}>
+                                        <img src={user?.profile_image} className='UserImage' />
+                                        <div style={{ cursor: "pointer", right: 2, bottom: 2, height: "20px", width: "20px", position: "absolute", borderRadius: "10px", backgroundColor: "#ec0d75", display: 'flex', justifyContent: 'center', alignItems: 'center' }}
+                                            onClick={() => {
+                                                document.getElementById('image-upload').click();
+                                            }}
+                                        >
+                                            <CameraAltIcon sx={{ color: "white", height: "10px", width: "10px", }} />
+                                        </div>
                                     </div>
-                                </div>
-                        }
+                            }
 
+                        </div>
+                        <input
+                            type="file"
+                            id="image-upload"
+                            name="image"
+                            accept="image/*"
+                            onChange={handleFileChange}
+                            style={{ display: 'none' }} // Hide the default input
+                        />
+                        <p className='UserNameTitle' >{user?.name}</p>
                     </div>
-                    <input
-                        type="file"
-                        id="image-upload"
-                        name="image"
-                        accept="image/*"
-                        onChange={handleFileChange}
-                        style={{ display: 'none' }} // Hide the default input
-                    />
-                    <p style={{ fontSize: "25px", fontWeight: "600", opacity: "0.7" }} >{user?.name}</p>
+                    <span className='OpenMenu' onClick={() => setShowresponsiveMenu(true)}><MenuOpenIcon /></span>
                 </div>
                 <div className="accountNav">
                     {NavigationArray.map((data, index) => {
@@ -247,6 +247,23 @@ const Account = () => {
                     }
                 </div>
             </div>
+            {showresponsiveMenu &&
+                <div className='responsiveMenu' >
+                    <span className='responsiveCloseIcon' onClick={() => setShowresponsiveMenu(false)} ><CloseIcon style={{ alignSelf: "center", opacity: "0.7" }} /></span>
+                    {NavigationArray.map((data, index) => {
+                        return (
+                            <div className="AccountnavInfoResponsive" onClick={() => HandleClick(data.title)}>
+                                <span className="accountNavIconResponsive">
+                                    {data.icon}
+                                </span>
+                                <p className='AccountNavTextResponsive' style={{ color: index == NavigationArray.length - 1 ? "red" : "", opacity: index == NavigationArray.length - 1 ? "1" : "" }}>
+                                    {data.title}
+                                </p>
+                            </div>
+                        )
+                    })}
+                </div>
+            }
         </div >
     )
 }

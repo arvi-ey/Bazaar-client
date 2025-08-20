@@ -8,10 +8,18 @@ import { useNavigate } from 'react-router'
 import { useDispatch, useSelector } from 'react-redux'
 import Recentview from '../RecentlyViewed/Recentview'
 import { getRecentView } from '../../../Redux/Slice/recentlyView'
+import { GetBanners } from '../../../Redux/Slice/bannerSlicer'
+import { getfavouriteItem } from '../../../Redux/Slice/favouriteItemSlicer'
 const Home = () => {
     const navigate = useNavigate()
+    const dispatch = useDispatch()
 
 
+    useEffect(() => {
+
+        dispatch(GetBanners())
+        dispatch(getfavouriteItem())
+    }, [dispatch])
 
 
 
