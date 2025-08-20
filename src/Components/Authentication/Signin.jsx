@@ -20,8 +20,8 @@ const Signin = () => {
 
     const formik = useFormik({
         initialValues: {
-            email: '',
-            password: '',
+            email: 'tuhinroyand@gmail.com',
+            password: 'Tuhin@1234',
         },
         validationSchema: AuthvalidationSignin,
         onSubmit: (values, { resetForm }) => {

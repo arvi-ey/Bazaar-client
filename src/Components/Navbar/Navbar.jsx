@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import "./Navbar.css"
 import Logo from "../../assets/Bazaarlogo.svg"
-import DemoUser from "../../assets/user.jpg"
+// import DemoUser from "../../assets/user.jpg"
 import Search from "../../assets/search.svg"
 import { NavLink } from 'react-router-dom';
 import UserProfile from '../../Common/Avatar'
@@ -16,6 +16,7 @@ import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined
 import { useDispatch, useSelector } from 'react-redux'
 import { GetCartItems } from '../../../Redux/Slice/cartSlicer'
 import { GetUserInfo } from '../../../Redux/Slice/userSlicer'
+import DemoUser from "../../assets/boy.png"
 
 const Navbar = () => {
     const dispatch = useDispatch()
@@ -99,11 +100,9 @@ const Navbar = () => {
                     />
                 </div>
                 <div className="AccountBox" onClick={GoToAccount} >
-                    {auth ?
-                        <UserProfile
-                            image={user?.profile_image && user?.profile_image}
-                            name={`${user?.name.charAt(0)}`}
-                        />
+                    {user ?
+
+                        <img src={user?.profile_image || DemoUser} className='user-image' />
                         :
                         <PersonOutlineOutlinedIcon style={{ fontSize: 30 }} />
                     }

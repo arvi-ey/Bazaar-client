@@ -5,21 +5,8 @@ import { deepOrange, deepPurple } from '@mui/material/colors';
 
 export default function UserProfile({ name, image }) {
     return (
-        <Stack direction="row" spacing={2}>
-            {
-                name ?
-                    <Avatar sx={{ bgcolor: deepOrange[500] }} src={image} >
-                        {
-                            name
-                        }
-                    </Avatar>
-                    :
-                    image ?
-                        <Avatar alt="Travis Howard" src={image} />
-                        :
-                        null
-            }
-
-        </Stack>
+        <div>
+            <img src={image} />
+        </div>
     );
 }
