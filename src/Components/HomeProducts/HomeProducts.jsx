@@ -11,7 +11,7 @@ import Stack from '@mui/material/Stack';
 const HomeProducts = () => {
     const boxref = useRef(null)
     const dispatch = useDispatch()
-    const { homeProducts } = useSelector(state => state.product)
+    const { homeProducts, loading } = useSelector(state => state.product)
     const [hideLeft, setHideLeft] = useState(true)
     const [hideRight, setHideRight] = useState(false)
 
@@ -55,7 +55,7 @@ const HomeProducts = () => {
 
     const LoaderAray = [1, 2, 3, 4, 5, 6]
 
-    if (!homeProducts) {
+    if (loading) {
         return (
             <div style={{ marginTop: "20px", width: "100%", }}>
                 <p className='recetViewText' >All Items</p>

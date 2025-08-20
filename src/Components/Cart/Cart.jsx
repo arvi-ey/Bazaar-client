@@ -50,7 +50,7 @@ const Cart = () => {
                     </div>
 
                     :
-                    <>
+                    <div className='Cart_container'>
                         <div className="cartItems">
                             {cartitems?.map((data, index) => <Cartbox cartData={data} key={data._id} />)}
                         </div>
@@ -83,7 +83,7 @@ const Cart = () => {
                             </div>
 
                         </div>
-                    </>
+                    </div>
                 }
             </div>
             <Recentview />

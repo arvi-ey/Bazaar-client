@@ -7,23 +7,26 @@
     padding: 0px 20px 0px 20px;
     flex-wrap: wrap;
     scroll-behavior: auto;
-    overflow-y: auto;
+    /* overflow-y: auto; */
 }
 
 .cartItems {
-    width: 110vmin;
+    width: 60%;
     height: 100vh;
     display: flex;
     flex-direction: column;
+    overflow-y: auto;
 }
 
 .cartAmoutBox {
-    width: 60vmin;
+    width: 40%;
     /* background-color: rgb(235, 231, 226); */
     height: 100%;
     padding: 10px;
-
+    position: sticky;
+    top: 20px;
     overflow-y: hidden;
+    /* background-color: #a7ec30; */
 }
 
 .cartBoxComponent {
@@ -35,13 +38,13 @@
     /* align-items: center; */
     margin-bottom: 3em;
     gap: 10px;
-
+    /* background-color: aqua */
 }
 
 .CartImageBox {
     /* background-color: aqua; */
-    height: 25vmin;
-    width: 25vmin;
+    height: 100%;
+    width: 180px;
 }
 
 .cartImage {
@@ -50,6 +53,10 @@
     object-fit: cover;
     border-radius: 10px;
     cursor: pointer;
+}
+
+.countproductIcon {
+    opacity: 0.8;
 }
 
 .cartDetail {
@@ -62,31 +69,35 @@
 
 .cartItemTitle {
     font-weight: 600;
-    font-size: 1.5vmax;
+    font-size: 15px;
     color: rgba(0, 0, 0, 0.623);
 }
 
 .cartItemDeliveryDate {
     font-weight: 400;
-    font-size: 1.1vmax;
+    font-size: 12px;
     color: rgba(0, 0, 0, 0.626);
 }
 
 .cartItemdesc {
     font-weight: 400;
-    font-size: 0.8vmax;
+    font-size: 10px;
     opacity: 0.8;
 }
 
 .cartItemprice {
     font-weight: 500;
-    font-size: 1.1vmax;
+    font-size: 12px;
     color: rgba(0, 0, 0, 0.955);
+}
+
+.productReducedPrice {
+    font-size: 12px;
 }
 
 .cartItemSize {
     font-weight: 500;
-    font-size: 1.1vmax;
+    font-size: 12px;
     color: rgba(0, 0, 0, 0.626);
 }
 
@@ -107,7 +118,7 @@
 }
 
 .CartCount {
-    font-size: 1.5vmax;
+    font-size: 1em;
 }
 
 .RemoveIconDIv {
@@ -163,6 +174,8 @@
 
 .PlaceTotalOrder {
     font-size: 1.5vmax;
+    width: 80%;
+    align-self: center;
     cursor: pointer;
     padding: 10px;
     border-radius: 5px;
@@ -175,5 +188,148 @@
 
 .PlaceTotalOrder:hover {
     background-color: #a7ec30;
+
+}
+
+.Cart_container {
+    width: 100vw;
+    display: flex;
+}
+
+@media (max-width:891px) {
+    .PlaceOrder {
+        padding: 5px;
+        font-size: small;
+        font-size: 400;
+    }
+
+    .RemoveItem {
+        padding: 5px;
+        font-size: small;
+        font-size: 400;
+    }
+}
+
+@media (max-width:730px) {
+    .Cart_container {
+        flex-direction: column;
+    }
+
+    .cartItems {
+        width: 100%;
+    }
+
+    .PlaceOrder {
+        padding: 10px;
+        font-size: small;
+        font-size: 400;
+    }
+
+    .RemoveItem {
+        padding: 10px;
+        font-size: small;
+        font-size: 400;
+    }
+
+    .cartAmoutBox {
+        position: relative;
+        width: 100%;
+        margin-bottom: 50px;
+        overflow: auto;
+    }
+
+    .cartBoxComponent {
+        padding-left: 0px;
+        width: 100%;
+    }
+}
+
+
+@media (max-width:570px) {
+    .PlaceOrder {
+        padding: 5px;
+        font-weight: 400;
+    }
+
+    .RemoveItem {
+        padding: 5px;
+        font-weight: 400;
+    }
+}
+
+@media (max-width:484px) {
+    .PlaceOrder {
+        padding: 5px;
+        font-weight: 400;
+        font-size: 10px;
+    }
+
+    .RemoveItem {
+        padding: 5px;
+        font-weight: 400;
+        font-size: 10px;
+    }
+
+    .cartItemdesc {
+        display: none;
+    }
+}
+
+@media (max-width:449px) {
+    .cartBoxComponent {
+        padding-left: 0px;
+        width: 90%;
+    }
+}
+
+@media (max-width:409px) {
+    .cartBoxComponent {
+        padding-left: 0px;
+        width: 90%;
+        height: 600px;
+    }
+
+    .cartBoxComponent {
+        flex-direction: column;
+    }
+
+    .cartImage {
+        height: 100%;
+        width: 100%;
+        object-fit: fill;
+    }
+
+    .cartItems {
+        gap: 50px;
+    }
+
+    .cartDetail {
+        width: 100%;
+    }
+
+    .CartImageBox {
+        width: 100%;
+        height: 350px;
+    }
+
+    .CartFooter {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .Option {
+        /* background-color: aqua; */
+        width: 90%;
+    }
+
+    .PlaceOrder {
+        padding: 10px;
+        width: 180px
+    }
+
+    .RemoveItem {
+        padding: 10px;
+        width: 180px
+    }
 
 }

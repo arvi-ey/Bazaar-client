@@ -58,8 +58,8 @@ const Cartbox = ({ cartData, key }) => {
                 <p className='cartItemDeliveryDate'>Delivery by : {GetDeliveryDate(cartData.deliveryTime)}</p>
                 <div style={{ width: "100%", display: "flex", gap: "5px", alignItems: "center" }} >
                     <p className='cartItemprice'>₹ {Math.floor(cartData.price * cartData.count)}</p>
-                    <s className='productReducedPrice' style={{ fontSize: "1vmax" }}>
-                        <span style={{ fontSize: "0.6", fontWeight: "600" }}>
+                    <s className='productReducedPrice'>
+                        <span style={{ fontSize: "10px", fontWeight: "600" }}>
                             ₹
                         </span>
                         {cartData?.actualprice}
@@ -72,12 +72,12 @@ const Cartbox = ({ cartData, key }) => {
                 <div className='CartFooter' >
                     <div className="updateCountbox">
                         <div className='RemoveIconDIv' onClick={() => UpdateCount(0)} >
-                            <RemoveIcon sx={{ fontSize: "2vmax" }} />
+                            <RemoveIcon className='countproductIcon' />
                         </div>
 
                         <p className='CartCount'>{cartData.count}</p>
                         <div className='AddIconDIv' onClick={() => UpdateCount(1)}>
-                            <AddIcon sx={{ fontSize: "2vmax" }} />
+                            <AddIcon className='countproductIcon' />
                         </div>
                     </div>
                     <div className='Option'>
