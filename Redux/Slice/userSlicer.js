@@ -73,11 +73,16 @@ export const userSlice = createSlice({
     name: "user",
     initialState: {
         loading: false,
-        user: null, // This would now be either an object or null
+        user: null,
         error: null,
         uploadImageLoading: false
     },
-    reducers: {},
+    reducers: {
+        AddUser: (state, action) => {
+
+            state.user = action.payload
+        }
+    },
     extraReducers: (builder) => {
         builder
             .addCase(GetUserInfo.pending, (state) => {
@@ -86,7 +91,7 @@ export const userSlice = createSlice({
             })
             .addCase(GetUserInfo.fulfilled, (state, action) => {
                 state.loading = false;
-                state.user = action.payload; // No need for type casting in JS
+                state.user = action.payload;
             })
             .addCase(GetUserInfo.rejected, (state, action) => {
                 state.loading = false;
@@ -121,3 +126,5 @@ export const userSlice = createSlice({
 
 // Export the user reducer
 export const userReducer = userSlice.reducer;
+
+export const { AddUser } = userSlice.actions

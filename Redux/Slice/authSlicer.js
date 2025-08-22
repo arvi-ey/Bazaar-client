@@ -64,6 +64,7 @@ export const authSlice = createSlice({
         AddUserInfo: (state, action) => {
             state.userInfo = action.payload
         },
+
     },
     extraReducers: (builder) => {
         builder
@@ -97,6 +98,7 @@ export const authSlice = createSlice({
             })
             .addCase(logOutUser.fulfilled, (state, action) => {
                 state.loading = false
+                // state.user = null
             })
             .addCase(logOutUser.rejected, (state, action) => {
                 state.loading = false;

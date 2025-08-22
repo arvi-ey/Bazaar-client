@@ -16,7 +16,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router';
 import { useFormik } from 'formik';
 import useAuth from '../Hooks/useAuth';
-import { GetUserInfo, UpdateUser, UploadImage } from '../../../Redux/Slice/userSlicer';
+import { AddUser, GetUserInfo, UpdateUser, UploadImage } from '../../../Redux/Slice/userSlicer';
 import CameraAltIcon from '@mui/icons-material/CameraAlt';
 import CircularProgress from '@mui/material/CircularProgress';
 import MenuOpenIcon from '@mui/icons-material/MenuOpen';
@@ -24,7 +24,6 @@ import CloseIcon from '@mui/icons-material/Close';
 
 const Account = () => {
     const navigate = useNavigate()
-    const { loading, error } = useSelector(state => state.auth)
     const { user, uploadImageLoading } = useSelector(state => state.user)
     const dispatch = useDispatch()
     const { auth } = useAuth()
@@ -149,6 +148,7 @@ const Account = () => {
         if (!auth) return
         const response = await dispatch(logOutUser())
         dispatch(AddUserInfo(null))
+        dispatch(AddUser(null))
         if (response) {
             navigate('/signin')
         }

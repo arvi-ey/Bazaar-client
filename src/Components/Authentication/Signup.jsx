@@ -148,12 +148,6 @@ const Signup = () => {
                     <p>Alrady have an account ?</p>
                     <p onClick={() => navigate("/signin")}>Go to login</p>
                 </div>
-                <div className="otherOptions">
-                    <img src={Google} style={{ height: "2em", width: "2em" }} />
-                    <p>Sign Up with google</p>
-                </div>
-
-
             </div>
             {
                 <SnackbarComponent bgColor="#9ee721" severity={snackBarMessage == "Sign up failed" ? "error" : 'success'} isOpen={openSnackBar} message={snackBarMessage} />

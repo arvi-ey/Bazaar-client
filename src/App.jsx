@@ -24,6 +24,8 @@ import Payment from './Components/Payment/Payment'
 import Success from './Components/Success/Success'
 import Failed from './Components/Success/Failed'
 import OrderDetails from './Components/Order/OrderDetails'
+import { GoogleOAuthProvider } from '@react-oauth/google';
+
 const router = createBrowserRouter([
   {
     path: "/",
@@ -59,8 +61,11 @@ function App() {
 
 
 
+
   return (
-    <RouterProvider router={router} />
+    <GoogleOAuthProvider clientId={import.meta.env.VITE_GOOGLE_CLIENT_ID}>
+      <RouterProvider router={router} />
+    </GoogleOAuthProvider>
   )
 }
 

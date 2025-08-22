@@ -9,6 +9,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import { signinUser, AddUserInfo } from '../../../Redux/Slice/authSlicer';
 import { CircularProgress } from '@mui/material';
 import { useNavigate } from 'react-router';
+import useOAuth from '../Hooks/useOAuth';
+
 
 const Signin = () => {
     const navigate = useNavigate()
@@ -17,6 +19,7 @@ const Signin = () => {
     const location = useLocation();
     const productId = location.state?.productId;
     const [errorText, setErrorText] = useState()
+    const { handleGoogleAuth } = useOAuth()
 
     const formik = useFormik({
         initialValues: {
@@ -48,6 +51,9 @@ const Signin = () => {
             }
         }
     }
+
+
+
 
     return (
         <div className="signINContainer">
@@ -94,12 +100,10 @@ const Signin = () => {
                     <p>Don't have an account ?</p>
                     <p onClick={() => navigate("/signup")} > Sign up</p>
                 </div>
-                <div className="otherOptions">
+                <div className="otherOptions" onClick={handleGoogleAuth}>
                     <img src={Google} style={{ height: "4vmin", width: "4vmin" }} />
-                    <p>Sign In with google</p>
+                    <p>Continue with google</p>
                 </div>
-
-
             </div>
         </div>
     )
