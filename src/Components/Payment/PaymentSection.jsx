@@ -81,7 +81,7 @@ const PaymentSection = ({ data, enableCheckout, setEnableCheckout }) => {
             return
         }
         finally {
-            // setIsProcessing(false)
+            setIsProcessing(false)
         }
 
 
@@ -93,18 +93,18 @@ const PaymentSection = ({ data, enableCheckout, setEnableCheckout }) => {
                 data?.map((item, index) => {
                     return (
                         <div key={item?._id} style={{ display: "flex", gap: "10px", width: "90%", marginTop: "20px" }} >
-                            <img src={item?.image} style={{ width: "10vmax", height: "10vmax", borderRadius: "5px" }} />
+                            <img src={item?.image} className='Payment-item-image' alt='payment-item' />
                             <div>
-                                <p style={{ fontSize: "1.5vmax", opacity: "0.7" }}>{item?.title}</p>
-                                <p style={{ fontSize: "1vmax", opacity: "0.7" }}>₹ {Math.floor(item.subTotal)}</p>
-                                <p style={{ fontSize: "1vmax", opacity: "0.7" }}>Total items: {item.count}</p>
+                                <p className='Order-item-title'>{item?.title}</p>
+                                <p style={{ fontSize: "clamp(1rem, 0.5vw , 1rem)", opacity: "0.8" }}>₹ {Math.floor(item.subTotal)}</p>
+                                <p style={{ fontSize: "clamp(1rem, 0.5vw , 1rem)", opacity: "0.8" }}>Total items: {item.count}</p>
                             </div>
                         </div>
                     )
                 })
             }
             <div style={{ width: "90%", marginTop: "20px" }}>
-                <p style={{ fontSize: "1.3vmax", fontWeight: "500", opacity: "0.7" }} >Total Payble Ammount: ₹{Math.floor(paybleAmount)}</p>
+                <p style={{ fontWeight: "500", opacity: "0.7", fontSize: "clamp(1rem, 0.5vw , 1rem)" }} >Total Payble Ammount: ₹{Math.floor(paybleAmount)}</p>
             </div>
             <div style={{ width: "90%", marginTop: "20px" }}>
                 <Button
@@ -114,7 +114,7 @@ const PaymentSection = ({ data, enableCheckout, setEnableCheckout }) => {
                     sx={{
                         color: "white",
                         fontSize: "1vmax",
-                        width: "35vmin",
+                        width: "100%",
                         display: "flex",
                         justifyContent: "center",
                         alignItems: " center",
@@ -132,7 +132,7 @@ const PaymentSection = ({ data, enableCheckout, setEnableCheckout }) => {
             {
                 !enableCheckout &&
                 <div style={{ width: "90%", marginTop: "10px" }}>
-                    <p style={{ fontSize: "0.9vmax", opacity: 0.5 }} >Please add address for checkout for payment</p>
+                    <p style={{ fontSize: "clamp(0.6rem, 0.8vw , 1rem)", opacity: 0.5 }} >Please add address for checkout for payment</p>
                 </div>
             }
 

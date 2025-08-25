@@ -62,7 +62,7 @@ const Address = ({ enableCheckout, setEnableCheckout }) => {
     }
     return (
         <div className="addressComponent">
-            <p style={{ fontSize: "1.5vmax" }}>Delivery Address</p>
+            <p className='delivery-addressTitle'>Delivery Address</p>
             <TextField
                 required
                 id="name"
@@ -171,12 +171,13 @@ const Address = ({ enableCheckout, setEnableCheckout }) => {
                 helperText="Enter landmark for better search"
             />
             <div>
-                <p style={{ fontSize: "1vmax" }}>Select Address Type</p>
-                <div style={{ display: "flex", gap: "1em", marginTop: "5px" }}>
+                <p style={{ fontSize: "clamp(1rem, 0.5vw , 1rem)" }}>Select Address Type</p>
+                <div style={{ display: "flex", gap: "1em", flexWrap: "wrap", marginTop: "5px", width: "100%", }}>
                     {AddressTypeArray.map((data, index) => (
                         <div
                             onClick={() => HandleAddressType(data)}
                             key={index}
+                            className='AddressType-Button'
                             style={{
                                 borderRadius: "5px",
                                 padding: "8px",

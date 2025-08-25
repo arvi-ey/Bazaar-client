@@ -45,3 +45,43 @@
 .Checkout:hover {
     background-color: #ed4694;
 }
+
+.Order-item-title {
+    font-size: clamp(1rem, 0.5vw, 3rem);
+    font-weight: bold;
+}
+
+.delivery-addressTitle {
+    font-size: clamp(1rem, 1vw, 3rem);
+    font-weight: bold;
+    opacity: 0.8;
+}
+
+.AddressType-Button {}
+
+.Payment-item-image {
+    max-width: 10em;
+    width: 5em;
+    min-width: 5em;
+    height: auto;
+    max-width: 7em;
+    border-radius: 10px;
+}
+
+@media(max-width:600px) {
+    .paymentDiv {
+        flex-direction: column;
+    }
+
+    .address {
+        width: 100%;
+    }
+
+    .payment {
+        width: 100%;
+    }
+
+    .AddressType-Button {
+        padding: 5px;
+    }
+}
