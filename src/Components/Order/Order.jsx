@@ -27,7 +27,7 @@ const Order = () => {
                     <div>
                         <img src={Empty_order} style={{ height: "30vmax", widows: "30vmax" }} />
                     </div>
-                    <p style={{ fontSize: "2vmax", fontWeight: "6000" }} >No item added into cart</p>
+                    <p style={{ fontSize: "clamp(1em , 2vmax , 5em)", fontWeight: "6000" }} >No item added into cart</p>
                 </div>
 
                 :

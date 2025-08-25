@@ -6,7 +6,7 @@
 
 .orderPageTitle {
     margin-left: 2%;
-    font-size: 1.8vmax;
+    font-size: clamp(1em, 1.8vmax, 3em);
     font-weight: 600;
     color: rgba(0, 0, 0, 0.611);
 }
@@ -21,15 +21,26 @@
 }
 
 .OrderBoxContainer {
-    width: 70%;
-    height: 22vmax;
+    width: 100%;
+    height: auto;
     display: flex;
     align-items: center;
+    padding: 5px;
+    gap: 20px;
+    /* overflow: hidden; */
+}
+
+.OrderBoxDetailContainer {
+    display: flex;
+    width: auto;
+    padding: 5px;
 }
 
 .orderProductImage {
-    height: 20vmax;
-    width: 20vmax;
+    height: auto;
+    max-width: 15em;
+    width: 200px;
+    min-width: 100px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -44,35 +55,37 @@
 }
 
 .orderProductDesc {
-    height: 20vmax;
+    height: auto;
     display: flex;
     flex-direction: column;
     gap: 10px;
     padding-top: 10px;
+    padding: 10px;
     color: rgba(0, 0, 0, 0.647);
 }
 
 .orderProductTitle {
-    font-size: 1.2vmax;
+    font-size: clamp(0.6em, 2vamx, 5em);
     font-weight: 500;
 }
 
 .orderProductPrice {
     font-weight: 500;
-    font-size: 1.1vmax;
+    font-size: clamp(0.6em, 2vamx, 5em);
     /* color: #ec0d75; */
 }
 
 .orderProductAddress {
-    font-size: 1vmax;
+    font-size: clamp(0.6em, 2vamx, 5em);
 }
 
 .orderProductDate {
-    font-size: 1vmax;
+    font-size: clamp(0.6em, 2vamx, 5em);
+    ;
 }
 
 .orderProducPayment {
-    font-size: 1vmax;
+    font-size: clamp(0.6em, 2vamx, 5em);
 
 }
 
@@ -90,17 +103,17 @@
 }
 
 .orderExpecedDelivery {
-    font-size: 1vmax;
+    font-size: clamp(0.6em, 2vamx, 5em);
 }
 
 .orderAddressType {
-    font-size: 1vmax;
+    font-size: clamp(0.6em, 2vamx, 5em);
 
 }
 
 .orderProductSize {
 
-    font-size: 1vmax;
+    font-size: clamp(1em, 1vmax, 3em);
 }
 
 .OrderDetailComp {
@@ -108,5 +121,51 @@
     width: 100vw;
     display: flex;
     height: 100vh;
+    justify-content: center;
+    gap: 20px;
+}
 
+.Order-Track {
+    width: auto;
+    padding: 10px;
+}
+
+
+
+.orderDetailProductImage {
+    max-width: 300px;
+}
+
+.OrderDetailProduct {
+    width: 100%;
+    height: auto;
+    border-radius: 5px;
+}
+
+@media(max-width:600px) {
+    .OrderBoxContainer {
+        flex-direction: column;
+    }
+
+    .orderProductDesc {
+        align-content: start;
+    }
+
+    .OrderDetailComp {
+        flex-direction: column;
+        height: 100%;
+    }
+
+}
+
+@media(max-width:950px) {
+    .OrderBoxDetailContainer {
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+    .OrderDetailProduct {
+        height: 300px;
+        object-fit: contain;
+    }
 }

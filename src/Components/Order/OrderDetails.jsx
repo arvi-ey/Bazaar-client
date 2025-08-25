@@ -47,7 +47,7 @@ const OrderDetails = () => {
 
     return (
         <div className='OrderDetailComp' >
-            <div style={{ width: "20%", marginLeft: 20 }} >
+            <div className='Order-Track' >
                 <OrderTrack
                     orderStatus={singleOrder?.orderStatus}
                     orderDate={formatFriendlyDate(singleOrder?.orderDate)}
@@ -55,12 +55,12 @@ const OrderDetails = () => {
 
                 />
             </div>
-            <div className='OrderBoxContainer'  >
-                <div className='orderProductImage' onClick={() => navigate(`/user/orderdetails/${singleOrder?._id}`)} >
-                    <img src={singleOrder?.image} alt='Order-Product' className='OrderProduct' />
+            <div className='OrderBoxDetailContainer'  >
+                <div className='orderDetailProductImage' onClick={() => navigate(`/user/orderdetails/${singleOrder?._id}`)} >
+                    <img src={singleOrder?.image} alt='Order-Product' className='OrderDetailProduct' />
                 </div>
                 <div className='orderProductDesc' >
-                    <p className='orderProductTitle' >{singleOrder?.productTitle} (<span style={{ fontSize: "1vmax" }}>Qty:{singleOrder?.quantity}</span>) </p>
+                    <p className='orderProductTitle' >{singleOrder?.productTitle} (<span style={{ fontSize: "clamp(1em ,1vmax ,2em)" }}>Qty:{singleOrder?.quantity}</span>) </p>
                     <p className='orderProductPrice'>₹ {Math.floor(singleOrder?.totalPrice)}</p>
                     <p className='orderProductSize' >Size: {singleOrder?.size}</p>
                     <p className='orderProductAddress'>{`${singleOrder?.state}, ${singleOrder?.orderAddress}, ${singleOrder?.city},${singleOrder?.pinCode}, ${singleOrder?.houseNumber && `House no.${singleOrder.houseNumber}`}`}</p>

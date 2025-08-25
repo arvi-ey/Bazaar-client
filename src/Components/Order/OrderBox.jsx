@@ -64,7 +64,7 @@ const OrderBox = ({ data }) => {
                 <img src={data?.image} alt='Order-Product' className='OrderProduct' />
             </div>
             <div className='orderProductDesc' >
-                <p className='orderProductTitle' >{data?.productTitle} (<span style={{ fontSize: "1vmax" }}>Qty:{data?.quantity}</span>) </p>
+                <p className='orderProductTitle' >{data?.productTitle} (<span style={{ fontSize: "clamp(1em ,1vmax ,2em)" }}>Qty:{data?.quantity}</span>) </p>
                 <p className='orderProductPrice'>₹ {Math.floor(data?.totalPrice)}</p>
                 <p className='orderProductSize' >Size: {data?.size}</p>
                 <p className='orderProductAddress'>{`${data?.state}, ${data?.orderAddress}, ${data?.city},${data?.pinCode}, ${data?.houseNumber && `House no.${data.houseNumber}`}`}</p>
